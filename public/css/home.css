@@ -1,0 +1,80 @@
+body, html {
+    height: 86.4%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .bg-image {
+    /* The image used */
+    background-image: url("https://www.cigna.co.th/sites/default/files/pictures/travel-nature-place-family-1.jpg");
+    
+    /* Add the blur effect */
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px); */
+    
+    /* Full height */
+    height: 100%; 
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* Position text in the middle of the page/image */
+  .bg-text {
+    background-color: #f6fa0b(0, 0, 0); /* Fallback color */
+    background-color: #f3f624; /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 1px solid #030300;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 90%;
+    padding: 50px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+
+  .avatar {
+    /* vertical-align: middle; */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    left: 100%;
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+
+  button {
+    color: #1D9AF2;
+    background-color: #292D3E;
+    border: 1px solid #1D9AF2;
+    border-radius: 4px;
+    padding: 0 15px;
+    cursor: pointer;
+    height:40px;
+    font-size:20px;
+    transition: all 0.2s ease-in-out;
+    margin-left: 70px;
+    margin-right: 60px;
+    }
+    button:hover {
+    transform: scale(0.8);
+    }
+
+
+    
