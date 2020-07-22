@@ -28,18 +28,22 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/device', function () {
-    return view('device');
-});
-
 Route::get('/incubator', function () {
     return view('incubator');
 });
 
-Route::get('/addincu', function () {
-    return view('addincu');
+Route::get('/adddata', function () {
+    return view('adddata');
+});
+
+Route::get('/user.addregis', function () {
+    return view('user.addregis');
 });
 
 Route::resource('user', 'UsersController'); 
-Route::resource('incubator', 'IncubatorController'); 
+Route::resource('incubator', 'IncubatorController');
+Route::resource('device', 'DeviceController');
+
+
+ 
 

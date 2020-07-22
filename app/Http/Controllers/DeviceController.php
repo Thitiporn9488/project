@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Incub;
-use Illuminate\Routing\Redirector;
-use App\Http\Requests;
-use App\incubator;
+use App\Device;
 
-class IncubatorController extends Controller
+class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,8 @@ class IncubatorController extends Controller
      */
     public function index()
     {
-        $incubs = Incub::all(); 
-        return view('incubator')->with('incubs',$incubs); 
+        $devices = Device::all(); 
+        return view('device')->with('devices',$devices); 
     }
 
     /**
@@ -40,18 +37,16 @@ class IncubatorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [ 
-        'id_in' => 'required', 
-        'name' => 'required','unique:users',
-        'address' => 'required'
-        ]); 
-
-        $incub = new Incub
-        ([ 'id_in' => $request->get('id_in'),
-        'name' => $request->get('name'),
-        'address' => $request->get('address')
-         ]); 
-        $incub->save();
-        return redirect('incubator')->with('success', 'บันทึกข้อมูลเรียบร้อย'); 
+            'id_device' => 'required', 
+            'key' => 'required','unique:users'
+            ]); 
+    
+            $device = new Device
+            ([ 'id_device' => $request->get('id_device'),
+            'key' => $request->get('key')
+             ]); 
+            $device->save();
+            return redirect('device')->with('success', 'บันทึกข้อมูลเรียบร้อย'); 
     }
 
     /**
