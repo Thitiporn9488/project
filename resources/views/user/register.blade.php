@@ -147,8 +147,6 @@
                     </div>
                 </div>
 
-
-
                 <!-- <div class="row">
         <div class="col-xs-8">
             <div class="checkbox icheck">
@@ -159,7 +157,9 @@
         </div> -->
 
                 <input value="submit" type="submit" class="btn btn-primary form-control">
-
+                <input id="close_window" type="button" class="btn btn-success"
+                   style="font-weight: bold;display: inline;"
+                   value="Close">
 
 
     </form>
@@ -173,3 +173,10 @@
 </body>
 
 </html>
+
+<script>
+   $('#close_window').on('click', function(){
+      window.opener = self;
+      window.close();
+   });
+</script>

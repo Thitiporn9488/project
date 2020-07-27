@@ -6,47 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>โรงบ่ม</title>
 
-    <!-- ส่วนหัว -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- ส่วนตัว -->
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-    </script>
+      <!-- ส่วนหัว -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js">
     
    
 
 </head>
 
-<body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{url('home')}}">TOBACCO CURE</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{url('incubator')}}">โรงบ่ม</a></li>
-                <li><a href="{{url('device')}}">Device</a></li>
-                <li><a href="#">ช่วงของการบ่ม</a></li>
-                <li><a href="#">ข้อมูลย้อนหลัง</a></li>
-                <li><a href="#">กราฟข้อมูล</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{url('home')}}">TOBACCO CURE</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{url('incubator')}}">โรงบ่ม</a></li>
+          <li><a href="{{url('device')}}">Device</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="#">ช่วงของการบ่ม</a></li>
+      <li><a href="#">ข้อมูลย้อนหลัง</a></li>
+      <li><a href="#">กราฟข้อมูล</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+  
 
-    <!-- start add Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ <!-- start add Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -189,34 +185,26 @@
    
 
     <script type="text/javascript"> 
-
 $(document).ready( function () {
     var table =$('#dataTable').DataTable();
 } );
-
 // start edit record
     table.on('click', '.edit' , function (){
-
         str =$(this).closet('tr');
         if ($($tr).hasClass('child')) {
             $tr = $tr.prev('.parent');
         }
-
         var data = table.row($tr).data();
         console.log(data);
-
         $('#id_in').val(data[1]);
         $('#name').val(data[2);
         $('#address').val(data[3]);
-
         $('#editForm').attr('action, ./incubator /'+data[0]);
         $('#editModal').Modal('show')
 	
     }); 
 }); 
-
 </script>
-
 
 
 </body>
