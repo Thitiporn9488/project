@@ -60,7 +60,8 @@
 
 <body id="body">
 
-    <form action="{{url('user')}}" method="post">{{csrf_field()}}
+    <form action="{{url('user')}}" method="post">
+    {{csrf_field()}}
         <div class="card" id="register"><br>
             <h style="text-align: center;">REGISTER</h><br>
             <!-- เกิดข้อผิดพลาด -->
@@ -96,7 +97,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">รหัสชาวไร่ <font color="red">( * จำเป็นต้องกรอก)</font></label>
                     <input value="" name="id_farmer" class="form-control" id="id_farmer" type="text"
-                        onkeyup="autoTab(this)" aria-describedby="emailHelp" placeholder="รหัสชาวไร่ (สำหรับเจ้าของ)">
+                         aria-describedby="emailHelp" placeholder="รหัสชาวไร่ (สำหรับเจ้าของ)">
                 </div>
 
                 <div class="form-group">
@@ -157,9 +158,6 @@
         </div> -->
 
                 <input value="submit" type="submit" class="btn btn-primary form-control">
-                <input id="close_window" type="button" class="btn btn-success"
-                   style="font-weight: bold;display: inline;"
-                   value="Close">
 
 
     </form>
@@ -174,9 +172,3 @@
 
 </html>
 
-<script>
-   $('#close_window').on('click', function(){
-      window.opener = self;
-      window.close();
-   });
-</script>

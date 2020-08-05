@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">รหัสชาวไร่</label>
                     <input type="text" placeholder="id_farmer" name="id_farmer" class="form-control"
-                        value="{{$user->id_farmer}}"  onkeyup="autoTab(this)" /> 
+                        value="{{$user->id_farmer}}" /> 
                     </div>
 
                     <div class="form-group">

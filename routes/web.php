@@ -28,9 +28,6 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/incubator', function () {
-    return view('incubator');
-});
 
 Route::get('/adddata', function () {
     return view('adddata');
@@ -40,8 +37,12 @@ Route::get('/user.addregis', function () {
     return view('user.addregis');
 });
 
+
+
+
+
 Route::resource('user', 'UsersController'); 
-Route::resource('incubator', 'IncubatorController');
+Route::resource('incub', 'IncubatorController');
 Route::resource('device', 'DeviceController');
 
 

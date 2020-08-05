@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Incub;
 use Illuminate\Routing\Redirector;
 use App\Http\Requests;
-use App\incubator;
+
 
 class IncubatorController extends Controller
 {
@@ -17,8 +17,8 @@ class IncubatorController extends Controller
      */
     public function index()
     {
-        $incubs = Incub::all(); 
-        return view('incubator')->with('incubs',$incubs); 
+        $incubs = Incub::all()->toArray(); 
+        return view('incub.index', compact('incubs')); 
     }
 
     /**
@@ -28,7 +28,7 @@ class IncubatorController extends Controller
      */
     public function create()
     {
-        //
+        return view('incub.create');  
     }
 
     /**
@@ -40,18 +40,18 @@ class IncubatorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [ 
-        'id_in' => 'required', 
-        'name' => 'required','unique:users',
-        'address' => 'required'
-        ]); 
-
-        $incub = new Incub
-        ([ 'id_in' => $request->get('id_in'),
-        'name' => $request->get('name'),
-        'address' => $request->get('address')
-         ]); 
-        $incub->save();
-        return redirect('incubator')->with('success', 'บันทึกข้อมูลเรียบร้อย'); 
+            'id_in' => 'required', 
+            'name' => 'required','unique:users',
+            'address' => 'required'
+            ]); 
+    
+            $incub = new Incub
+            ([ 'id_in' => $request->get('id_in'),
+            'name' => $request->get('name'),
+            'address' => $request->get('address')
+             ]); 
+            $incub->save();
+            return redirect('incub')->with('success', 'บันทึกข้อมูลเรียบร้อย');  
     }
 
     /**
@@ -73,7 +73,8 @@ class IncubatorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $incub = Incub::find($id);  
+	    return view('incub.edit', compact('incub', 'id'));
     }
 
     /**
@@ -85,7 +86,19 @@ class IncubatorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, 
+        [ 'id_in' => 'required', 
+        'name' => 'required',
+        'address' => 'required'
+         ]); 
+        
+        $incub = Incub::find($id); 
+        $incub->id_in = $request->get('id_in'); 
+        $incub->name = $request->get('name');
+        $incub->address = $request->get('address');
+        $incub->save(); 
+        return redirect()->route('incub.index')->with('success', 'อัพเดทเรียบร้อย');
+
     }
 
     /**
@@ -96,6 +109,8 @@ class IncubatorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $incub = Incub::find($id); 
+        $incub->delete(); 
+        return redirect()->route('incub.index')->with('success', 'ลบข้อมูลเรียบร้อย'); 
     }
 }

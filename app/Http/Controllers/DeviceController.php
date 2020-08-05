@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Device;
+use Illuminate\Routing\Redirector;
+use App\Http\Requests;
 
 class DeviceController extends Controller
 {
@@ -14,8 +16,9 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        $devices = Device::all(); 
-        return view('device')->with('devices',$devices); 
+        $devices = Device::all()->toArray(); 
+        return view('device.index', compact('devices')); 
+
     }
 
     /**
@@ -25,7 +28,7 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        //
+        return view('device.create');   
     }
 
     /**
@@ -68,7 +71,8 @@ class DeviceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $device = Device::find($id);  
+	    return view('device.edit', compact('device', 'id'));
     }
 
     /**
@@ -80,7 +84,16 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, 
+        [ 'id_device' => 'required', 
+        'key' => 'required'
+         ]); 
+        
+        $device = Device::find($id); 
+        $device->id_device = $request->get('id_device'); 
+        $device->key = $request->get('key');
+        $device->save(); 
+        return redirect()->route('device.index')->with('success', 'อัพเดทเรียบร้อย');
     }
 
     /**
@@ -91,6 +104,8 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $device = Device::find($id); 
+        $device->delete(); 
+        return redirect()->route('device.index')->with('success', 'ลบข้อมูลเรียบร้อย'); 
     }
 }
