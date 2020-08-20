@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Routing\Redirector;
+use Illuminate\Routing\DB;
 
 class UsersController extends Controller
 {
@@ -41,6 +42,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+
             $this->validate($request, [ 'name' => 'required', 
             'username' => 'required','unique:users',
             'password' => 'required', 
@@ -53,8 +55,11 @@ class UsersController extends Controller
             'password' => $request->get('password'),
             'status' => $request->get('status'),
              ]); 
+
             $user->save();
             return redirect()->route('user.index')->with('success', 'บันทึกข้อมูลเรียบร้อย');  
+
+
     }
 
 

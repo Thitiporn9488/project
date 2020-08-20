@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="{{ URL::asset('css/wel.css') }}">
+        <link rel="stylesheet" href="css/wel.css">
 
     </head>
     <body>
@@ -36,10 +36,10 @@
   <div class="hero-text">
     <h1 style="font-size:100px">Tobacco Cure</h1>
     <!-- <p>And I'm a Photographer</p> -->
-    <form action="{{url('login')}}" method="GET">
+    <form action="login" method="GET">
     <button>Login</button>
     </form><br>
-    <form action="{{url('user/create')}}" method="GET">
+    <form action="register" method="GET">
     <button>Register</button>
     </form>
   </div>

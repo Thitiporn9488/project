@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Incub;
+use App\User;
 use Illuminate\Routing\Redirector;
 use App\Http\Requests;
 
@@ -62,7 +63,9 @@ class IncubatorController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $user = DB::select("SELECT * FROM users WHERE id='$id'");
+        return view('incub',compact('users'));
     }
 
     /**

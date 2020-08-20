@@ -20,10 +20,6 @@ Route::get('/login', function () {
     return view('login');
 });
 
-// Route::get('/register', function () {
-//     return view('register');
-// });
-
 Route::get('/home', function () {
     return view('home');
 });
@@ -33,18 +29,23 @@ Route::get('/adddata', function () {
     return view('adddata');
 });
 
-Route::get('/user.addregis', function () {
-    return view('user.addregis');
+Route::get('/checklogin', function () {
+    return view('checklogin');
+});
+
+Route::get('/addregis', function () {
+    return view('addregis');
+});
+
+Route::get('/register', function () {
+    return view('register');
 });
 
 
 
-
-
-Route::resource('user', 'UsersController'); 
+// Route::resource('user', 'UsersController'); 
 Route::resource('incub', 'IncubatorController');
 Route::resource('device', 'DeviceController');
 
 
  
-

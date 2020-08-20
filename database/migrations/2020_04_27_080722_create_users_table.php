@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 100);
             $table->string('id_farmer', 100);
-            $table->string('group');
+            $table->string('group_farmer');
             $table->string('username');
             $table->string('password', 100);
             $table->string('status');

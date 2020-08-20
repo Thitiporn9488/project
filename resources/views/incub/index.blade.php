@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>โรงบ่ม</title>
 
     <!-- ส่วนหัว -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -46,27 +46,172 @@
                 <li><a href="#">ข้อมูลย้อนหลัง</a></li>
                 <li><a href="#">กราฟข้อมูล</a></li>
             </ul>
-            <!-- <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul> -->
+            <ul class="nav navbar-nav navbar-right">
+            
+            <?php session_start(); 
+    if(isset($_SESSION['status'])=='เจ้าของ'){
+                            ?>
+                <li class="dropdown">
+                    <a class="dropdown" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+
+                        <div class="name-scle dropdown-toggle "><?php echo $_SESSION['name'];?></div>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <h5 class="name">
+                            <span class="name"><?php echo $_SESSION['name'];?></span>
+                        </h5>
+                        <h5 class="id_farmer">
+                            <span class="id_farmer"><?php echo $_SESSION['id_farmer'];?></span>
+                        </h5>
+                        <span class="status"><?php echo $_SESSION['status'];?></span>
+                    </div>
+        </div>
+
+        </div>
+        </ul>
+        </div>
+        </li>
+
+
+        <?php }
+                            // ลูกจ้าง
+                            else if(isset($_SESSION['status'])=='ลูกจ้าง'){
+                            ?>
+        <li class="navbar navbar-inverse">
+            <a class="dropdown" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+
+                <div class="name-scle dropdown-toggle "><?php echo $_SESSION['name'];?></div>
+            </a>
+
+            <div class="dropdown-menu">
+                <h5 class="name">
+                    <span class="name"><?php echo $_SESSION['name'];?></span>
+                </h5>
+                <span class="id_farmer"><?php echo $_SESSION['id_farmer'];?></span>
+                <span class="status"><?php echo $_SESSION['status'];?></span>
+            </div>
+            </div>
+
+            </div>
+            </ul>
+            </div>
+        </li>
+        <?php } ?>
+
+
+        </ul>
+
         </div>
     </nav>
 
     <div class="container">
         <h3 style="text-align: center;">โรงบ่ม</h3>
-        <p>An inverted navbar is black instead of gray.</p><br>
-
-        <div><a href="{{route('incub.create')}}" class="btn btn-primary"
-                style="font-size:large;padding: 7px 40px;border-radius: 8px;">เพิ่มข้อมูล</a></div><br>
-
-                @if(\Session::has('success')) 
-                <div class="alert alert-success"> 
-                <p>{{ \Session::get('success') }}</p> 
-                </div> 
-                @endif
-
         <br>
+
+        <?php 
+    if(isset($_SESSION['status'])=='เจ้าของ'){
+                            ?>
+
+        <!-- <div class="container">
+            <h2></h2>
+            <div class="panel panel-default">
+                <div class="panel-body">ชื่อผู้ใช้ : <?php echo $_SESSION['name'];?></div>
+            </div>
+        </div> -->
+        
+        
+        <div class="container" style="width:500px;height:100px;text-align: center;">
+  <div class="panel panel-default" >
+    <div class="panel-heading" >ชื่อผู้ใช้</div>
+    <div class="panel-body" ><?php echo $_SESSION['name'];?></div>
+  </div>
+</div>
+        <!-- end -->
+        <br>
+        <!-- เพิ่มข้อมูล -->
+        <h4 style="text-align: center;">เพิ่มข้อมูลโรงบ่ม</h4>
+        <form action="{{url('incub')}}" method="POST">
+            {{csrf_field()}}
+            <!-- เกิดข้อผิดพลาด -->
+            @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <!-- กรอกข้อมูลแล้ว -->
+            @if(\Session::has('success'))
+            <div class="alert alert-success">
+                <p>{{ \Session::get('success') }}</p>
+            </div>
+            @endif
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label>ID โรงบ่ม</label>
+                    <input name="id_in" type="text" class="form-control" placeholder="ID โรงบ่ม">
+                </div>
+                <div class="form-group">
+                    <label>ชื่อโรงบ่ม</label>
+                    <input name="name" type="text" class="form-control" placeholder="ชื่อโรงบ่ม">
+                </div>
+                <div class="form-group">
+                    <label>ที่อยู่</label>
+                    <input name="address" type="text" class="form-control" placeholder="ที่อยู่">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+            </div>
+        </form> <br>
+        <!-- end -->
+
+        <!-- ตาราง -->
+        <table id="datatable" class="table table-bordered" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
+                    <th scope="col" style="text-align: center;">ชื่อโรงบ่ม</th>
+                    <th scope="col" style="text-align: center;">ADDRESS</th>
+                    <th scope="col" style="text-align: center;">EDIT</th>
+                    <th scope="col" style="text-align: center;">DELETE</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($incubs as $row)
+                <tr>
+                    <td>{{$row['id_in']}}</td>
+                    <td>{{$row['name']}}</td>
+                    <td>{{$row['address']}}</td>
+                    <td><a href="{{action('IncubatorController@edit', $row['id'])}}" class="btn btn-success">Edit</a>
+                    </td>
+                    <td>
+                        <form method="post" class="delete_form"
+                            action="{{action('IncubatorController@destroy',$row['id'])}}">{{csrf_field()}}
+                            <input type="hidden" name="_method" value="Delete" />
+                            <button type="submit" class="btn btn-danger">Delete</botton>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <!-- end -->
+
+
+        <?php }
+                            // ลูกจ้าง
+                            else if(isset($_SESSION['status'])=='ลูกจ้าง'){
+                            ?>
+
         <!-- ตาราง -->
         <table id="datatable" class="table table-bordered" style="text-align: center;">
             <thead>
@@ -98,9 +243,12 @@
 
             </tbody>
         </table>
+        <!-- end -->
+        <?php } ?>
 
     </div><br>
 
+    <!-- แจ้งเตือนการลบ -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('.delete_form').on('submit', function () {
