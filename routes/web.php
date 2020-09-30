@@ -91,6 +91,9 @@ Route::get('check_key', function () {
 Route::get('check_add', function () {
     return view('rb.check_add');
 });
+Route::get('calen', function () {
+    return view('calendar.calen');
+});
 
 
 

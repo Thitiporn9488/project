@@ -205,7 +205,7 @@
                         <?php echo $id_device; ?>
                     </td>
                     <td style="text-align: center;">
-                        <a href="#add_de" data-toggle="modal">
+                        <a href="#add_de<?php echo $no_in;?>" data-toggle="modal">
                             <button type='button' class='btn btn-success btn-sm' title='เพิ่มอุปกรณ์'><span
                                     class='glyphicon glyphicon-plus' aria-hidden='true'></span></button>
                         </a>
@@ -223,7 +223,7 @@
         </td> -->
  
                     <!-- add device Modal -->
-                    <div class="modal fade" id="add_de" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="add_de<?php echo $no_in;?>" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -248,6 +248,7 @@
                                                 placeholder="KEY" required><br>
                                                 <span id="hok1"></span> 
                                         </div>
+                                        <div id="show_cal"></div>
                                     </div>
                                     <div class="modal-footer">
                                     <span id="hok2"></span> 
@@ -341,15 +342,9 @@
                         if ($conn->query($sql) === TRUE) {
                             
                             if ($conn) {
-                                echo '<script>
-                                swal({
-                                    title: "สร้างผลงานเรียบร้อย",
-                                    icon: "success",
-                                    button: "ตกลง",
-                                    
-                                }); 
-          </script>';
- 
+                                echo  $alert = "<div class='alert alert-succes'>
+                                <strong>$id_in</strong> No Stock
+                                </div>";
                                 echo '<script>window.location.href="index_in"</script>';
                             } else {
                                 echo "Error: " . $sql . "<br>" . $conn->error;
@@ -399,15 +394,28 @@
                     $id_in = $_GET['id_in'];
                     $id_device = $_GET['id_device'];
                     
-                    $sql = "UPDATE  incubs 
+                    // เช็คว่ามีข้อมูลนี้อยู่หรือไม่
+                    $sql = "SELECT COUNT * FROM incubs WHERE id_device='$id_device' ";
+                    $result= mysqli_query($conn,$sql);
+                        if($num = 0){
+                                // echo 'yed';
+                            $sql = "UPDATE  incubs 
                             SET  id_device='$id_device'
                             WHERE id_in='$id_in'";
-                    if ($conn->query($sql) === TRUE) {
-                        echo '<script>window.location.href="index_in"</script>';
-                    } else {
-                        echo "Error updating record: " . $conn->error;
-                    }
-                }
+                            if ($conn->query($sql) === TRUE) {
+                            echo '<script>window.location.href="index_in"</script>';
+                            } else {
+                            echo "Error updating record: " . $conn->error;
+                            }
+                                exit(0);
+                            }
+                        else{
+                            echo "ห้องนี้มีผู้ใช้งาน ช่วงเวลา  กรุณาตรวจสอบอีกครั้ง!";
+                        }       
+                        mysqli_close($conn);
+                        }
+                        
+                        
                 
 ?>
             </tbody>
@@ -448,14 +456,12 @@
             </div>
         </div>
     </div>
-
-
 </body>
-
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 <script>
 
-$("#id_device").keyup(function(){
-var var1= document.getElementById("id_device").value;
+$("#add_de").keyup(function(){
+var var1= document.getElementById("add_de").value;
             var _token = $('input[name="_token"]').val();
             $.ajax({
                     method:"GET",
@@ -479,6 +485,7 @@ var var2= document.getElementById("key").value;
                     }
                 })
 })
+
 
 </script>		
 

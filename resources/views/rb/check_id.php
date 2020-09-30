@@ -16,11 +16,11 @@ $check = "SELECT * FROM devices WHERE id_device = '$id_device'";
 $result= mysqli_query($conn,$check);
   $num=mysqli_num_rows($result); 
   if($num > 0){
-    echo "<span style='color:green'>ชื่อผู้ใช้งานใช้ได้ครับ</span>";
+    echo "<span style='color:green'>มีอยู่แล้ว</span>";
 }
 
 else{
-    echo "<span style='color:red'>ชื่อผู้ใช้งานนี้ไม่ว่างครับ</span>";
+    echo "<span style='color:red'>ไม่มีข้อมูล</span>";
 }       
 mysqli_close($conn);
 }
