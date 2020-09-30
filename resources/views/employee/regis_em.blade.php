@@ -39,41 +39,22 @@
 
 <body id="body">
 
-    <form action="addregis" method="GET">
+    <form action="addregis_em" method="GET">
     
         <div class="card" id="register"><br>
-            <h style="text-align: center;">REGISTER FARMER</h>
+            <h style="text-align: center;">REGISTER EMPLOYEE</h>
             
 
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input value="" name="name_user" class="form-control" id="exampleInputEmail1"
+                    <input value="" name="name_emp" class="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Name" required>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label for="exampleInputEmail1">รหัสพนักงาน</label>
-                    <input value="" name="id_admin" class="form-control" id="id_admin" type="text" 
-                        onkeyup="autoTab(this)" aria-describedby="emailHelp" placeholder="รหัสชาวไร่ (สำหรับเจ้าของ)">
-                </div> -->
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">รหัสชาวไร่ <font color="red">( * จำเป็นต้องกรอก)</font></label>
-                    <input value="" name="id_farmer" class="form-control" id="id_farmer" type="text"
-                         aria-describedby="emailHelp" placeholder="รหัสชาวไร่ (สำหรับเจ้าของ)" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">เขต-กลุ่ม <font color="red">( * จำเป็นต้องกรอก)</font></label>
-                    <input value="" name="group_farmer" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="เขต-กลุ่ม (สำหรับเจ้าของ)" required>
-                </div>
-
-
                 <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
-                    <input value="" name="username" class="form-control" id="exampleInputEmail1"
+                    <input value="" name="username_em" class="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Username" required>
 
                 </div>
@@ -91,9 +72,12 @@
                             
                 </div> -->
 
+
+
+               
+
                 <input value="submit" type="submit" class="btn btn-primary form-control">
-
-
+                
     </form>
 
     </div>

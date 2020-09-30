@@ -14,10 +14,11 @@ class CreateIncubsTable extends Migration
     public function up()
     {
         Schema::create('incubs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('no_in');
             $table->string('id_in');
-            $table->string('name');
+            $table->string('name_in');
             $table->string('address');
+            $table->string('id_farmer');
             $table->timestamps();
         });
     }

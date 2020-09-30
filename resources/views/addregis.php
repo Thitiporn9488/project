@@ -2,12 +2,12 @@
 
 require('dbconnect.php');
 
-$name = $_REQUEST['name'];
+$name_user = $_REQUEST['name_user'];
 $id_farmer= $_REQUEST['id_farmer'];
 $group_farmer= $_REQUEST['group_farmer'];
 $username = $_REQUEST['username'];
 $password= $_REQUEST['password'];
-$status= $_REQUEST['status'];
+$status= 'เจ้าของ';
 
 
 // เช็คว่ามีข้อมูลนี้อยู่หรือไม่
@@ -32,12 +32,10 @@ $result2 = mysqli_query($conn,$check2);
   echo "window.location='register';";
   echo "</script>";
 }
-
-
 else{
 
-    $sql = "INSERT INTO users (name, id_farmer ,group_farmer,username,password,status) VALUES ";
-    $sql .= "('" . $name ."',
+    $sql = "INSERT INTO users (name_user, id_farmer ,group_farmer,username,password,status) VALUES ";
+    $sql .= "('" . $name_user ."',
             '" . $id_farmer."',
             '" . $group_farmer ."',
             '" . $username ."',

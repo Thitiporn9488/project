@@ -28,7 +28,7 @@
                 @foreach($users as $row) 
                 <tr>
                     <td>{{$row['id']}}</td>
-                    <td>{{$row['name']}}</td>
+                    <td>{{$row['name_user']}}</td>
                     <td>{{$row['id_farmer']}}</td>
                     <td>{{$row['group']}}</td>
                     <td>{{$row['username']}}</td>

@@ -7,6 +7,7 @@ use App\Incub;
 use App\User;
 use Illuminate\Routing\Redirector;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 
 class IncubatorController extends Controller
@@ -18,8 +19,13 @@ class IncubatorController extends Controller
      */
     public function index()
     {
-        $incubs = Incub::all()->toArray(); 
+        // $incubs = Incub::all()->toArray(); 
+        session_start();
+        $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
+
+        $incubs=DB::select("SELECT * FROM incubs,users where incubs.id_farmer=users.id_farmer and incubs.id_farmer='$farmer'");
         return view('incub.index', compact('incubs')); 
+
     }
 
     /**
@@ -40,17 +46,18 @@ class IncubatorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [ 
-            'id_in' => 'required', 
-            'name' => 'required','unique:users',
-            'address' => 'required'
+        $this->validate($request, [  
+            'id_in' => 'required',
+            'name_in' => 'required','unique:users'
             ]); 
-    
-            $incub = new Incub
-            ([ 'id_in' => $request->get('id_in'),
-            'name' => $request->get('name'),
-            'address' => $request->get('address')
-             ]); 
+
+            session_start();
+            $id_farmer = $_SESSION['id_farmer'];
+
+            $incub = new Incub;
+            $incub ->id_in=$request->id_in;
+            $incub ->name_in=$request->name_in;
+            $incub ->id_farmer=$id_farmer;
             $incub->save();
             return redirect('incub')->with('success', 'บันทึกข้อมูลเรียบร้อย');  
     }
@@ -64,8 +71,7 @@ class IncubatorController extends Controller
     public function show($id)
     {
         
-        $user = DB::select("SELECT * FROM users WHERE id='$id'");
-        return view('incub',compact('users'));
+        //
     }
 
     /**
@@ -74,10 +80,11 @@ class IncubatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($no_in)
     {
-        $incub = Incub::find($id);  
-	    return view('incub.edit', compact('incub', 'id'));
+        $incubs = DB::select("SELECT * FROM incubs where incubs.no_in='$no_in'");  
+        // print_r ($incub);
+	    return view('incub.edit', compact('incubs', 'no_in'));
     }
 
     /**
@@ -87,19 +94,15 @@ class IncubatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update_in(Request $request, $no_in)
     {
-        $this->validate($request, 
-        [ 'id_in' => 'required', 
-        'name' => 'required',
-        'address' => 'required'
-         ]); 
-        
-        $incub = Incub::find($id); 
-        $incub->id_in = $request->get('id_in'); 
-        $incub->name = $request->get('name');
-        $incub->address = $request->get('address');
-        $incub->save(); 
+       $incub = new Incub;
+       $id_in=$request->id_in;
+       $name_in=$request->name_in;
+       
+
+        DB::update("UPDATE users,incubs SET name_in='$name_in' WHERE users.id_farmer=incubs.id_farmer
+                    AND projects.user_id=img_project.p_id AND ");
         return redirect()->route('incub.index')->with('success', 'อัพเดทเรียบร้อย');
 
     }
@@ -110,10 +113,12 @@ class IncubatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($no_in)
     {
-        $incub = Incub::find($id); 
+        $incub = Incub::where('no_in',$no_in);
         $incub->delete(); 
         return redirect()->route('incub.index')->with('success', 'ลบข้อมูลเรียบร้อย'); 
     }
+
+    
 }

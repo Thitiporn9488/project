@@ -43,17 +43,15 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
-            $this->validate($request, [ 'name' => 'required', 
+            $this->validate($request, [ 'name_user' => 'required', 
             'username' => 'required','unique:users',
-            'password' => 'required', 
-            'status' => 'required']); 
+            'password' => 'required']); 
 
-            $user = new User([ 'name' => $request->get('name'),
+            $user = new User([ 'name_user' => $request->get('name_user'),
             'id_farmer' => $request->get('id_farmer'),
             'group' => $request->get('group'), 
             'username' => $request->get('username'),
             'password' => $request->get('password'),
-            'status' => $request->get('status'),
              ]); 
 
             $user->save();
@@ -97,7 +95,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, 
-        [ 'name' => 'required', 
+        [ 'name_user' => 'required', 
         'id_farmer' => 'required',
         'group' => 'required',
         'username' => 'required',
@@ -105,7 +103,7 @@ class UsersController extends Controller
          ]); 
         
         $user = User::find($id); 
-        $user->name = $request->get('name'); 
+        $user->name_user = $request->get('name_user'); 
         $user->id_farmer = $request->get('id_farmer');
         $user->group = $request->get('group');
         $user->name = $request->get('username'); 

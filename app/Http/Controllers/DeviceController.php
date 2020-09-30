@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Device;
 use Illuminate\Routing\Redirector;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class DeviceController extends Controller
 {
@@ -82,14 +83,14 @@ class DeviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_device)
     {
         $this->validate($request, 
         [ 'id_device' => 'required', 
         'key' => 'required'
          ]); 
         
-        $device = Device::find($id); 
+        $device = Device::find($id_device); 
         $device->id_device = $request->get('id_device'); 
         $device->key = $request->get('key');
         $device->save(); 
@@ -102,9 +103,9 @@ class DeviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_device)
     {
-        $device = Device::find($id); 
+        $device =Device::where('id_device',$id_device);
         $device->delete(); 
         return redirect()->route('device.index')->with('success', 'ลบข้อมูลเรียบร้อย'); 
     }

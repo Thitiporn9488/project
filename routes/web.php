@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index_h');
 });
 
 Route::get('/login', function () {
@@ -41,11 +41,75 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('logout', function () {
+    return view('logout');
+});
+
+//  regis employee
+Route::get('regis_em', function () {
+    return view('employee.regis_em');
+});
+Route::get('/addregis_em', function () {
+    return view('employee.addregis_em');
+});
+
+// regis admin
+Route::get('regis_ad', function () {
+    return view('admin.regis_ad');
+});
+Route::get('/addregis_ad', function () {
+    return view('admin.addregis_ad');
+});
 
 
-// Route::resource('user', 'UsersController'); 
+Route::get('/home_ad', function () {
+    return view('admin.home_ad');
+});
+
+
+Route::get('index_ad', function () {
+    return view('admin.index_ad');
+});
+
+Route::get('dbconnect', function () {
+    return view('dbconnect');
+});
+
+Route::get('index_in', function () {
+    return view('rb.index_in');
+});
+
+Route::get('index_de', function () {
+    return view('device.index_de');
+});
+Route::get('check_id', function () {
+    return view('rb.check_id');
+});
+Route::get('check_key', function () {
+    return view('rb.check_key');
+});
+Route::get('check_add', function () {
+    return view('rb.check_add');
+});
+
+
+
+Route::resource('user', 'UsersController'); 
 Route::resource('incub', 'IncubatorController');
 Route::resource('device', 'DeviceController');
+Route::post('update_in', 'IncubatorController@update_in');
+
+
+
+// Route::put('edit', 'IncubatorController@update');
+// Route::get('Delete', 'IncubatorController@destroy');
+// Route::get('/Delete/{id_in}/delete', 'IncubatorController@destroy');
+// Route::get('/edit/{id_in}/edit', 'IncubatorController@edit');
+// Route::put('/edit','ProjectController@update');
+
+
+
+
 
 
  

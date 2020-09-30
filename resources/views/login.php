@@ -17,7 +17,7 @@
 #login{
     width: 350px;
     margin: auto;
-    margin-top: 180px;
+    margin-top: 160px;
     background-color: whitesmoke;   
 }
 #body {
@@ -47,7 +47,7 @@
                 <button type="submit" value ="login" name="login" class="btn btn-primary form-control">Login</button>
             </form>
                 <form action="register" method="GET" >
-                    <button type="submit" value ="register" name="send" class="btn btn-primary form-control" style="margin-top:3px;" >Register</button>
+                    <button type="submit" value ="register" name="send" class="btn btn-primary form-control" style="margin-top:3px;" >Register Farmer</button>
                 </form>
             </div>
         </div>
