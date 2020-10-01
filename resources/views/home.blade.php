@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +16,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- ส่วนกราฟ -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
-<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
 
 </head>
 
@@ -38,7 +40,7 @@
                         <li><a href="#">Page 1-3</a></li>
                     </ul>
                 </li>
-                <li><a href="#">ช่วงของการบ่ม</a></li>
+                <li><a href="pro">กระบวนการบ่ม</a></li>
                 <li><a href="#">ข้อมูลย้อนหลัง</a></li>
                 <li><a href="#">กราฟข้อมูล</a></li>
             </ul>
@@ -98,28 +100,52 @@
 
         </div>
     </nav>
-    <?php
-  $datadb = "testpj";
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $datadb);
-  $sql = "SELECT id_device FROM devices";
-  $query = mysqli_query($conn, $sql);
+<div>
+    <div class="form-group row">
+                    <label class="control-label col-sm-1">เลือกโรงบ่ม:</label>
+                    <div class="col-md-4">
+                        <select name="status" id="" class="form-control">
 
-?>  
-    <div class="form-group col-md-4" style="margin-left:100px;">
-      <label for="inputState">Choose a device</label>
-      <select id="inputState" class="form-control">
-        <option disabled selected>Choose...</option>
-        <?php 
-        while($result = mysqli_fetch_assoc($query)): ?>
-                                <option value="<?=$result['id_device']?>"><?=$result['id_device']?></option>
-                            <?php endwhile; ?>
-      </select>
-    </div>
+                            <option value="" disabled selected>เลือกโรงบ่ม</option>
+                            <?php 
+                           $datadb = "testpj";
+                           $servername = "localhost";
+                           $username = "root";
+                           $password = "";
+                       
+                           // Create connection
+                           $conn = new mysqli($servername, $username, $password, $datadb);
+
+                           $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
+                           $sql = "SELECT * FROM incubs,users where incubs.id_farmer=users.id_farmer and incubs.id_farmer='$farmer'";
+                            $result = $conn->query($sql);
+                                while($row = $result->fetch_assoc()) {
+                                  $name_in = $row['name_in'];
+                                
+                           ?>  
+                            <option value='<?php echo $name_in ?>'><?php echo $name_in?></option>   
+                           <?php } ?> 
+
+                        </select>
+                    </div>
+                </div> 
+
+ 
+    <?php
+        define("DB_SERVER", "localhost");
+        define("DB_USERNAME", "root");
+        define("DB_PASSWORD", "");
+        define("DB_DATABASE", "testpj");
+
+        $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+        $result = mysqli_query($conn, "SELECT lowTemp, highTemp, lowHumid, highHumid FROM conditions");
+ 
+        $data = array();
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data, $row);
+        }
+        // echo json_encode($data, true);
+    ?>
     
     <div class="container" style="position: relative; height:40vh; width:80vw">
         <div>
@@ -131,7 +157,6 @@
     </div>
     
     <script>
-    window.addEventListener("load", genLineChart);
     
         const firebaseConfig = {
             apiKey: "AIzaSyBU_2EzzqX8jAhKmLkfxguCSENHLDgHXiM",
@@ -145,100 +170,209 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        function genLineChart(){
-            let ref = firebase.database().ref('logHTU21D');
-            ref.on("child_added", getData)
+        let ref = firebase.database().ref('logS161');
+        ref.on("child_added", getData)
             
-            const humArr = [];
-            const tempArr = [];
-            const timeArr = [];
+        let humArr = [];
+        let tempArr = [];
+        let timeArr = [];
+        let idArr = [];
             
-            function getData(snapshot) {
-                const temp = snapshot.val().Temperature
-                tempArr.push(temp)
-                const time = snapshot.val().Time
-                timeArr.push(time)
-                const hum = snapshot.val().Humidity
-                humArr.push(hum)
-                tempChrt(tempArr, timeArr);
-                humChrt(humArr, timeArr);
-            }
-            console.log(timeArr, tempArr, humArr)
+        async function getData(snapshot) {
+            let temp = snapshot.val().Temperature
+            tempArr.push(temp)
+            let time = snapshot.val().Time
+            timeArr.push(time)
+            let humid = snapshot.val().Humidity
+            humArr.push(humid)
+            let id = snapshot.val().ID
+            idArr.push(id)
+
+            await tempChrt();
+            await humChrt();
+            await alertData(temp, humid);
+        }
             
-            function tempChrt(tempArr, timeArr) { // to be called by loadChart() to render live chart
-                const ctx1 = document.getElementById('tempChart').getContext('2d');
-                const chartConfig = new Chart(ctx1, {
-                    type: 'line',
-                    data: {
-                        labels: timeArr,
-                        datasets: [{
-                            label: 'Temprature',
-                            data: tempArr,
-                            backgroundColor: "rgba(255, 99, 132, 0.2)",
-                            borderColor: "rgba(255, 99, 132, 1)",
-                            borderWidth: 1
-                        }]
-                    },
-                    options:{
-                        responsive: true,
-                        legend: {
-                            display: true,
-                            labels:{
-                                fontColor :"#333",
-                                fontSize:12,
-                            },
-                            position: 'bottom' 
+        function tempChrt(){
+            let ctx1 = document.getElementById('tempChart').getContext('2d');
+            let chartConfig = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: timeArr,
+                    datasets: [{
+                        label: 'Temprature',
+                        data: tempArr,
+                        backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        borderColor: "rgba(255, 99, 132, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options:{
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        labels:{
+                            fontColor :"#333",
+                            fontSize:12,
                         },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true,
-                                    max:100,
-                                    min:0,
-                                    stepSize:10
-                                }
-                            }]
-                        }
+                        position: 'bottom' 
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                max:100,
+                                min:0,
+                                stepSize:10
+                            }
+                        }]
                     }
-                });
+                }
+            });
+        }
+
+        function humChrt(){
+            let ctx2 = document.getElementById('humChart').getContext('2d');
+            let chartConfig = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: timeArr,
+                    datasets: [{
+                        label: 'Humidity',
+                        data: humArr,
+                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                        borderColor: "rgba(54, 162, 235, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options:{
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        labels:{
+                            fontColor :"#333",
+                            fontSize:12,
+                        },
+                        position: 'bottom' 
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                max:100,
+                                min:0,
+                                stepSize:10
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        function alertData(temp, humid){
+
+            let dataArr = <?php echo json_encode($data) ?>;
+            let lT = dataArr[0].lowTemp;
+            let hT = dataArr[0].highTemp;
+            let lH = dataArr[0].lowHumid;
+            let hH = dataArr[0].highHumid;
+            console.log(lT, hT, lH, hH);
+
+            if(temp < lT && humid < lH){
+                Swal.fire({
+                    title: 'อุณหภูมิต่ำกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นต่ำกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
             }
 
-            function humChrt(humArr, timeArr) { // to be called by loadChart() to render live chart
-                const ctx2 = document.getElementById('humChart').getContext('2d');
-                const chartConfig = new Chart(ctx2, {
-                    type: 'line',
-                    data: {
-                        labels: timeArr,
-                        datasets: [{
-                            label: 'Humidity',
-                            data: humArr,
-                            backgroundColor: "rgba(54, 162, 235, 0.2)",
-                            borderColor: "rgba(54, 162, 235, 1)",
-                            borderWidth: 1
-                        }]
+            else if(temp > hT && humid > hH){
+                Swal.fire({
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
                     },
-                    options:{
-                        responsive: true,
-                        legend: {
-                            display: true,
-                            labels:{
-                                fontColor :"#333",
-                                fontSize:12,
-                            },
-                            position: 'bottom' 
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true,
-                                    max:100,
-                                    min:0,
-                                    stepSize:10
-                                }
-                            }]
-                        }
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
                     }
-                });
+                })
+            }
+
+            else if(temp < lT && humid > hH){
+                Swal.fire({
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            }
+
+            else if(temp > hT && humid < lH){
+                // swal("อุณหภูมิสูงกว่าที่กำหนด Temperature: " + temp + '\n' + "ความชื้นต่ำกว่าที่กำหนด Humidity: " + humid);
+                Swal.fire({
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            }
+
+            else if(temp < lT){
+                Swal.fire({
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            }
+
+            else if(temp > hT){
+                Swal.fire({
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            }
+
+            else if(humid < lH){
+                Swal.fire({
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            }
+
+            else if(humid > hH){
+                Swal.fire({
+                    title: 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
             }
         }
     </script>

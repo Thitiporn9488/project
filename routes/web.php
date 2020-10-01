@@ -94,6 +94,9 @@ Route::get('check_add', function () {
 Route::get('calen', function () {
     return view('calendar.calen');
 });
+Route::get('pro', function () {
+    return view('pprocess.pro');
+});
 
 
 

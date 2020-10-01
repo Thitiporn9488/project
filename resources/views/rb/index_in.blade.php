@@ -177,19 +177,7 @@
                         $id_in = $row['id_in'];
                         $name_in = $row['name_in'];
                         $id_device = $row['id_device'];
-               
-                        if($id_in == 0){
-                           $alert = "<div class='alert alert-danger'>
-                           <strong>$id_in</strong> No Stock
-                           </div>";
-                       }else if($id_in >= $id_in){
-                           $alert = "<div class='alert alert-warning'>
-                           <strong>$id_in</strong> Critical Level
-                           </div>";
-                       }else {
-                           $alert = $id_in;
-                       }
-
+                
                     ?>
                 <tr>
                     <td style="text-align: center;">
@@ -218,10 +206,7 @@
                                     class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
                         </a>
                     </td>
-                    <!-- <td>
-            <?php echo $alert; ?>
-        </td> -->
- 
+    
                     <!-- add device Modal -->
                     <div class="modal fade" id="add_de<?php echo $no_in;?>" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -236,7 +221,8 @@
                                 <form action="" id="add_de" method="GET">
                                     <div class="modal-body">
                                         <div class="form-group">
-                                        <input type="input" name="id_in" value="<?php echo $id_in;?>">
+                                        <label>ID   โรงบ่ม:</label>
+                                        <input type="input" name="id_in" value="<?php echo $id_in;?> " id="id_in"><br><br>
                                             <label>ID DEVICE:</label>
                                             <input type="text" name="id_device" class="form-control" id="id_device"
                                                 placeholder="ID DEVICE" required><br>
@@ -395,27 +381,26 @@
                     $id_device = $_GET['id_device'];
                     
                     // เช็คว่ามีข้อมูลนี้อยู่หรือไม่
-                    $sql = "SELECT COUNT * FROM incubs WHERE id_device='$id_device' ";
-                    $result= mysqli_query($conn,$sql);
-                        if($num = 0){
-                                // echo 'yed';
-                            $sql = "UPDATE  incubs 
-                            SET  id_device='$id_device'
-                            WHERE id_in='$id_in'";
-                            if ($conn->query($sql) === TRUE) {
-                            echo '<script>window.location.href="index_in"</script>';
-                            } else {
-                            echo "Error updating record: " . $conn->error;
-                            }
-                                exit(0);
-                            }
-                        else{
-                            echo "ห้องนี้มีผู้ใช้งาน ช่วงเวลา  กรุณาตรวจสอบอีกครั้ง!";
-                        }       
-                        mysqli_close($conn);
-                        }
-                        
-                        
+                    $sql = "SELECT * FROM incubs WHERE id_device='$id_device' ";
+                    
+                    $result = mysqli_query($conn,$sql);
+                    // echo $result;
+                    $num = mysqli_num_rows($result); 
+                    echo $num;
+                    if($num == 0){
+                        // echo 'yed';
+                        $sql = "UPDATE  incubs 
+                        SET  id_device='$id_device'
+                        WHERE id_in='$id_in'";
+                        mysqli_query($conn,$sql);
+                    }       
+                    else{
+                        echo "ห้องนี้มีผู้ใช้งาน ช่วงเวลา  กรุณาตรวจสอบอีกครั้ง!";
+                        echo '<script>window.location.href="index_in"</script>';  
+                    }
+                    mysqli_close($conn);
+                    }
+                    
                 
 ?>
             </tbody>
@@ -457,34 +442,36 @@
         </div>
     </div>
 </body>
-<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+
 <script>
+// 
 
-$("#add_de").keyup(function(){
-var var1= document.getElementById("add_de").value;
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                    method:"GET",
-                    url:"{{'check_id'}}",    
-                    data:{data1:var1,_token: _token},
-                    success:function(responsedata){
-                        $('#hok').html(responsedata);
-                    }
-                })
-})
-
-$("#key").keyup(function(){
-var var2= document.getElementById("key").value;
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                    method:"GET",
-                    url:"{{'check_key'}}",    
-                    data:{data2:var2,_token: _token},
-                    success:function(responsedata){
-                        $('#hok1').html(responsedata);
-                    }
-                })
-})
+$( document ).ready(function() {
+    $("#key").keyup(function(){
+    var var1= document.getElementById("id_device").value;
+    var var2= document.getElementById("key").value;
+    console.log('อุอิอุอิอุอิอุอิอุอิ');
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+            method:"GET",
+            url:"{{'check_id'}}",    
+            data:{data1:var1,_token: _token},
+            success:function(responsedata){
+                console.log('เข้ามาจร้าาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาา');
+                $('#hok').html(responsedata);
+            }
+        });
+        $.ajax({
+            method:"GET",
+            url:"{{'check_key'}}",    
+            data:{data2:var2,_token: _token},
+            success:function(responsedata){
+                console.log('เข้ามาแล้ววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว');
+                $('#hok1').html(responsedata);
+            }
+        });
+    });
+});
 
 
 </script>		

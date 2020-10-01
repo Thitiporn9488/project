@@ -9,11 +9,11 @@ $conn = new mysqli($servername, $username, $password, $datadb);
 
 // $data1='data1';
 
-if (isset($_GET['data1'])) {
-$id_device = $_REQUEST['data1'];
+if (isset($_GET['data1'])) {$id_device = $_REQUEST['data1'];}
+if (isset($_GET['data2'])) {$key_de = $_REQUEST['data2'];}
 //เช็คจากตาราง User
-$check = "SELECT * FROM devices WHERE id_device = '$id_device'";
-$result= mysqli_query($conn,$check);
+$check_id_device = "SELECT * FROM devices WHERE id_device = '$id_device'";
+$result= mysqli_query($conn,$check_id_device);
   $num=mysqli_num_rows($result); 
   if($num > 0){
     echo "<span style='color:green'>มีอยู่แล้ว</span>";
@@ -21,8 +21,11 @@ $result= mysqli_query($conn,$check);
 
 else{
     echo "<span style='color:red'>ไม่มีข้อมูล</span>";
-}       
+}  
+
+
+
 mysqli_close($conn);
-}
+
 
 ?>
