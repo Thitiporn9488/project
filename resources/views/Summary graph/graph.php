@@ -12,9 +12,6 @@
      if(isset($_SESSION['status'])=='เจ้าของ') {
             header("Location:/");
         }
-        if(isset($_SESSION['status'])=='ลูกจ้าง'){
-            header("Location:/");
-        }
 ?>
 
 <!DOCTYPE html>
@@ -65,63 +62,44 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                <?php 
+                <?php  
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
-                    <li class="nav-item dropdown d-none d-xl-inline-block">
+                   <li class="nav-item dropdown d-none d-xl-inline-block">
                         <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                             aria-expanded="false">
-                            <span class="glyphicon glyphicon-user hidden-xs"> <?php echo $_SESSION['name_user'];?></span>  </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown"  ><br>
-                                    <div class="d-flex border-bottom w-100 justify-content-center" style="width:250px;height:160px;text-indent:1.5em;">
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME : <?php echo $_SESSION['name_user'];?></p>
-                                        </div>
-                                        <div
-                                            class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                                            <p class="mdi mdi-account-outline mr-0 text-gray">ID FARMER : <?php echo $_SESSION['id_farmer'];?></p>
-                                        </div>
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS : <?php echo $_SESSION['status'];?></p>
-                                        </div>
-                                        <hr class="my-4">
-                                        <form action="regis_em">
-                                        <div class="pull-left">
-                                                  <button type="submit"
-                                        class="btn btn-default btn_flat">Register Employee</button>
-                                            </div> 
-                                        </form>                                           
-                                    </div>
-                            </div>
-                    </li>
+                            <span class="glyphicon glyphicon-user hidden-xs">
+                                <?php echo $_SESSION['name_user'];?></span> </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <br>
+                            <div class="d-flex border-bottom w-100 justify-content-center"
+                                style="width:250px;height:160px;text-indent:1.5em;">
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                    <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME :
+                                        <?php echo $_SESSION['name_user'];?></p>
+                                </div>
+                                <div
+                                    class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+                                    <p class="mdi mdi-account-outline mr-0 text-gray">ID ADMIN :
+                                        <?php echo $_SESSION['id_farmer'];?></p>
+                                </div>
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                    <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS :
+                                        <?php echo $_SESSION['status'];?></p>
+                                </div>
+                                <hr class="my-4">
 
-                    
-                <?php }
-                            // ลูกจ้าง
-                            else if(isset($_SESSION['status'])=='ลูกจ้าง'){
-                            ?>
-                      <li class="nav-item dropdown d-none d-xl-inline-block">
-                        <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <span class="glyphicon glyphicon-user hidden-xs"> <?php echo $_SESSION['name_emp'];?></span>  </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown"  ><br>
-                                    <div class="d-flex border-bottom w-100 justify-content-center" style="width:250px;height:160px;text-indent:1.5em;">
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME : <?php echo $_SESSION['name_emp'];?></p>
-                                        </div>
-                        
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS : <?php echo $_SESSION['status'];?></p>
-                                        </div>
-                                        <hr class="my-4">
-                                                                                
+                                <form action="regis_em">
+                                    <div class="pull-left">
+                                    <button href="#" class="btn btn-defaul btn-flat">register employee</button>
                                     </div>
+                                </form>
+                                
                             </div>
+                        </div>
                     </li>
-                    
                     <?php } ?>
+
                     <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
 

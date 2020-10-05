@@ -44,7 +44,12 @@ Route::get('/register', function () {
 Route::get('logout', function () {
     return view('logout');
 });
+Route::get('dbconnect', function () {
+    return view('dbconnect');
+});
 
+
+// ลูกจ้าง
 //  regis employee
 Route::get('regis_em', function () {
     return view('employee.regis_em');
@@ -52,7 +57,12 @@ Route::get('regis_em', function () {
 Route::get('/addregis_em', function () {
     return view('employee.addregis_em');
 });
+Route::get('home_em', function () {
+    return view('employee.home_em');
+});
 
+
+//แอดมิน
 // regis admin
 Route::get('regis_ad', function () {
     return view('admin.regis_ad');
@@ -61,20 +71,18 @@ Route::get('/addregis_ad', function () {
     return view('admin.addregis_ad');
 });
 
-
 Route::get('/home_ad', function () {
     return view('admin.home_ad');
 });
-
 
 Route::get('index_ad', function () {
     return view('admin.index_ad');
 });
 
-Route::get('dbconnect', function () {
-    return view('dbconnect');
-});
 
+
+//เจ้าของ
+// โรงบ่ม
 Route::get('index_in', function () {
     return view('rb.index_in');
 });
@@ -91,17 +99,20 @@ Route::get('check_key', function () {
 Route::get('check_add', function () {
     return view('rb.check_add');
 });
-Route::get('calen', function () {
-    return view('calendar.calen');
-});
+
+// กระบวนการ
 Route::get('pro', function () {
     return view('pprocess.pro');
 });
+// กราฟสรุป
 Route::get('graph', function () {
     return view('Summary graph.graph');
 });
-Route::get('RONG BOM', function () {
-    return view('image.RONG BOM');
+
+
+
+Route::get('calen', function () {
+    return view('calendar.calen');
 });
 
 

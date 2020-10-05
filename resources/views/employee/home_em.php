@@ -9,7 +9,7 @@
 
     session_start(); 
 
-     if(isset($_SESSION['status'])=='แอดมิน') {
+     if(isset($_SESSION['status'])=='ลูกจ้าง') {
         header("Location:/");
         }
     
@@ -51,42 +51,32 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="index_de">การจัดการอุปกรณ์</a></li>
+                <li><a href="index_in">การจัดการโรงบ่มและอุปกรณ์</a></li>
+                    <li><a href="pro">การจัดการกระบวนการบ่ม</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
 
                     <?php  
-    if(isset($_SESSION['status'])=='แอดมิน'){
+    if(isset($_SESSION['status'])=='ลูกจ้าง'){
                             ?>
                     <li class="nav-item dropdown d-none d-xl-inline-block">
                         <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                             aria-expanded="false">
-                            <span class="glyphicon glyphicon-user hidden-xs">
-                                <?php echo $_SESSION['name_ad'];?></span> </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                            <br>
-                            <div class="d-flex border-bottom w-100 justify-content-center"
-                                style="width:250px;height:130px;text-indent:1.5em;">
-                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                    <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME :
-                                        <?php echo $_SESSION['name_ad'];?></p>
-                                </div>
-                                <div
-                                    class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                                    <p class="mdi mdi-account-outline mr-0 text-gray">ID ADMIN :
-                                        <?php echo $_SESSION['id_admin'];?></p>
-                                </div>
-                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                    <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS :
-                                        <?php echo $_SESSION['status'];?></p>
-                                </div>
-                                <hr class="my-4">
-                                <form action="regis_em">
-                            
-                                </form>
+                            <span class="glyphicon glyphicon-user hidden-xs"> <?php echo $_SESSION['name_emp'];?></span>  </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                aria-labelledby="UserDropdown"  ><br>
+                                    <div class="d-flex border-bottom w-100 justify-content-center" style="width:250px;height:100px;text-indent:1.5em;">
+                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                            <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME : <?php echo $_SESSION['name_emp'];?></p>
+                                        </div>
+                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                            <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS : <?php echo $_SESSION['status'];?></p>
+                                        </div>
+                                        <hr class="my-4">
+                                                                             
+                                    </div>
                             </div>
-                        </div>
                     </li>
 
                     <?php } ?>

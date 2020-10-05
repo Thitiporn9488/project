@@ -71,12 +71,12 @@ if(mysqli_num_rows($result_employees)==1 ){
         if($row["status"] == "ลูกจ้าง"){
             $_SESSION['name_emp'] = $row['name_emp'];
             $_SESSION['status'] = $row['status'];
-            header("Location:home");
+            header("Location:home_em");
             exit(0);
         }else{
             $_SESSION['name_emp'] = $row['name_emp'];
             $_SESSION['status'] = $row['status'];
-            header("Location:home");
+            header("Location:home_em");
             exit(0);
         }
        

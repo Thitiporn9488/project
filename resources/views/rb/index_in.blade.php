@@ -12,10 +12,7 @@
      if(isset($_SESSION['status'])=='เจ้าของ') {
             header("Location:/");
         }
-        if(isset($_SESSION['status'])=='ลูกจ้าง'){
-            header("Location:/");
-        }
- 
+     
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>การจัดการโรงบ่มและอุปกรณ์</title>
     <!-- ส่วนหัว -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -60,7 +57,7 @@
 
 <body>
 
-    <nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
         <div class="container-fluid" style="margin-right:100px;margin-left:100px">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -84,67 +81,44 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <?php 
+                <?php  
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
-                     <li class="nav-item dropdown d-none d-xl-inline-block">
-                        <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <span class="glyphicon glyphicon-user hidden-xs"> <?php echo $_SESSION['name_user'];?></span>  </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown"  ><br>
-                                    <div class="d-flex border-bottom w-100 justify-content-center" style="width:250px;height:160px;text-indent:1.5em;">
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME : <?php echo $_SESSION['name_user'];?></p>
-                                        </div>
-                                        <div
-                                            class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                                            <p class="mdi mdi-account-outline mr-0 text-gray">ID FARMER : <?php echo $_SESSION['id_farmer'];?></p>
-                                        </div>
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS : <?php echo $_SESSION['status'];?></p>
-                                        </div>
-                                        <hr class="my-4">
-                                        <form action="regis_em">
-                                        <div class="pull-left">
-                                                  <button type="submit"
-                                        class="btn btn-default btn_flat">Register Employee</button>
-                                            </div> 
-                                        </form>                                           
-                                    </div>
-                            </div>
-                    </li>
-
-
-                    <?php }
-                            // ลูกจ้าง
-                            else if(isset($_SESSION['status'])=='ลูกจ้าง'){
-                            ?>
-                    <li class="nav-item dropdown d-none d-xl-inline-block">
+                   <li class="nav-item dropdown d-none d-xl-inline-block">
                         <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                             aria-expanded="false">
                             <span class="glyphicon glyphicon-user hidden-xs">
-                                <?php echo $_SESSION['name_emp'];?></span> </a>
+                                <?php echo $_SESSION['name_user'];?></span> </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <br>
                             <div class="d-flex border-bottom w-100 justify-content-center"
-                                style="width:250px;height:160px;text-indent:1.5em;">
+                                style="width:250px;height:140px;text-indent:1.5em;">
                                 <div class="py-3 px-4 d-flex align-items-center justify-content-center">
                                     <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME :
-                                        <?php echo $_SESSION['name_emp'];?></p>
+                                        <?php echo $_SESSION['name_user'];?></p>
                                 </div>
-                                
+                                <div
+                                    class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+                                    <p class="mdi mdi-account-outline mr-0 text-gray">ID ADMIN :
+                                        <?php echo $_SESSION['id_farmer'];?></p>
+                                </div>
                                 <div class="py-3 px-4 d-flex align-items-center justify-content-center">
                                     <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS :
                                         <?php echo $_SESSION['status'];?></p>
                                 </div>
                                 <hr class="my-4">
-                               
+
+                                <form action="regis_em">
+                                    <div class="pull-left">
+                                    <button href="#" class="btn btn-defaul btn-flat">register employee</button>
+                                    </div>
+                                </form>
+                                
                             </div>
                         </div>
                     </li>
-
                     <?php } ?>
+
                     <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
 
@@ -152,7 +126,7 @@
         </div><!-- /.container-fluid -->
     </nav><br>
 
-    <h3 style="text-align: center;">โรงบ่ม</h3><br>
+    <h3 style="text-align: center;">การจัดการโรงบ่มและอุปกรณ์</h3><br><br>
     <?php 
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
@@ -172,9 +146,9 @@
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><span
                 class='glyphicon glyphicon-plus' aria-hidden='true'></span>
-            เพิ่มข้อมูล
-        </button> <br> <br>
-        <
+            เพิ่มข้อมูลโรงบ่มและอุปกรณ์
+        </button> <br> <br><br>
+    
 
         <table id="example" class="table table-bordered" cellspacing="0" width="100%">
             <thead>
@@ -191,13 +165,13 @@
             </thead>
             <tfoot>
                 <tr class="bg-danger">
-                    <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
+                <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ชื่อโรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">ID DEVICE</th>
+                    <th scope="col" style="text-align: center;">อุณหภูมิต่ำ</th>
+                    <th scope="col" style="text-align: center;">อุณหภูมิสูง</th>
+                    <th scope="col" style="text-align: center;">ความชื้นต่ำ</th>
+                    <th scope="col" style="text-align: center;">ความชื้นสูง</th>
                     <th scope="col" style="text-align: center;">action</th>
                 </tr>
             </tfoot>
@@ -209,248 +183,264 @@
                   $result = $conn->query($sql);
                       // output data of each row
                       while($row = $result->fetch_assoc()){
-                        $no_in = $row['no_in'];
-                        $id_in = $row['id_in'];
-                        $name_in = $row['name_in'];
-                        $id_device = $row['id_device'];
-                        $lowTemp = $row['lowTemp'];
-                        $highTemp = $row['highTemp'];
-                        $lowHumid = $row['lowHumid'];
-                        $highHumid = $row['highHumid'];
-                       
-                    ?>
-                <tr>
-                    <td style="text-align: center;">
-                        <?php echo $id_in; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php echo $name_in; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php echo $id_device; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php echo $lowTemp; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php echo $highTemp; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php echo $lowHumid; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php echo $highHumid; ?>
-                    </td>
-                    <td style="text-align: center;">
-                        <a href="#alert<?php echo $no_in;?>" data-toggle="modal">
-                            <button type='button' class='btn btn-warning btn-sm' title='แจ้งเตือน'><span
-                                    class='glyphicon glyphicon-bell' aria-hidden='true'></span></button>
-                        </a>
-                        <a href="#add_de<?php echo $no_in;?>" data-toggle="modal">
-                            <button type='button' class='btn btn-success btn-sm' title='เพิ่มอุปกรณ์'><span
-                                    class='glyphicon glyphicon-plus' aria-hidden='true'></span></button>
-                        </a>
-                        <a href="#edit<?php echo $no_in;?>" data-toggle="modal">
-                            <button type='button' class='btn btn-info btn-sm' title='แก้ไขข้อมูล'><span
-                                    class='glyphicon glyphicon-edit' aria-hidden='true'></span></button>
-                        </a>
-                        <a href="#delete<?php echo $no_in;?>" data-toggle="modal">
-                            <button type='button' class='btn btn-danger btn-sm' title='ลบข้อมูล'><span
-                                    class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
-                        </a>
-                    </td>
 
-                    <!-- แจ้งเตือน Modal -->
-                    <div class="modal fade" id="alert<?php echo $no_in;?>" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">ตั้งค่าการแจ้งเตือน</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                        echo ' 
+                        <tr>
+                        <td style="text-align: center;">
+                            '.$row['id_in'].'
+                        </td>
+                        <td style="text-align: center;">
+                            '.$row['name_in'].'
+                        </td>
+                        <td style="text-align: center;">
+                            '.$row['id_device'].'
+                        </td>
+                        <td style="text-align: center;">
+                          '.$row['lowTemp'].'
+                        </td>
+                        <td style="text-align: center;">
+                            '.$row['highTemp'].'
+                        </td>
+                        <td style="text-align: center;">
+                           '.$row['lowHumid'].'
+                        </td>
+                        <td style="text-align: center;">
+                           '.$row['highHumid'].'
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#alert'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
+                                <button type="button" class="btn btn-warning btn-sm" title="แจ้งเตือน"><span
+                                        class="glyphicon glyphicon-bell" aria-hidden="true"></span></button>
+                            </a>
+                            <a href="#add_de'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
+                                <button type="button" class="btn btn-success btn-sm" title="เพิ่มอุปกรณ์"><span
+                                        class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            </a>
+                            <a href="#edit'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
+                                <button type="button" class="btn btn-info btn-sm" title="แก้ไขข้อมูล"><span
+                                        class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            </a>
+                            <a href="#delete'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
+                                <button type="button" class="btn btn-danger btn-sm" title="ลบข้อมูล"><span
+                                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </a>
+                        </td>
+    
+                        <!-- แจ้งเตือน Modal -->
+
+                        
+                        <div class="modal fade" id="alert'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel">ตั้งค่าการแจ้งเตือน</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="" method="GET">
+                                        <div class="modal-body">
+                                            <label>ชื่อโรงบ่ม:</label>
+                                            <input type="input" name="name_in" class="form-control"
+                                                value="'.$row['name_in'].'"'.$row['name_in'].' " id="name_in" readonly><br>
+
+                                                <div class="form-group row">
+
+                                            <div  class="col-xs-4" style="margin-left:70px">
+                                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
+                                                <input type="text" name="lowTemp" class="form-control" id="lowTemp"
+                                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" required>
+                                            </div>
+                                            <div  class="col-xs-4" style="margin-left:70px">
+                                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
+                                                <input type="text" name="highTemp" class="form-control" id="highTemp"
+                                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" required>
+                                            </div><br><br><br><br>
+                                            <div  class="col-xs-4" style="margin-left:70px">
+                                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
+                                                <input type="text" name="lowHumid" class="form-control" id="lowHumid"
+                                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" required>
+                                            </div>
+                                            <div  class="col-xs-4" style="margin-left:70px"
+                                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
+                                                <input type="text" name="highHumid" class="form-control" id="highHumid"
+                                                    placeholder="ความชื้นสูงกว่าที่กำหนด" required>
+                                            </div>
+
+                                        </div>  
+                                        
+                                        </div>
+    
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" name="alert"
+                                                data-target="#alert">บันทึกข้อมูล</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <form action="" method="GET">
-                                    <div class="modal-body">
-                                        <label>ชื่อโรงบ่ม:</label>
-                                        <input type="input" name="name_in" class="form-control"
-                                            value="<?php echo $name_in;?> " id="name_in" readonly><br>
-                                        <div class="form-group">
-                                            <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                            <input type="text" name="lowTemp" class="form-control" id="lowTemp"
-                                                placeholder="อุณหภูมิต่ำกว่าที่กำหนด" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                            <input type="text" name="highTemp" class="form-control" id="highTemp"
-                                                placeholder="อุณหภูมิสูงกว่าที่กำหนด" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                            <input type="text" name="lowHumid" class="form-control" id="lowHumid"
-                                                placeholder="ความชื้นต่ำกว่าที่กำหนด" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                            <input type="text" name="highHumid" class="form-control" id="highHumid"
-                                                placeholder="ความชื้นสูงกว่าที่กำหนด" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="alert"
-                                            data-target="#alert">บันทึกข้อมูล</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
-                    </div>
+    
+    
+                        <!-- add device Modal -->
+                        <div class="modal fade" id="add_de'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel">เพิ่มอุปกรณ์</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="" method="GET">
+                                        <div class="modal-body">
+                                            <label>ชื่อโรงบ่ม:</label>
+                                            <input type="input" name="name_in" class="form-control"
+                                                value="'.$row['name_in'].'"'.$row['name_in'].' " id="name_in" readonly><br>
 
+                                                <div class="form-group row">
 
-                    <!-- add device Modal -->
-                    <div class="modal fade" id="add_de<?php echo $no_in; ?>" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">เพิ่มอุปกรณ์</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="" method="GET">
-                                    <div class="modal-body">
-                                        <label>ชื่อโรงบ่ม:</label>
-                                        <input type="input" name="name_in" class="form-control"
-                                            value="<?php echo $name_in;?> " id="name_in" readonly><br>
-
-                                        <div class="form-group">
-                                            <label>ID DEVICE::</label>
-                                            <input type="text" name="id_device" class="form-control" id="id_device"
-                                                placeholder="ID DEVICE" required>
-                                        </div>
+                                            <div class="col-xs-4" style="margin-left:70px">
+                                                <label>ID DEVICE::</label>
+                                                <input type="text" name="id_device" class="form-control" id="id_device"
+                                                    placeholder="ID DEVICE" required>
+                                            </div>
+                                           
+                                            <div class="col-xs-4" style="margin-left:70px">
+                                                <label>KEY:</label>
+                                                <input type="text" name="key" class="form-control" id="key"
+                                                    placeholder="KEY" required>
+                                            </div>
+                                           
+    
+                                        </div><br>
                                         <span id="hok"></span>
-                                        <div class="form-group">
-                                            <label>KEY:</label>
-                                            <input type="text" name="key" class="form-control" id="key"
-                                                placeholder="KEY" required>
-                                        </div>
                                         <span id="hok1"></span>
 
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="check"
-                                            data-target="#check">บันทึกข้อมูล</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- edit Modal -->
-                    <div class="modal fade" id="edit<?php echo $no_in; ?>" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลโรงบ่ม</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" name="check"
+                                                data-target="#check">บันทึกข้อมูล</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <form action="" method="GET">
-                                    <div class="modal-body">
-                                        <input type="hidden" name="no_in" class="form-control"
-                                            value="<?php echo $no_in;?>" id="no_in" readonly><br>
-
-                                        <div class="form-group">
-                                            <label>ID โรงบ่ม:</label>
-                                            <input type="text" name="id_in" class="form-control" id="id_in"
-                                                value="<?php echo $id_in; ?>" placeholder="ID โรงบ่ม" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ชื่อโรงบ่ม:</label>
-                                            <input type="text" name="name_in" class="form-control" id="name_in"
-                                                value="<?php echo $name_in; ?>" placeholder="ชื่อโรงบ่ม" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                            <input type="text" name="lowTemp" class="form-control" id="lowTemp"
-                                                value="<?php echo $lowTemp; ?>" placeholder="อุณหภูมิต่ำกว่าที่กำหนด"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                            <input type="text" name="highTemp" class="form-control" id="highTemp"
-                                                value="<?php echo $highTemp; ?>" placeholder="อุณหภูมิสูงกว่าที่กำหนด"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                            <input type="text" name="lowHumid" class="form-control" id="lowHumid"
-                                                value="<?php echo $lowHumid; ?>" placeholder="ความชื้นต่ำกว่าที่กำหนด"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                            <input type="text" name="highHumid" class="form-control" id="highHumid"
-                                                value="<?php echo $highHumid; ?>" placeholder="ความชื้นสูงกว่าที่กำหนด"
-                                                required>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="edit"
-                                            data-target="#edit">update data</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
-                    </div>
+    
+    
+                        <!-- edit Modal -->
+                        <div class="modal fade" id="edit'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลโรงบ่ม</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="" method="GET">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="no_in" class="form-control"
+                                                value="'.$row['no_in'].'"'.$row['no_in'].'" id="no_in" readonly><br>
 
-                    <!-- delete Modal -->
-                    <div class="modal fade" id="delete<?php echo $no_in; ?>" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                                                <div class="form-group row">
+    
+                                            <div class="col-xs-4" style="margin-left:65px">
+                                                <label>ID โรงบ่ม:</label>
+                                                <input type="text" name="id_in" class="form-control" id="id_in"
+                                                    value="'.$row['id_in'].'"'.$row['id_in'].'" placeholder="ID โรงบ่ม" required>
+                                            </div>
+                                            <div class="col-xs-4" style="margin-left:65px">
+                                                <label>ชื่อโรงบ่ม:</label>
+                                                <input type="text" name="name_in" class="form-control" id="name_in"
+                                                    value="'.$row['name_in'].'"'.$row['name_in'].'" placeholder="ชื่อโรงบ่ม" required>
+                                            </div><br><br><br><br>
 
-                                    <h4 class="modal-title" id="exampleModalLabel">ลบข้อมูลโรงบ่ม</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                            <div class="col-xs-4" style="margin-left:65px">
+                                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
+                                                <input type="text" name="lowTemp" class="form-control" id="lowTemp"
+                                                    value="'.$row['lowTemp'].'"'.$row['lowTemp'].'" placeholder="อุณหภูมิต่ำกว่าที่กำหนด"
+                                                    required>
+                                            </div>
+                                            <div class="col-xs-4" style="margin-left:65px">
+                                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
+                                                <input type="text" name="highTemp" class="form-control" id="highTemp"
+                                                    value="'.$row['highTemp'].'"'.$row['highTemp'].'" placeholder="อุณหภูมิสูงกว่าที่กำหนด"
+                                                    required>
+                                            </div><br><br><br><br>
+                                            <div class="col-xs-4" style="margin-left:65px">
+                                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
+                                                <input type="text" name="lowHumid" class="form-control" id="lowHumid"
+                                                    value="'.$row['lowHumid'].'"'.$row['lowHumid'].'" placeholder="ความชื้นต่ำกว่าที่กำหนด"
+                                                    required>
+                                            </div>
+                                            <div class="col-xs-4" style="margin-left:65px">
+                                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
+                                                <input type="text" name="highHumid" class="form-control" id="highHumid"
+                                                    value="'.$row['highHumid'].'"'.$row['highHumid'].'" placeholder="ความชื้นสูงกว่าที่กำหนด"
+                                                    required>
+                                            </div>
+
+                                            </div>
+    
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" name="edit"
+                                                data-target="#edit">update data</button>
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <form action="" method="GET">
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input type="hidden" name="delete_id" value="<?php echo $no_in; ?>">
-                                            <div class="alert alert-danger">คุณต้องการลบโรงบ่ม <strong>
-                                                    <?php echo $name_in; ?>
-                                                </strong> หรือไม่?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary" name="delete"
-                                                    data-target="#delete">ลบ</button>
-                                            </div>
-                                </form>
-                                
                             </div>
                         </div>
-                    </div>
-
-                </tr>
+    
+                        <!-- delete Modal -->
+                        <div class="modal fade" id="delete'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+    
+                                        <h4 class="modal-title" id="exampleModalLabel">ลบข้อมูลโรงบ่ม</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+    
+                                    <form action="" method="GET">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input type="hidden" name="delete_id" value="<?php echo $no_in; ?>">
+                                                <div class="alert alert-danger">คุณต้องการลบโรงบ่ม <strong>
+                                                        <?php echo $name_in; ?>
+                                                    </strong> หรือไม่?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" name="delete"
+                                                        data-target="#delete">ลบ</button>
+                                                </div>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+    
+                    </tr>
+                        
+                        
+                        ';
+                      
+                    ?>
+             
                 <?php
                       }
                     
@@ -541,8 +531,9 @@
                     
                    // check device
                    if(isset($_GET['check'])){
-                    $id_in = $_GET['id_in'];
+                    $name_in = $_GET['name_in'];
                     $id_device = $_GET['id_device'];
+                    $key = $_GET['key'];
                     
                     // เช็คว่ามีข้อมูลนี้อยู่หรือไม่
                     $sql = "SELECT * FROM incubs WHERE id_device='$id_device' ";
@@ -555,7 +546,7 @@
                         // echo 'yed';
                         $sql = "UPDATE  incubs 
                         SET  id_device='$id_device'
-                        WHERE id_in='$id_in'";
+                        WHERE name_in='$name_in'";
                         mysqli_query($conn,$sql);
                     }       
                     else{

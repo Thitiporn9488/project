@@ -12,9 +12,7 @@
   if(isset($_SESSION['status'])=='เจ้าของ') {
          header("Location:/");
      }
-     if(isset($_SESSION['status'])=='ลูกจ้าง'){
-         header("Location:/");
-     }
+  
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +23,7 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>home</title>
+    <title>การจัดการกระบวนการบ่ม</title>
     <!-- ส่วนหัว -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -60,6 +58,13 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- sweet aleart -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 
 
 
@@ -219,12 +224,11 @@
 
     </script>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
         <div class="container-fluid" style="margin-right:100px;margin-left:100px">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -248,67 +252,44 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <?php 
+                <?php  
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
-                     <li class="nav-item dropdown d-none d-xl-inline-block">
-                        <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <span class="glyphicon glyphicon-user hidden-xs"> <?php echo $_SESSION['name_user'];?></span>  </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown"  ><br>
-                                    <div class="d-flex border-bottom w-100 justify-content-center" style="width:250px;height:160px;text-indent:1.5em;">
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME : <?php echo $_SESSION['name_user'];?></p>
-                                        </div>
-                                        <div
-                                            class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                                            <p class="mdi mdi-account-outline mr-0 text-gray">ID FARMER : <?php echo $_SESSION['id_farmer'];?></p>
-                                        </div>
-                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                            <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS : <?php echo $_SESSION['status'];?></p>
-                                        </div>
-                                        <hr class="my-4">
-                                        <form action="regis_em">
-                                        <div class="pull-left">
-                                                  <button type="submit"
-                                        class="btn btn-default btn_flat">Register Employee</button>
-                                            </div> 
-                                        </form>                                           
-                                    </div>
-                            </div>
-                    </li>
-
-
-                    <?php }
-                            // ลูกจ้าง
-                            else if(isset($_SESSION['status'])=='ลูกจ้าง'){
-                            ?>
-                    <li class="nav-item dropdown d-none d-xl-inline-block">
+                   <li class="nav-item dropdown d-none d-xl-inline-block">
                         <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                             aria-expanded="false">
                             <span class="glyphicon glyphicon-user hidden-xs">
-                                <?php echo $_SESSION['name_emp'];?></span> </a>
+                                <?php echo $_SESSION['name_user'];?></span> </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <br>
                             <div class="d-flex border-bottom w-100 justify-content-center"
                                 style="width:250px;height:160px;text-indent:1.5em;">
                                 <div class="py-3 px-4 d-flex align-items-center justify-content-center">
                                     <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME :
-                                        <?php echo $_SESSION['name_emp'];?></p>
+                                        <?php echo $_SESSION['name_user'];?></p>
                                 </div>
-                               
+                                <div
+                                    class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+                                    <p class="mdi mdi-account-outline mr-0 text-gray">ID ADMIN :
+                                        <?php echo $_SESSION['id_farmer'];?></p>
+                                </div>
                                 <div class="py-3 px-4 d-flex align-items-center justify-content-center">
                                     <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS :
                                         <?php echo $_SESSION['status'];?></p>
                                 </div>
                                 <hr class="my-4">
-                               
+
+                                <form action="regis_em">
+                                    <div class="pull-left">
+                                    <button href="#" class="btn btn-defaul btn-flat">register employee</button>
+                                    </div>
+                                </form>
+                                
                             </div>
                         </div>
                     </li>
-
                     <?php } ?>
+
                     <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
 
@@ -316,7 +297,7 @@
         </div><!-- /.container-fluid -->
     </nav><br>
 
-    <h3 style="text-align: center;">โรงบ่ม</h3><br>
+    <h3 style="text-align: center;">การจัดการกระบวนการบ่ม</h3><br><br>
     <?php 
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
@@ -329,7 +310,7 @@
     </div>
     <?php } ?>
     <!-- end -->
-    <br>
+    <br>  <br>
 
     <div class="container">
 
@@ -337,7 +318,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><span
                 class='glyphicon glyphicon-plus' aria-hidden='true'></span>
             เพิ่มข้อมูลกระบวนการบ่ม
-        </button> <br> <br>
+        </button> <br> <br><br>
 
                 <?php 
              $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
@@ -367,12 +348,12 @@
                          <input class="form-control" id="rbom" name="rbom" type="text" value="'.$row['rbom'].'"'.$row['rbom'].' readonly>
                      </div>
 
-                     <a href="#edit'.$row['id_pro'].'"'.$row['id_pro'].'" data-toggle="modal" style="margin-left:160px">
+                     <a href="#edit'.$row['no_pro'].'"'.$row['no_pro'].'" data-toggle="modal" style="margin-left:160px">
                             <button type="button" class="btn btn-info btn-sm" title="แก้ไขข้อมูล"><span
                                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                         </a>
 
-                 <a href="#delete'.$row['id_pro'].'"'.$row['id_pro'].'" data-toggle="modal" tyle="text-align:right;">
+                 <a href="#delete'.$row['no_pro'].'"'.$row['no_pro'].'" data-toggle="modal" tyle="text-align:right;">
                      <button type="button" class="btn btn-danger btn-sm" title="ลบข้อมูล"><span
                              class="glyphicon glyphicon-trash" ></span></button>
                  </a>
@@ -452,7 +433,7 @@
              </div><br>
 
              <!-- edit Modal -->
-             <div class="modal fade" id="edit'.$row['id_pro'].'"'.$row['id_pro'].'" role="dialog">
+             <div class="modal fade" id="edit'.$row['no_pro'].'"'.$row['no_pro'].'" role="dialog">
                  <div class="modal-dialog modal-lg">
                      <div class="modal-content">
                          <div class="modal-header">
@@ -460,15 +441,19 @@
                              <h4 class="modal-title">แก้ไขข้อมูลกระบานการบ่ม</h4>
                          </div>
 
+                         <form method="GET">
+
                          <div class="modal-body">
 
-                             <form>
+                         <input class="form-control" id="no_pro" value="'.$row['no_pro'].'"'.$row['no_pro'].'"
+                         name="no_pro" type="hidden">
 
                              <div class="form-group row">
+                         
                      <div class="col-xs-4">
                          <label>ID กระบวนการบ่ม:</label>
                          <input class="form-control" id="id_pro" value="'.$row['id_pro'].'"'.$row['id_pro'].'"
-                         name="id_pro">
+                         name="id_pro" type="text">
                      </div>
 
                      <div class="col-xs-4">
@@ -485,18 +470,13 @@
 
                      <div class="col-xs-4">
                          <label>การบ่มช่วงแรก</label>
-                         <select class="form-control" name="stap_1" id="stap_1" >
-                             <option value="" disabled selected>เลือกช่วงการบ่ม</option>
-                             <option value="ช่วงทำสี">ช่วงทำสี</option>
-                             <option value="ช่วงตรึงสี">ช่วงตรึงสี</option>
-                             <option value="ช่วงทำใบแห้ง">ช่วงทำใบแห้ง</option>
-                             <option value="ช่วงทำก้านแห้ง">ช่วงทำก้านแห้ง</option>
-                         </select>
+                         <input class="form-control" name="stap_1" id="stap_1"
+                         value="'.$row['stap_1'].'"'.$row['stap_1'].'" type="text">
                      </div>
 
                      <div class="col-xs-4">
                          <label>วันที่เริ่มการบ่ม</label>
-                         <input class="form-control" name="sdate_1" value="'.$row['sdate_1'].'"'.$row['sdate_1'].'>
+                         <input class="form-control" name="sdate_1" name="sdate_1" value="'.$row['sdate_1'].'"'.$row['sdate_1'].'>
                      </div>
 
                      <div class="col-xs-4">
@@ -507,13 +487,8 @@
 
                      <div class="col-xs-4">
                          <label>การบ่มช่วงที่ 2:</label>
-                         <select class="form-control" name="stap_2" id="stap_2" >
-                             <option value="" disabled selected>เลือกช่วงการบ่ม</option>
-                             <option value="ช่วงทำสี">ช่วงทำสี</option>
-                             <option value="ช่วงตรึงสี">ช่วงตรึงสี</option>
-                             <option value="ช่วงทำใบแห้ง">ช่วงทำใบแห้ง</option>
-                             <option value="ช่วงทำก้านแห้ง">ช่วงทำก้านแห้ง</option>
-                         </select>
+                         <input class="form-control" name="stap_2" id="stap_2"
+                         value="'.$row['stap_2'].'"'.$row['stap_2'].'" type="text">
                      </div>
 
                      <div class="col-xs-4">
@@ -524,19 +499,14 @@
 
                      <div class="col-xs-4">
                          <label>วันที่สิ้นสุดการบ่ม:</label>
-                         <input class="form-control" id="edate_2" name="edate_2"
+                         <input class="form-control"  name="edate_2"
                          value="'.$row['edate_2'].'"'.$row['edate_2'].'" type="text">
                      </div><br><br><br><br>
 
                      <div class="col-xs-4">
                          <label>การบ่มช่วงที่ 3:</label>
-                         <select class="form-control" name="stap_3" id="stap_3" >
-                             <option value="" disabled selected>เลือกช่วงการบ่ม</option>
-                             <option value="ช่วงทำสี">ช่วงทำสี</option>
-                             <option value="ช่วงตรึงสี">ช่วงตรึงสี</option>
-                             <option value="ช่วงทำใบแห้ง">ช่วงทำใบแห้ง</option>
-                             <option value="ช่วงทำก้านแห้ง">ช่วงทำก้านแห้ง</option>
-                         </select>
+                         <input class="form-control" name="stap_3" id="stap_3"
+                         value="'.$row['stap_3'].'"'.$row['stap_3'].'" type="text">
                      </div>
 
                      <div class="col-xs-4">
@@ -553,13 +523,8 @@
 
                      <div class="col-xs-4">
                          <label>การบ่มช่วงที่ 4:</label>
-                         <select class="form-control" name="stap_4" id="stap_4">
-                             <option value="" disabled selected>เลือกช่วงการบ่ม</option>
-                             <option value="ช่วงทำสี">ช่วงทำสี</option>
-                             <option value="ช่วงตรึงสี">ช่วงตรึงสี</option>
-                             <option value="ช่วงทำใบแห้ง">ช่วงทำใบแห้ง</option>
-                             <option value="ช่วงทำก้านแห้ง">ช่วงทำก้านแห้ง</option>
-                         </select>
+                         <input class="form-control" name="stap_4" id="stap_4"
+                         value="'.$row['stap_4'].'"'.$row['stap_4'].'" type="text">
                      </div>
 
                      <div class="col-xs-4">
@@ -573,25 +538,22 @@
                          <input class="form-control"  name="edate_4"
                          value="'.$row['edate_4'].'"'.$row['edate_4'].' type="text">
                      </div>
-
-                             </form>
+  
                          </div>
-
-
 
                          <div class="modal-footer">
                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                              <button type="submit" class="btn btn-primary" name="edit" data-target="#edit">
                                  Update data </button>
                          </div>
-
+                         </form>
                      </div>
                  </div>
              </div>
 </div>
 
-<!-- Modal -->
-  <div class="modal fade" id="delete'.$row['id_pro'].'"'.$row['id_pro'].'" role="dialog">
+<!-- Delete Modal -->
+  <div class="modal fade" id="delete'.$row['no_pro'].'"'.$row['no_pro'].'" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -600,9 +562,10 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">ลบข้อมูลกระบวนการบ่ม</h4>
         </div>
-        <form>
+        <form method="GET">
         <div class="modal-body">
 
+        <input type="hidden" name="delete_id" value="'.$row['no_pro'].'"'.$row['no_pro'].'">
         <div class="alert alert-danger">คุณต้องการลบ
         <a href="#" class="alert-link">'.$row['name_pro'].'</a> หรือไม่? 
       </div>
@@ -611,7 +574,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="edit" data-target="#edit">
+          <button type="submit" class="btn btn-primary" name="delete" data-target="#delete">
                                 ลบ</button>
         </div>
         </form>
@@ -621,113 +584,141 @@
                  ';  
                 ?>
 
-                
-                   
 
-
-    <?php
-                    }
-                    //Add Item        
-                    if(isset($_GET['save'])){
-                        $id_pro = $_GET['id_pro'];
-                        $name_pro = $_GET['name_pro'];
-                        $rbom = $_GET['rbom'];
-                        $stap_1 = $_GET['stap_1'];
-                        $sdate_1 = $_GET['sdate_1'];
-                        $edate_1 = $_GET['edate_1'];
-                        $stap_2 = $_GET['stap_2'];
-                        $sdate_2 = $_GET['sdate_2'];
-                        $edate_2 = $_GET['edate_2'];
-                        $stap_3 = $_GET['stap_3'];
-                        $sdate_3 = $_GET['sdate_3'];
-                        $edate_3 = $_GET['edate_3'];
-                        $stap_4 = $_GET['stap_4'];
-                        $sdate_4 = $_GET['sdate_4'];
-                        $edate_4 = $_GET['edate_4'];
-                        $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
-                        $sql = "INSERT INTO pprocessb (id_pro,name_pro,rbom,stap_1,sdate_1,edate_1,stap_2,sdate_2,edate_2,stap_3,sdate_3,edate_3,stap_4,sdate_4,edate_4,id_farmer)  
-                        VALUES ('$id_pro','$name_pro','$rbom','$stap_1','$sdate_1','$edate_1','$stap_2','$sdate_2','$edate_2','$stap_3','$sdate_3','$edate_3','$stap_4','$sdate_4','$edate_4','$farmer') ";
-                        if ($conn->query($sql) === TRUE) {
-                            if ($conn) {
-                                echo  $alert = "<div class='alert alert-succes'>
-                     
-                                </div>";
-                                echo '<script>window.location.href="pro"</script>';
-                            } else {
-                                echo "Error: " . $sql . "<br>" . $conn->error;
-                            }
-                        } else {
-                            echo "Error: " . $sql . "<br>" . $conn->error;
-                        }
-                     }
-
-                 //Update Items
-                 if(isset($_GET['edit'])){
-                    $no_pro = $_GET['no_pro'];
-                    $id_pro = $_GET['id_pro'];
-                    $name_pro = $_GET['name_pro'];
-                    $rbom = $_GET['rbom'];
-                    $stap_1 = $_GET['stap_1'];
-                    $sdate_1 = $_GET['sdate_1'];
-                    $edate_1 = $_GET['edate_1'];
-                    $stap_2 = $_GET['stap_2'];
-                    $sdate_2 = $_GET['sdate_2'];
-                    $edate_2 = $_GET['edate_2'];
-                    $stap_3 = $_GET['stap_3'];
-                    $sdate_3 = $_GET['sdate_3'];
-                    $edate_3 = $_GET['edate_3'];
-                    $stap_4 = $_GET['stap_4'];
-                    $sdate_4 = $_GET['sdate_4'];
-                    $edate_4 = $_GET['edate_4'];
-                    
-                  
-                    $sql = "UPDATE  pprocessb 
-                            SET  id_pro='$id_pro',
-                            id_pro='$id_pro',
-                            name_pro='$name_pro',
-                            rbom='$rbom',
-                            stap_1='$stap_1',
-                            sdate_1='$sdate_1',
-                            edate_1='$edate_1',
-                            stap_2='$stap_2',
-                            sdate_2='$sdate_2',
-                            edate_2='$edate_2',
-                            stap_3='$stap_3',
-                            sdate_3='$sdate_3',
-                            edate_3='$edate_3',
-                            stap_4='$stap_4',
-                            sdate_4='$sdate_4',
-                            edate_4='$edate_4'
-                            WHERE no_pro=$no_pro";
-                    if ($conn->query($sql) === TRUE) {
-                        echo '<script>window.location.href="pro"</script>';
+              <?php 
+            } 
+            if(isset($_GET['save'])){
+                $id_pro = $_GET['id_pro'];
+                $name_pro = $_GET['name_pro'];
+                $rbom = $_GET['rbom'];
+                $stap_1 = $_GET['stap_1'];
+                $sdate_1 = $_GET['sdate_1'];
+                $edate_1 = $_GET['edate_1'];
+                $stap_2 = $_GET['stap_2'];
+                $sdate_2 = $_GET['sdate_2'];
+                $edate_2 = $_GET['edate_2'];
+                $stap_3 = $_GET['stap_3'];
+                $sdate_3 = $_GET['sdate_3'];
+                $edate_3 = $_GET['edate_3'];
+                $stap_4 = $_GET['stap_4'];
+                $sdate_4 = $_GET['sdate_4'];
+                $edate_4 = $_GET['edate_4'];
+             
+                $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
+                $sql = "INSERT INTO pprocessb (id_pro,name_pro,rbom,stap_1,sdate_1,edate_1,stap_2,sdate_2,edate_2,stap_3,sdate_3,edate_3,stap_4,sdate_4,edate_4,id_farmer)  
+                VALUES ('$id_pro','$name_pro','$rbom','$stap_1','$sdate_1','$edate_1','$stap_2','$sdate_2','$edate_2','$stap_3','$sdate_3','$edate_3','$stap_4','$sdate_4','$edate_4','$farmer') ";
+                if ($conn->query($sql) === TRUE) {
+                    if ($conn) {
+                        echo  '<script>
+                        setTimeout(function() {
+                            swal({
+                                title: "ลบข้อมูลเรียบร้อยแล้ว",
+                                icon: "success",
+                              });
+                        }, function() {
+                            window.location.href="pro";
+                     }, );
+                 </script>';
                     } else {
-                        echo "Error updating record: " . $conn->error;
+                        echo "Error: " . $sql . "<br>" . $conn->error;
                     }
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
                 }
+             }
 
-                // Delete
-                if(isset($_GET['delete'])){
-                    // sql to delete a record
-                    $delete_id = $_GET['delete_id'];
-                    $sql = "DELETE FROM devices WHERE no_devi   ='$delete_id' ";
+             //Update Items
+             if(isset($_GET['edit'])){
+                $no_pro = $_GET['no_pro'];
+                $id_pro = $_GET['id_pro'];
+                $name_pro = $_GET['name_pro'];
+                $rbom = $_GET['rbom'];
+                $stap_1 = $_GET['stap_1'];
+                $sdate_1 = $_GET['sdate_1'];
+                $edate_1 = $_GET['edate_1'];
+                $stap_2 = $_GET['stap_2'];
+                $sdate_2 = $_GET['sdate_2'];
+                $edate_2 = $_GET['edate_2'];
+                $stap_3 = $_GET['stap_3'];
+                $sdate_3 = $_GET['sdate_3'];
+                $edate_3 = $_GET['edate_3'];
+                $stap_4 = $_GET['stap_4'];
+                $sdate_4 = $_GET['sdate_4'];
+                $edate_4 = $_GET['edate_4'];
+            
+                $sql = "UPDATE  pprocessb 
+                        SET    no_pro='$no_pro',
+                        id_pro='$id_pro',
+                        name_pro='$name_pro',
+                        rbom='$rbom',
+                        stap_1='$stap_1',
+                        sdate_1='$sdate_1',
+                        edate_1='$edate_1',
+                        stap_2='$stap_2',
+                        sdate_2='$sdate_2',
+                        edate_2='$edate_2',
+                        stap_3='$stap_3',
+                        sdate_3='$sdate_3',
+                        edate_3='$edate_3',
+                        stap_4='$stap_4',
+                        sdate_4='$sdate_4',
+                        edate_4='$edate_4'
+
+                        WHERE no_pro ='$no_pro'";
+
+                       
+                if ($conn->query($sql) === TRUE) {
+                    echo  '<script>
+                    setTimeout(function() {
+                        swal({
+                            title: "แก้ไขข้อมูลเรียบร้อยแล้ว",
+                            icon: "success",
+                          });
+                    }, function() {
+                        window.location.href="pro";
+                 }, 1);
+             </script>';
+                } 
+                else {
+                    echo "Error updating record: " . $conn->error;
+                }
+            }
+              
+             // Delete
+             if(isset($_GET['delete'])){
+                // sql to delete a record
+                $delete_id = $_GET['delete_id'];
+                $sql = "DELETE FROM pprocessb WHERE no_pro  ='$delete_id' ";
+                if ($conn->query($sql) === TRUE) {
+                    $sql = "DELETE FROM pprocessb WHERE no_pro ='$delete_id' ";
                     if ($conn->query($sql) === TRUE) {
-                        $sql = "DELETE FROM devices WHERE no_devi  ='$delete_id' ";
-                        if ($conn->query($sql) === TRUE) {
-                            $sql = "DELETE FROM devices WHERE no_devi ='$delete_id' ";
-                            echo '<script>window.location.href="index_de"</script>';
-                        } else {
-                            echo "Error deleting record: " . $conn->error;
-                        }
+                        $sql = "DELETE FROM pprocessb WHERE no_pro='$delete_id' ";
+                        echo  '<script>
+                        swal({
+                            title: "Good job!",
+                            text: "You clicked the button!",
+                            icon: "success",
+                            timer: ""
+                          });
+                          window.location.href="pro";
+                 </script>';
+                   
                     } else {
                         echo "Error deleting record: " . $conn->error;
                     }
+                } else {
+                    echo "Error deleting record: " . $conn->error;
                 }
-                
-?>
-  
-    </div>
+            }
+              
+              
+              ?>
 
+</div>
+
+                
+                
+  
     <!--Add Item Modal -->
    
     <div class="modal fade" id="exampleModal" role="dialog">
@@ -740,7 +731,7 @@
 
                 <div class="modal-body">
 
-                    <form>
+                    <form method="GET">
 
                         <div class="form-group row">
                             <div class="col-xs-4">
@@ -863,26 +854,30 @@
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
                             </div>
 
-                    </form>
+                  
                 </div>
-
-
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" name="save" data-target="#save">
                             บันทึกข้อมูล </button>
                 </div>
+                </form>
 
             </div>
         </div>
     </div>
     </div>
 
-
-
-
-
 </body>
+
+<script>
+
+$(".save").on("submit", function(e) {
+        swal("Good job!", "You clicked the button!", "success");
+    });
+
+
+
+</script>
 
 </html>
