@@ -14,13 +14,14 @@ if (isset($_GET['data2'])) {$key_de = $_REQUEST['data2'];}
 //เช็คจากตาราง User
 $check_id_device = "SELECT * FROM devices WHERE id_device = '$id_device'";
 $result= mysqli_query($conn,$check_id_device);
-  $num=mysqli_num_rows($result); 
-  if($num > 0){
-    echo "<span style='color:green'>มีอยู่แล้ว</span>";
+$row = mysqli_fetch_assoc($result);
+
+  if($row > 0){
+    echo "<span style='color:green'>อุปกรณ์นี้พร้อมใช้งานแล้ว</span>";
 }
 
 else{
-    echo "<span style='color:red'>ไม่มีข้อมูล</span>";
+    echo "<span style='color:red'>อุปกรณ์นี้ยังไม่พร้อมใช้งาน</span>";
 }  
 
 

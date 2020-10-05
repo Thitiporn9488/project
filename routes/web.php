@@ -97,6 +97,12 @@ Route::get('calen', function () {
 Route::get('pro', function () {
     return view('pprocess.pro');
 });
+Route::get('graph', function () {
+    return view('Summary graph.graph');
+});
+Route::get('RONG BOM', function () {
+    return view('image.RONG BOM');
+});
 
 
 

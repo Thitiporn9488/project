@@ -24,7 +24,7 @@
     #register {
         width: 500px;
         margin: auto;
-        margin-top: 7px;
+        margin-top: 35px;
         background-color: whitesmoke;
     }
 

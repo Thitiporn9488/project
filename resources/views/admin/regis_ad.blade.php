@@ -24,7 +24,7 @@
     #register {
         width: 500px;
         margin: auto;
-        margin-top: 7px;
+        margin-top: 70px;
         background-color: whitesmoke;
     }
 
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">ID_ADMIN</label>
                     <input value="" name="id_admin" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Name" required>
+                        aria-describedby="emailHelp" placeholder="ID_ADMIN" required>
                 </div>
 
                 <div class="form-group">

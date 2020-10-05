@@ -1,4 +1,22 @@
+<?php
+    $datadb = "testpj";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
 
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $datadb);
+
+    session_start(); 
+
+     if(isset($_SESSION['status'])=='เจ้าของ') {
+            header("Location:/");
+        }
+        if(isset($_SESSION['status'])=='ลูกจ้าง'){
+            header("Location:/");
+        }
+    
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,96 +44,104 @@
 
 <body>
 
-
-    <nav class="navbar navbar-inverse ">
-        <div class="container-fluid">
+<nav class="navbar navbar-default">
+        <div class="container-fluid" style="margin-right:100px;margin-left:100px">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="home">TOBACCO CURE</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home">Rong Bom</a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">ตั้งค่าโรงบ่ม<span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index_in">โรงบ่ม</a></li>
-                        <li><a href="#">Page 1-3</a></li>
-                    </ul>
-                </li>
-                <li><a href="pro">กระบวนการบ่ม</a></li>
-                <li><a href="#">ข้อมูลย้อนหลัง</a></li>
-                <li><a href="#">กราฟข้อมูล</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
 
-                <?php session_start(); 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="index_in">การจัดการโรงบ่มและอุปกรณ์</a></li>
+                    <li><a href="pro">การจัดการกระบวนการบ่ม</a></li>
+                    <li><a href="graph">กราฟสรุปข้อมูล</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                <?php  
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
+                   <li class="nav-item dropdown d-none d-xl-inline-block">
+                        <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
+                            aria-expanded="false">
+                            <span class="glyphicon glyphicon-user hidden-xs">
+                                <?php echo $_SESSION['name_user'];?></span> </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <br>
+                            <div class="d-flex border-bottom w-100 justify-content-center"
+                                style="width:250px;height:160px;text-indent:1.5em;">
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                    <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME :
+                                        <?php echo $_SESSION['name_user'];?></p>
+                                </div>
+                                <div
+                                    class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+                                    <p class="mdi mdi-account-outline mr-0 text-gray">ID ADMIN :
+                                        <?php echo $_SESSION['id_farmer'];?></p>
+                                </div>
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                    <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS :
+                                        <?php echo $_SESSION['status'];?></p>
+                                </div>
+                                <hr class="my-4">
+                                <form action="regis_em">
+                            
+                                </form>
+                            </div>
+                        </div>
+                    </li>
 
-                            <div class="dropdown">
-<button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<?php echo $_SESSION['name_user'];?>
-<span class="caret"></span>
-</button>
-<ul class="dropdown-menu" aria-labelledby="about-us">
-<h5 class="name">
-                            <span class="name">Name : <?php echo $_SESSION['name_user'];?></span>
-                        </h5>
-                        <h5 class="id_farmer">
-                            <span class="id_farmer">ID_farmer : <?php echo $_SESSION['id_farmer'];?></span>
-                        </h5>
-                        <span class="status">Status : <?php echo $_SESSION['status'];?></span><br>
-                         <a href="logout">logout</a><br>
-                         <a href="regis_em">register employee</a>
-</ul>
-</div>
-
-
-        <?php }
+                    
+                <?php }
                             // ลูกจ้าง
                             else if(isset($_SESSION['status'])=='ลูกจ้าง'){
                             ?>
-        <li class="navbar navbar-inverse">
-            <a class="dropdown" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+                      <li class="nav-item dropdown d-none d-xl-inline-block">
+                        <a class="dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
+                            aria-expanded="false">
+                            <span class="glyphicon glyphicon-user hidden-xs"> <?php echo $_SESSION['name_emp'];?></span>  </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                aria-labelledby="UserDropdown"  ><br>
+                                    <div class="d-flex border-bottom w-100 justify-content-center" style="width:250px;height:160px;text-indent:1.5em;">
+                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                            <p class="mdi mdi-bookmark-plus-outline mr-0 text-gray">NAME : <?php echo $_SESSION['name_emp'];?></p>
+                                        </div>
+                                        <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                            <p class="mdi mdi-alarm-check mr-0 text-gray">STATUS : <?php echo $_SESSION['status'];?></p>
+                                        </div>
+                                        <hr class="my-4">
+                                                                             
+                                    </div>
+                            </div>
+                    </li>
+                    
+                    <?php } ?>
+                    <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
 
-                <div class="name-scle dropdown-toggle "><?php echo $_SESSION['name_user'];?></div>
-            </a>
-
-            <div class="dropdown-menu">
-                <h5 class="name">
-                    <span class="name"><?php echo $_SESSION['name_user'];?></span>
-                </h5>
-                <span class="id_farmer"><?php echo $_SESSION['id_farmer'];?></span>
-                <span class="status"><?php echo $_SESSION['status'];?></span>
-            </div>
-            </div>
-
-            </div>
-            </ul>
-            </div>
-        </li>
-        <?php } ?>
-
-
-        </ul>
-
-        </div>
-    </nav>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav><br>
+    
 <div>
-    <div class="form-group row">
-                    <label class="control-label col-sm-1">เลือกโรงบ่ม:</label>
-                    <div class="col-md-4">
-                        <select name="status" id="" class="form-control">
 
+<!-- drop down โรงบ่ม -->
+    <div class="form-group row" style="margin-right:100px;margin-left:200px">
+                    <label class="control-label col-sm-2" >เลือกโรงบ่ม:</label>
+                    <div class="col-md-3">
+                        <select name="status" id="" class="form-control">
                             <option value="" disabled selected>เลือกโรงบ่ม</option>
                             <?php 
-                           $datadb = "testpj";
-                           $servername = "localhost";
-                           $username = "root";
-                           $password = "";
-                       
-                           // Create connection
-                           $conn = new mysqli($servername, $username, $password, $datadb);
-
                            $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
                            $sql = "SELECT * FROM incubs,users where incubs.id_farmer=users.id_farmer and incubs.id_farmer='$farmer'";
                             $result = $conn->query($sql);
@@ -128,7 +154,8 @@
 
                         </select>
                     </div>
-                </div> 
+                </div> <br>
+                <!-- จบ -->
 
  
     <?php
@@ -146,14 +173,19 @@
         }
         // echo json_encode($data, true);
     ?>
-    
-    <div class="container" style="position: relative; height:40vh; width:80vw">
+
+
+
+    <div class="contain"  style="position:relative;width:90%;left:50px">
         <div>
+            <h1>LogS161</h1><br>
+        </div display: inline;>
+        <div style="float:left;width:600px;height:500px">
             <canvas id="tempChart"></canvas>
         </div>
-        <div>
+        <div style="float:right;width:600px;height:100px">
             <canvas id="humChart"></canvas>
-        </div>
+            </div>
     </div>
     
     <script>
@@ -276,11 +308,14 @@
             let hT = dataArr[0].highTemp;
             let lH = dataArr[0].lowHumid;
             let hH = dataArr[0].highHumid;
+
+            console.log('--------------------------')
             console.log(lT, hT, lH, hH);
+            console.log(temp, humid)
 
             if(temp < lT && humid < lH){
                 Swal.fire({
-                    title: 'อุณหภูมิต่ำกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นต่ำกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิต่ำกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นต่ำกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -292,7 +327,7 @@
 
             else if(temp > hT && humid > hH){
                 Swal.fire({
-                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -304,7 +339,7 @@
 
             else if(temp < lT && humid > hH){
                 Swal.fire({
-                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -315,9 +350,8 @@
             }
 
             else if(temp > hT && humid < lH){
-                // swal("อุณหภูมิสูงกว่าที่กำหนด Temperature: " + temp + '\n' + "ความชื้นต่ำกว่าที่กำหนด Humidity: " + humid);
                 Swal.fire({
-                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -329,7 +363,7 @@
 
             else if(temp < lT){
                 Swal.fire({
-                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -341,7 +375,7 @@
 
             else if(temp > hT){
                 Swal.fire({
-                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -353,7 +387,7 @@
 
             else if(humid < lH){
                 Swal.fire({
-                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'อุณหภูมิสูงกว่าที่กำหนด Temperature: ' + temp.toFixed(2) + '&deg;C' + '\n' + 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -365,7 +399,7 @@
 
             else if(humid > hH){
                 Swal.fire({
-                    title: 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid,
+                    title: 'ความชื้นสูงกว่าที่กำหนด Humidity: ' + humid.toFixed(2) + '%',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
                     },
@@ -376,7 +410,6 @@
             }
         }
     </script>
-  
 </body>
 
 </html>
