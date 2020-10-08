@@ -30,24 +30,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- ตาราง -->
-      <!-- Latest compiled and minified CSS  ไอค่อน-->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    <!-- Latest compiled and minified CSS  ไอค่อน-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme ทำหนา-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
         integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        
-    <!-- data atble -->
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        } );
-            </script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- data atble -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+    </script>
+
+    <!-- sweet aleart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -55,7 +59,7 @@
 <body>
 
 
-<nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
         <div class="container-fluid" style="margin-right:100px;margin-left:100px">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -73,6 +77,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="index_de">การจัดการอุปกรณ์</a></li>
+                    <li><a href="owner">เจ้าของ</a></li>
+                    <li><a href="employ">ลูกจ้าง</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -104,7 +110,7 @@
                                 </div>
                                 <hr class="my-4">
                                 <form action="regis_em">
-                            
+
                                 </form>
                             </div>
                         </div>
@@ -118,24 +124,24 @@
         </div><!-- /.container-fluid -->
     </nav><br>
 
-                
+
     <h3 style="text-align: center;">โรงบ่ม</h3><br>
     <?php 
     if(isset($_SESSION['status'])=='แอดมิน'){
                             ?>
 
-        <div class="container" style="width:500px;height:100px;text-align: center;">
-            <div class="panel panel-default">
-                <div class="panel-heading">ชื่อผู้ใช้</div>
-                <div class="panel-body"><?php echo $_SESSION['name_ad'];?></div>
-            </div>
+    <div class="container" style="width:500px;height:100px;text-align: center;">
+        <div class="panel panel-default">
+            <div class="panel-heading">ชื่อผู้ใช้</div>
+            <div class="panel-body"><?php echo $_SESSION['name_ad'];?></div>
         </div>
-        <?php } ?>
-        <!-- end -->
-        <br>
+    </div>
+    <?php } ?>
+    <!-- end -->
+    <br>
 
     <div class="container">
-    
+
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><span
                 class='glyphicon glyphicon-plus' aria-hidden='true'></span>
@@ -145,7 +151,7 @@
         <table id="example" class="table table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr class="bg-danger">
-                    <th scope="col" style="text-align: center;">NUM</th>
+                    <th scope="col" style="text-align: center;">ชื่อ DEVICE</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
                     <th scope="col" style="text-align: center;">KEY</th>
                     <th scope="col" style="text-align: center;">action</th>
@@ -153,7 +159,7 @@
             </thead>
             <tfoot>
                 <tr class="bg-danger">
-                <th scope="col" style="text-align: center;">NUM</th>
+                    <th scope="col" style="text-align: center;">ชื่อ DEVICE</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
                     <th scope="col" style="text-align: center;">KEY</th>
                     <th scope="col" style="text-align: center;">action</th>
@@ -167,29 +173,19 @@
                   if ($result->num_rows > 0) {
                       // output data of each row
                       while($row = $result->fetch_assoc()) {
+                        $name_device = $row['name_device'];
                         $no_devi = $row['no_devi'];
                         $id_device = $row['id_device'];
                         $key_de = $row['key_de'];
                
-                        if($id_device == 0){
-                           $alert = "<div class='alert alert-danger'>
-                           <strong>$id_device</strong> No Stock
-                           </div>";
-                       }else if($id_device >= $id_device){
-                           $alert = "<div class='alert alert-warning'>
-                           <strong>$id_device</strong> Critical Level
-                           </div>";
-                       }else {
-                           $alert = $id_device;
-                       }
 
                     ?>
                 <tr>
-                <td style="text-align: center;">
-                        <?php echo $no_devi  ?>         
+                    <td style="text-align: center;">
+                        <?php echo $name_device ?>
                     </td>
                     <td style="text-align: center;">
-                        <?php echo $id_device ?>         
+                        <?php echo $id_device ?>
                     </td>
                     <td style="text-align: center;">
                         <?php echo $key_de; ?>
@@ -204,10 +200,8 @@
                                     class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
                         </a>
                     </td>
-                    <!-- <td>
-            <?php echo $alert; ?>
-        </td> -->
- 
+
+
                     <!-- edit Modal -->
                     <div class="modal fade" id="edit<?php echo $no_devi  ; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -222,21 +216,24 @@
 
                                 <form action="" method="GET">
                                     <div class="modal-body">
-                                        <div class="form-group">
                                         <input type="hidden" name="no_devi" value="<?php echo $no_devi ;?>">
-                                            <label>ID DEVICE:</label> 
+
+                                        <div class="form-group">
+                                            <label>ชื่อ DEVICE:</label>
+                                            <input type="text" name="name_device" class="form-control" id="name_device"
+                                                value="<?php echo $name_device; ?>">
+                                            <span class="message"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ID DEVICE:</label>
                                             <input type="text" name="id_device" class="form-control" id="id_device"
-                                                value="<?php echo $id_device; ?>" placeholder="ID โรงบ่ม" required>
-                                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                else.</small> -->
-                                <span class="message"></span>
+                                                value="<?php echo $id_device; ?>">
+                                            <span class="message"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>KEY:</label>
                                             <input type="text" name="key_de" class="form-control" id="key_de"
-                                                value="<?php echo $key_de; ?>" placeholder="ชื่อโรงบ่ม" required>
-                                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                else.</small> -->
+                                                value="<?php echo $key_de; ?>">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -266,7 +263,8 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <input type="hidden" name="delete_id" value="<?php echo $no_devi ; ?>">
-                                            <div class="alert alert-danger">คุณต้องการลบ <strong> <?php echo $id_device; ?> </strong> หรือไม่?
+                                            <div class="alert alert-danger">คุณต้องการลบ <strong>
+                                                    <?php echo $id_device; ?> </strong> หรือไม่?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -285,30 +283,33 @@
                     }
                          //Add Item        
                     if(isset($_GET['save'])){
+                        $name_device = $_GET['name_device'];
                         $id_device = $_GET['id_device'];
                         $key_de = $_GET['key_de'];
-                        $sql = "INSERT INTO devices (id_device,key_de) VALUES ('$id_device','$key_de')";
-                        // echo  $sql;
-                        if ($conn->query($sql) === TRUE) {
-                            
-                            if ($conn) {
-                                echo '<script>
-                                swal({
-                                    title: "สร้างผลงานเรียบร้อย",
-                                    icon: "success",
-                                    button: "ตกลง",
-                                    
-                                }); 
-          </script>';
- 
-                                echo '<script>window.location.href="index_de"</script>';
-                            } 
-                            else {
-                                echo "Error: " . $sql . "<br>" . $conn->error;
-                            }
-                        } else {
-                            echo "Error: " . $sql . "<br>" . $conn->error;
-                        }
+
+                        $check = "SELECT * FROM devices WHERE name_device = '$name_device'";
+                                // echo $check;
+                                $result= mysqli_query($conn,$check);
+                                $num=mysqli_num_rows($result); 
+                                if($num > 0){
+                                    //ถ้ามี username นี้อยู่ในระบบแล้วให้แจ้งเตือน
+                                    echo "<script>";
+                                    echo "alert(' มีผู้ใช้ ชื่อ DEVICE นี้แล้ว กรุณาสมัครใหม่อีกครั้ง !');";
+                                    echo "window.location='index_de';";
+                                    echo "</script>";
+                                }
+
+                                else{
+                              
+                                $sql = "INSERT INTO devices (name_device,id_device,key_de) VALUES ";
+                                    $sql .= "('" . $name_device ."',
+                                            '" . $id_device ."',
+                                            '" . $key_de ."')";
+                                    mysqli_query($conn, $sql);
+                                    header("Location:index_de");
+                                    exit(0);
+                                }       
+                                mysqli_close($conn);
                     }
 
                      //Update Items
@@ -323,7 +324,10 @@
                                      key_de='$key_de'
                                 WHERE no_devi=$no_devi";
                         if ($conn->query($sql) === TRUE) {
-                            echo '<script>window.location.href="index_de"</script>';
+                            echo '<script>
+                            swal("แก้ไขข้อมูลเรียบร้อยแล้ว", "success");
+                                window.location.href="index_de";
+                     </script>';
                         } else {
                             echo "Error updating record: " . $conn->error;
                         }
@@ -337,7 +341,10 @@
                             $sql = "DELETE FROM devices WHERE no_devi  ='$delete_id' ";
                             if ($conn->query($sql) === TRUE) {
                                 $sql = "DELETE FROM devices WHERE no_devi ='$delete_id' ";
-                                echo '<script>window.location.href="index_de"</script>';
+                                echo '<script>
+                                swal("ลบข้อมูลเรียบร้อยแล้ว", "success");
+                                    window.location.href="index_de";
+                         </script>';
                             } else {
                                 echo "Error deleting record: " . $conn->error;
                             }
@@ -365,16 +372,25 @@
 
                 <form action="" method="GET">
                     <div class="modal-body">
+
+                    <div class="form-group">
+                            <label>ชื่อ DEVICE:</label>
+                            <input type="text" name="name_device" class="form-control" id="name_device"
+                                placeholder="ชื่อ DEVICE" required>
+                        </div>
+
                         <div class="form-group">
                             <label>ID DEVICE:</label>
-                            <input type="text" name="id_device" class="form-control" id="id_device" placeholder="ID DEVICE"
-                                required>
+                            <input type="text" name="id_device" class="form-control" id="id_device"
+                                placeholder="ID DEVICE" required>
                         </div>
                         <div class="form-group">
                             <label>KEY:</label>
                             <input type="text" name="key_de" class="form-control" id="key_de" placeholder="KEY"
                                 required>
                         </div>
+                      
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -24,17 +24,28 @@
     <title>home</title>
 
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/home.css') }}"> -->
-  <!-- ส่วนหัว -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- ส่วนหัว -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+  
+      <!-- data atble -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+    </script>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
         <div class="container-fluid" style="margin-right:100px;margin-left:100px">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -85,7 +96,7 @@
                                 </div>
                                 <hr class="my-4">
                                 <form action="regis_em">
-                            
+
                                 </form>
                             </div>
                         </div>
@@ -99,17 +110,52 @@
         </div><!-- /.container-fluid -->
     </nav><br>
 
+    <div class="container">
+
+    <table id="example" class="table table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr class="bg-danger">
+                    <th scope="col" style="text-align: center;">ชื่อผู้ใช้</th>
+                    <th scope="col" style="text-align: center;">username</th>
+                    <th scope="col" style="text-align: center;">สถานะ</th>
+                </tr>
+            </thead>
+            <tfoot>
+            <tr class="bg-danger">
+                    <th scope="col" style="text-align: center;">ชื่อผู้ใช้</th>
+                    <th scope="col" style="text-align: center;">username</th>
+                    <th scope="col" style="text-align: center;">สถานะ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            <?php 
+                 $sql = "SELECT * FROM employees ";
+                  $result = $conn->query($sql);
+                      // output data of each row
+                      while($row = $result->fetch_assoc()) {
+                        $name_emp = $row['name_emp'];
+                        $username_em = $row['username_em'];
+                        $status = $row['status'];
+                  
+                    ?>
+                <tr>
+                <td style="text-align: center;">
+                        <?php echo $name_emp ?>
+                    </td>
+                    <td style="text-align: center;">
+                        <?php echo $username_em ?>
+                    </td>
+                    <td style="text-align: center;">
+                        <?php echo $status ?>
+                    </td>
+                </tr>
+            </tbody>
+                      <?php } ?>
+        </table>
+                    
 
 
-
-
-
-
-
-    <!-- <div class="top-left">Top Left</div> -->
-    <!-- css image รูปใหญ่ -->
-    <!-- <div class="bg-image"></div> -->
-
+    </div>
 
     </div>
 </body>

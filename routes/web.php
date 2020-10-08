@@ -79,6 +79,14 @@ Route::get('index_ad', function () {
     return view('admin.index_ad');
 });
 
+Route::get('owner', function () {
+    return view('admin.owner');
+});
+
+Route::get('employ', function () {
+    return view('admin.employ');
+});
+
 
 
 //เจ้าของ

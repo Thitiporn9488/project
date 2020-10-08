@@ -131,7 +131,7 @@
     if(isset($_SESSION['status'])=='เจ้าของ'){
                             ?>
 
-    <div class="container" style="width:500px;height:100px;text-align: center;">
+    <div class="container" style="width:400px;height:100px;text-align: center;">
         <div class="panel panel-default">
             <div class="panel-heading">ชื่อผู้ใช้</div>
             <div class="panel-body"><?php echo $_SESSION['name_user'];?></div>
@@ -156,10 +156,7 @@
                     <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ชื่อโรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">อุณหภูมิต่ำ</th>
-                    <th scope="col" style="text-align: center;">อุณหภูมิสูง</th>
-                    <th scope="col" style="text-align: center;">ความชื้นต่ำ</th>
-                    <th scope="col" style="text-align: center;">ความชื้นสูง</th>
+                    <th scope="col" style="text-align: center;">ลูกจ้างดูแลโรงบ่ม</th>
                     <th scope="col" style="text-align: center;">action</th>
                 </tr>
             </thead>
@@ -168,10 +165,7 @@
                 <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ชื่อโรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">อุณหภูมิต่ำ</th>
-                    <th scope="col" style="text-align: center;">อุณหภูมิสูง</th>
-                    <th scope="col" style="text-align: center;">ความชื้นต่ำ</th>
-                    <th scope="col" style="text-align: center;">ความชื้นสูง</th>
+                    <th scope="col" style="text-align: center;">ลูกจ้างดูแลโรงบ่ม</th>
                     <th scope="col" style="text-align: center;">action</th>
                 </tr>
             </tfoot>
@@ -195,18 +189,7 @@
                         <td style="text-align: center;">
                             '.$row['id_device'].'
                         </td>
-                        <td style="text-align: center;">
-                          '.$row['lowTemp'].'
-                        </td>
-                        <td style="text-align: center;">
-                            '.$row['highTemp'].'
-                        </td>
-                        <td style="text-align: center;">
-                           '.$row['lowHumid'].'
-                        </td>
-                        <td style="text-align: center;">
-                           '.$row['highHumid'].'
-                        </td>
+
                         <td style="text-align: center;">
                             <a href="#alert'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
                                 <button type="button" class="btn btn-warning btn-sm" title="แจ้งเตือน"><span
@@ -354,37 +337,37 @@
                                             <div class="col-xs-4" style="margin-left:65px">
                                                 <label>ID โรงบ่ม:</label>
                                                 <input type="text" name="id_in" class="form-control" id="id_in"
-                                                    value="'.$row['id_in'].'"'.$row['id_in'].'" placeholder="ID โรงบ่ม" required>
+                                                    value="'.$row['id_in'].'"'.$row['id_in'].'" placeholder="ID โรงบ่ม" >
                                             </div>
                                             <div class="col-xs-4" style="margin-left:65px">
                                                 <label>ชื่อโรงบ่ม:</label>
                                                 <input type="text" name="name_in" class="form-control" id="name_in"
-                                                    value="'.$row['name_in'].'"'.$row['name_in'].'" placeholder="ชื่อโรงบ่ม" required>
+                                                    value="'.$row['name_in'].'"'.$row['name_in'].'" placeholder="ชื่อโรงบ่ม" >
                                             </div><br><br><br><br>
 
                                             <div class="col-xs-4" style="margin-left:65px">
                                                 <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
                                                 <input type="text" name="lowTemp" class="form-control" id="lowTemp"
                                                     value="'.$row['lowTemp'].'"'.$row['lowTemp'].'" placeholder="อุณหภูมิต่ำกว่าที่กำหนด"
-                                                    required>
+                                                    >
                                             </div>
                                             <div class="col-xs-4" style="margin-left:65px">
                                                 <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
                                                 <input type="text" name="highTemp" class="form-control" id="highTemp"
                                                     value="'.$row['highTemp'].'"'.$row['highTemp'].'" placeholder="อุณหภูมิสูงกว่าที่กำหนด"
-                                                    required>
+                                                    >
                                             </div><br><br><br><br>
                                             <div class="col-xs-4" style="margin-left:65px">
                                                 <label>ความชื้นต่ำกว่าที่กำหนด:</label>
                                                 <input type="text" name="lowHumid" class="form-control" id="lowHumid"
                                                     value="'.$row['lowHumid'].'"'.$row['lowHumid'].'" placeholder="ความชื้นต่ำกว่าที่กำหนด"
-                                                    required>
+                                                    >
                                             </div>
                                             <div class="col-xs-4" style="margin-left:65px">
                                                 <label>ความชื้นสูงกว่าที่กำหนด:</label>
                                                 <input type="text" name="highHumid" class="form-control" id="highHumid"
                                                     value="'.$row['highHumid'].'"'.$row['highHumid'].'" placeholder="ความชื้นสูงกว่าที่กำหนด"
-                                                    required>
+                                                    >
                                             </div>
 
                                             </div>
@@ -402,36 +385,34 @@
                         </div>
     
                         <!-- delete Modal -->
-                        <div class="modal fade" id="delete'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-    
-                                        <h4 class="modal-title" id="exampleModalLabel">ลบข้อมูลโรงบ่ม</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-    
-                                    <form action="" method="GET">
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <input type="hidden" name="delete_id" value="<?php echo $no_in; ?>">
-                                                <div class="alert alert-danger">คุณต้องการลบโรงบ่ม <strong>
-                                                        <?php echo $name_in; ?>
-                                                    </strong> หรือไม่?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary" name="delete"
-                                                        data-target="#delete">ลบ</button>
-                                                </div>
-                                    </form>
-                                    
-                                </div>
+                       
+                        <div class="modal fade" id="delete'.$row['no_in'].'"'.$row['no_in'].'" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">ลบข้อมูลกระบวนการบ่ม</h4>
+                              </div>
+                              <form method="GET">
+                              <div class="modal-body">
+                      
+                              <input type="hidden" name="delete_id" value="'.$row['no_in'].'"'.$row['no_in'].'">
+                              <div class="alert alert-danger">คุณต้องการลบ
+                              <a href="#" class="alert-link">'.$row['name_in'].'</a> หรือไม่? 
                             </div>
+                      
+                              </div>
+                      
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" name="delete" data-target="#delete">
+                                                      ลบ</button>
+                              </div>
+                              </form>
+                            </div>
+                          </div>
                         </div>
     
                     </tr>
@@ -459,7 +440,10 @@
                                 highHumid='$highHumid'
                                 WHERE name_in='$name_in'";
                         if ($conn->query($sql) === TRUE) {
-                            echo '<script>window.location.href="index_in"</script>';
+                            echo  '<script>
+                            swal("บันทึกข้อมูลเรียบร้อยแล้ว","success");
+                                window.location.href="index_in";
+                     </script>';
                         } else {
                             echo "Error updating record: " . $conn->error;
                         }
@@ -477,7 +461,10 @@
                                 echo  $alert = "<div class='alert alert-succes'>
                                 <strong>$id_in</strong> No Stock
                                 </div>";
-                                echo '<script>window.location.href="index_in"</script>';
+                                echo '<script>
+                                swal("บันทึกข้อมูลเรียบร้อยแล้ว", "success");
+                                    window.location.href="index_in";
+                         </script>';
                             } else {
                                 echo "Error: " . $sql . "<br>" . $conn->error;
                             }
@@ -505,7 +492,10 @@
                                 highHumid='$highHumid'
                                 WHERE no_in='$no_in'";
                         if ($conn->query($sql) === TRUE) {
-                            echo '<script>window.location.href="index_in"</script>';
+                            echo '<script>
+                            swal("แก้ไขข้อมูลเรียบร้อยแล้ว","success");
+                                window.location.href="index_in";
+                     </script>';
                         } else {
                             echo "Error updating record: " . $conn->error;
                         }
@@ -520,7 +510,10 @@
                             $sql = "DELETE FROM incubs WHERE no_in='$delete_id' ";
                             if ($conn->query($sql) === TRUE) {
                                 $sql = "DELETE FROM incubs WHERE no_in='$delete_id' ";
-                                echo '<script>window.location.href="index_in"</script>';
+                                echo '<script>
+                                swal("ลบข้อมูลเรียบร้อยแล้ว", "success");
+                                    window.location.href="index_in";
+                         </script>';
                             } else {
                                 echo "Error deleting record: " . $conn->error;
                             }

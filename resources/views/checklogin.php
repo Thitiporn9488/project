@@ -115,7 +115,7 @@ else {
 
 
     echo "<script>";
-    echo "alert('password ไม่ถูกต้อง');";
+    echo "alert('ข้อมูลผู้ใช้ไม่ถูกต้อง');";
     echo "window.location='/';";
     echo "</script>";
     header("Location:index_h");
