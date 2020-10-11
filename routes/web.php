@@ -117,7 +117,10 @@ Route::get('graph', function () {
     return view('Summary graph.graph');
 });
 
-
+// แจ้งเตือน
+Route::get('alert', function () {
+    return view('Alert.alert');
+});
 
 Route::get('calen', function () {
     return view('calendar.calen');

@@ -61,6 +61,7 @@
                     <li><a href="index_in">การจัดการโรงบ่มและอุปกรณ์</a></li>
                     <li><a href="pro">การจัดการกระบวนการบ่ม</a></li>
                     <li><a href="graph">กราฟสรุปข้อมูล</a></li>
+                    <li><a href="alert">ตั้งค่าการแจ้งเตือน</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

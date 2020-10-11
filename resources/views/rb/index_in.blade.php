@@ -77,6 +77,7 @@
                     <li><a href="index_in">การจัดการโรงบ่มและอุปกรณ์</a></li>
                     <li><a href="pro">การจัดการกระบวนการบ่ม</a></li>
                     <li><a href="graph">กราฟสรุปข้อมูล</a></li>
+                    <li><a href="alert">ตั้งค่าการแจ้งเตือน</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -153,19 +154,13 @@
         <table id="example" class="table table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr class="bg-danger">
-                    <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
                     <th scope="col" style="text-align: center;">ชื่อโรงบ่ม</th>
-                    <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">ลูกจ้างดูแลโรงบ่ม</th>
                     <th scope="col" style="text-align: center;">action</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr class="bg-danger">
-                <th scope="col" style="text-align: center;">ID โรงบ่ม</th>
-                    <th scope="col" style="text-align: center;">ชื่อโรงบ่ม</th>
-                    <th scope="col" style="text-align: center;">ID DEVICE</th>
-                    <th scope="col" style="text-align: center;">ลูกจ้างดูแลโรงบ่ม</th>
+                    <th scope="col" style="text-align: center;"></th>
                     <th scope="col" style="text-align: center;">action</th>
                 </tr>
             </tfoot>
@@ -180,20 +175,17 @@
 
                         echo ' 
                         <tr>
-                        <td style="text-align: center;">
-                            '.$row['id_in'].'
-                        </td>
-                        <td style="text-align: center;">
+                       
+                        <td style="width:700px;text-align: center;">
                             '.$row['name_in'].'
                         </td>
-                        <td style="text-align: center;">
-                            '.$row['id_device'].'
-                        </td>
+                    
 
                         <td style="text-align: center;">
-                            <a href="#alert'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
-                                <button type="button" class="btn btn-warning btn-sm" title="แจ้งเตือน"><span
-                                        class="glyphicon glyphicon-bell" aria-hidden="true"></span></button>
+                            
+                            <a href="#view'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal" >
+                            <button type="button" class="btn btn-warning btn-sm" title="ดูข้อมูล"><span
+                                    class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
                             </a>
                             <a href="#add_de'.$row['no_in'].'"'.$row['no_in'].'" data-toggle="modal">
                                 <button type="button" class="btn btn-success btn-sm" title="เพิ่มอุปกรณ์"><span
@@ -208,63 +200,53 @@
                                         class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </a>
                         </td>
-    
-                        <!-- แจ้งเตือน Modal -->
 
-                        
-                        <div class="modal fade" id="alert'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <!-- View Modal -->
+                        <div class="modal fade" id="view'.$row['no_in'].'"'.$row['no_in'].'" role="dialog">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
+           
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">ตั้งค่าการแจ้งเตือน</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">ดูข้อมูลกระบานการบ่ม</h4>
                                     </div>
-                                    <form action="" method="GET">
-                                        <div class="modal-body">
-                                            <label>ชื่อโรงบ่ม:</label>
-                                            <input type="input" name="name_in" class="form-control"
-                                                value="'.$row['name_in'].'"'.$row['name_in'].' " id="name_in" readonly><br>
+           
+                                    <form method="GET">
+           
+                                    <div class="modal-body">
 
-                                                <div class="form-group row">
+                                    
 
-                                            <div  class="col-xs-4" style="margin-left:70px">
-                                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                                <input type="text" name="lowTemp" class="form-control" id="lowTemp"
-                                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" required>
-                                            </div>
-                                            <div  class="col-xs-4" style="margin-left:70px">
-                                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                                <input type="text" name="highTemp" class="form-control" id="highTemp"
-                                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" required>
-                                            </div><br><br><br><br>
-                                            <div  class="col-xs-4" style="margin-left:70px">
-                                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                                <input type="text" name="lowHumid" class="form-control" id="lowHumid"
-                                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" required>
-                                            </div>
-                                            <div  class="col-xs-4" style="margin-left:70px"
-                                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                                <input type="text" name="highHumid" class="form-control" id="highHumid"
-                                                    placeholder="ความชื้นสูงกว่าที่กำหนด" required>
-                                            </div>
 
-                                        </div>  
-                                        
-                                        </div>
-    
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" name="alert"
-                                                data-target="#alert">บันทึกข้อมูล</button>
-                                        </div>
+                                    <div class="panel panel-info">
+                                    <div class="panel-body">
+           
+                                    <div class="form-group row">
+                                    <label class="control-label col-sm-3">ลูกจ้างดูแลโรงบ่ม:</label>
+                                    <div class="col-xs-4">
+                                    <input  class="form-control" id="emp" name="emp" value="'.$row['emp'].'"'.$row['emp'].'"
+                                        type="text" disabled>
+                                </div>
+                                </div>
+           
+                                    </div>
+                                  </div>                    
+           
+                                
+                                                        
+                                    </div>
+           
+                                    <div class="modal-footer">
+                                    </div>
+           
                                     </form>
                                 </div>
                             </div>
                         </div>
+           </div>
+           
+    
+                       
     
     
                         <!-- add device Modal -->
@@ -334,41 +316,21 @@
 
                                                 <div class="form-group row">
     
-                                            <div class="col-xs-4" style="margin-left:65px">
+                                            <div class="col-xs-10" style="margin-left:65px">
                                                 <label>ID โรงบ่ม:</label>
                                                 <input type="text" name="id_in" class="form-control" id="id_in"
                                                     value="'.$row['id_in'].'"'.$row['id_in'].'" placeholder="ID โรงบ่ม" >
-                                            </div>
-                                            <div class="col-xs-4" style="margin-left:65px">
+                                            </div><br><br><br><br>
+                                            <div class="col-xs-10" style="margin-left:65px">
                                                 <label>ชื่อโรงบ่ม:</label>
                                                 <input type="text" name="name_in" class="form-control" id="name_in"
                                                     value="'.$row['name_in'].'"'.$row['name_in'].'" placeholder="ชื่อโรงบ่ม" >
                                             </div><br><br><br><br>
-
-                                            <div class="col-xs-4" style="margin-left:65px">
-                                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                                <input type="text" name="lowTemp" class="form-control" id="lowTemp"
-                                                    value="'.$row['lowTemp'].'"'.$row['lowTemp'].'" placeholder="อุณหภูมิต่ำกว่าที่กำหนด"
-                                                    >
-                                            </div>
-                                            <div class="col-xs-4" style="margin-left:65px">
-                                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                                <input type="text" name="highTemp" class="form-control" id="highTemp"
-                                                    value="'.$row['highTemp'].'"'.$row['highTemp'].'" placeholder="อุณหภูมิสูงกว่าที่กำหนด"
-                                                    >
+                                            <div class="col-xs-10" style="margin-left:65px">
+                                                <label>ลูกจ้างดูแลโรงบ่ม:</label>
+                                                <input type="text" name="emp" class="form-control" id="emp"
+                                                    value="'.$row['emp'].'"'.$row['emp'].'" placeholder="ลูกจ้างดูแลโรงบ่ม" >
                                             </div><br><br><br><br>
-                                            <div class="col-xs-4" style="margin-left:65px">
-                                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                                <input type="text" name="lowHumid" class="form-control" id="lowHumid"
-                                                    value="'.$row['lowHumid'].'"'.$row['lowHumid'].'" placeholder="ความชื้นต่ำกว่าที่กำหนด"
-                                                    >
-                                            </div>
-                                            <div class="col-xs-4" style="margin-left:65px">
-                                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                                <input type="text" name="highHumid" class="form-control" id="highHumid"
-                                                    value="'.$row['highHumid'].'"'.$row['highHumid'].'" placeholder="ความชื้นสูงกว่าที่กำหนด"
-                                                    >
-                                            </div>
 
                                             </div>
     
@@ -385,7 +347,6 @@
                         </div>
     
                         <!-- delete Modal -->
-                       
                         <div class="modal fade" id="delete'.$row['no_in'].'"'.$row['no_in'].'" role="dialog">
                           <div class="modal-dialog">
                           
@@ -424,37 +385,14 @@
              
                 <?php
                       }
-                    
-                      //Add Item  
-                      if(isset($_GET['alert'])){
-                        $name_in = $_GET['name_in'];
-                        $lowTemp = $_GET['lowTemp'];
-                        $highTemp = $_GET['highTemp'];
-                        $lowHumid = $_GET['lowHumid'];
-                        $highHumid = $_GET['highHumid'];
-
-                        $sql = "UPDATE  incubs 
-                                SET  lowTemp='$lowTemp',
-                                highTemp='$highTemp',
-                                lowHumid='$lowHumid',
-                                highHumid='$highHumid'
-                                WHERE name_in='$name_in'";
-                        if ($conn->query($sql) === TRUE) {
-                            echo  '<script>
-                            swal("บันทึกข้อมูลเรียบร้อยแล้ว","success");
-                                window.location.href="index_in";
-                     </script>';
-                        } else {
-                            echo "Error updating record: " . $conn->error;
-                        }
-                    }      
                 
                          //Add Item        
                     if(isset($_GET['save'])){
                         $id_in = $_GET['id_in'];
                         $name_in = $_GET['name_in'];
+                        $emp = $_GET['emp'];
                         $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
-                        $sql = "INSERT INTO incubs (id_in,name_in,id_farmer)  VALUES ('$id_in','$name_in','$farmer') ";
+                        $sql = "INSERT INTO incubs (id_in,name_in,emp,id_farmer)  VALUES ('$id_in','$name_in','$emp','$farmer') ";
                         if ($conn->query($sql) === TRUE) {
                             
                             if ($conn) {
@@ -478,18 +416,13 @@
                         $no_in = $_GET['no_in'];
                         $id_in = $_GET['id_in'];
                         $name_in = $_GET['name_in'];
-                        $lowTemp = $_GET['lowTemp'];
-                        $highTemp = $_GET['highTemp'];
-                        $lowHumid = $_GET['lowHumid'];
-                        $highHumid = $_GET['highHumid'];
-                        
+                        $emp = $_GET['emp'];
+
                         $sql = "UPDATE  incubs 
                                 SET  id_in='$id_in',
                                      name_in='$name_in',
-                                     lowTemp='$lowTemp',
-                                highTemp='$highTemp',
-                                lowHumid='$lowHumid',
-                                highHumid='$highHumid'
+                                     emp='$emp'
+                        
                                 WHERE no_in='$no_in'";
                         if ($conn->query($sql) === TRUE) {
                             echo '<script>
@@ -579,6 +512,12 @@
                             <input type="text" name="name_in" class="form-control" id="name_in" placeholder="ชื่อโรงบ่ม"
                                 required>
                         </div>
+                        <div class="form-group">
+                            <label>ลูกจ้างดูแลโรงบ่ม:</label>
+                            <input type="text" name="emp" class="form-control" id="emp" placeholder="ลูกจ้างดูแลโรงบ่ม"
+                                required>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

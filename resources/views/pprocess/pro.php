@@ -63,8 +63,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
+ 
+    <!-- data atble -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+        </script>
 
 
 
@@ -248,6 +256,7 @@
                     <li><a href="index_in">การจัดการโรงบ่มและอุปกรณ์</a></li>
                     <li><a href="pro">การจัดการกระบวนการบ่ม</a></li>
                     <li><a href="graph">กราฟสรุปข้อมูล</a></li>
+                    <li><a href="alert">ตั้งค่าการแจ้งเตือน</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -305,7 +314,7 @@
     <div class="container" style="width:400px;height:100px;text-align: center;">
         <div class="panel panel-default">
             <div class="panel-heading">ชื่อผู้ใช้</div>
-            <div class="panel-body" ><?php echo $_SESSION['name_user'];?></div>
+            <div class="panel-body"><?php echo $_SESSION['name_user'];?></div>
         </div>
     </div>
     <?php } ?>
@@ -320,179 +329,190 @@
             เพิ่มข้อมูลกระบวนการบ่ม
         </button> <br> <br><br>
 
+        <table id="example" class="table table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr class="bg-danger">
+                    <th scope="col" style="text-align: center;">ชื่อการบ่ม</th>
+                    <th scope="col" style="text-align: center;">action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr class="bg-danger">
+                <th scope="col" style="text-align: center;"></th>
+                    <th scope="col" style="text-align: center;"></th>
+                </tr>
+            </tfoot>
+
+            <tbody>
+
         <?php 
              $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
              $sql = "SELECT * FROM pprocessb,users where pprocessb.id_farmer=users.id_farmer and pprocessb.id_farmer='$farmer' ";
               $result = $conn->query($sql) ;
               while($row = $result->fetch_assoc()) {
                  echo '
-                 <div class="panel panel-default" >
-                 <div class="panel-heading" >
-                     <h5 class="panel-heading" style="background-color: #81b9bf;">
 
-                     <form>
-                     <div class="form-group row"><br>
+                 <tr>
+                 <td style="width:700px;text-align: center;">
+                     '.$row['name_pro'].'
+                 </td>
 
-                     <div class="col-xs-3" style="margin-left:60px">
-                         <label>ID กระบวนการบ่ม:</label><br><br>
-                         <input style="background-color: #e5ffff; " class="form-control" id="id_pro" name="id_pro" type="text" 
-                          value="'.$row['id_pro'].'"'.$row['id_pro'].' readonly>
-                     </div>
+                 <td style="text-align: center;">
+                     <a href="#view'.$row['no_pro'].'"'.$row['no_pro'].'" data-toggle="modal" >
+                            <button type="button" class="btn btn-warning btn-sm" title="ดูข้อมูล"><span
+                                    class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+                    </a>
 
-                     <div class="col-xs-3">
-                         <label>ชื่อการบ่ม:</label><br><br>
-                         <input style="background-color: #e5ffff; " class="form-control" id="name_pro" name="name_pro" type="text" value="'.$row['name_pro'].'"'.$row['name_pro'].' readonly>
-                     </div>
-
-                     <div class="col-xs-3">
-                         <label>โรงบ่ม:</label><br><br>
-                         <input style="background-color: #e5ffff;" class="form-control" id="rbom" name="rbom" type="text" value="'.$row['rbom'].'"'.$row['rbom'].' readonly>
-                     </div>
-
-                     <a href="#edit'.$row['no_pro'].'"'.$row['no_pro'].'" data-toggle="modal" style="margin-left:100px">
-                            <button type="button" class="btn btn-success btn-sm" title="แก้ไขข้อมูล"><span
-                                    class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                    <a href="#edit'.$row['no_pro'].'"'.$row['no_pro'].'" data-toggle="modal" >
+                    <button type="button" class="btn btn-success btn-sm" title="แก้ไขข้อมูล"><span
+                    class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                     </a>
 
                     <a href="#delete'.$row['no_pro'].'"'.$row['no_pro'].'" data-toggle="modal" >
-                        <button type="button" class="btn btn-danger btn-sm" title="ลบข้อมูล"><span
-                                class="glyphicon glyphicon-trash" ></span></button>
-                    </a>
+                    <button type="button" class="btn btn-danger btn-sm" title="ลบข้อมูล"><span
+                            class="glyphicon glyphicon-trash" ></span></button>
+                </a>
+                    </td>
 
-                     </div><br>
-                   
+                    <!-- View Modal -->
+             <div class="modal fade" id="view'.$row['no_pro'].'"'.$row['no_pro'].'" role="dialog">
+                 <div class="modal-dialog modal-lg">
+                     <div class="modal-content">
 
-                            
+                         <div class="modal-header">
+                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                             <h4 class="modal-title">ดูข้อมูลกระบานการบ่ม</h4>
+                         </div>
+
+                         <form method="GET">
+
+                         <div class="modal-body">
+
+                         <div class="panel panel-info">
+                         <div class="panel-body">
+
+                         <div class="form-group row">
+                         <label class="control-label col-sm-2">โรงบ่ม :</label>
+                         <div class="col-xs-4">
+                         <input  class="form-control" id="rbom" name="rbom" value="'.$row['rbom'].'"'.$row['rbom'].'"
+                             type="text" disabled>
+                     </div>
+                     </div>
+
+                         </div>
+                       </div>
+
+                       <div class="panel panel-info">
+                       <div class="panel-body">
+
+                       <div class="form-group row">
+                       <label class="control-label col-sm-2">ชื่อการบ่ม :</label>
+                       <div class="col-xs-4">
+                       <input  class="form-control" id="rbom" name="rbom" value="'.$row['name_pro'].'"'.$row['name_pro'].'"
+                           type="text" disabled>
+                   </div>
+                   </div>
+
+                       </div>
+                     </div>
+
+
+                         <div class="panel panel-info">
+                         <div class="panel-body">
+                           <div class="form-group row">
+
+                           <div class="col-xs-4">
+                           <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
+                       </div>
+  
+                       <div class="col-xs-4">
+                           <label>วันที่เริ่มการบ่ม:</label>
+                           <input class="form-control" name="sdate_1" name="sdate_1" value="'.$row['sdate_1'].'"'.$row['sdate_1'].' disabled>
+                       </div>
+  
+                       <div class="col-xs-4">
+                           <label>วันที่สิ้นสุดการบ่ม:</label>
+                           <input class="form-control" name="edate_1"
+                           value="'.$row['edate_1'].'"'.$row['edate_1'].' type="text" disabled> 
+                       </div>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="panel panel-info">
+                        <div class="panel-body">
+                        <div class="col-xs-4">
+                        <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
+                       
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>วันที่เริ่มการบ่ม:</label>
+                        <input class="form-control" name="sdate_2"
+                        value="'.$row['sdate_2'].'"'.$row['sdate_2'].'" type="text" disabled>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>วันที่สิ้นสุดการบ่ม:</label>
+                        <input class="form-control"  name="edate_2"
+                        value="'.$row['edate_2'].'"'.$row['edate_2'].'" type="text" disabled>
+                    </div>
+                        </div>
+                        </div>
+
+                        <div class="panel panel-info">
+                        <div class="panel-body">
+                        <div class="col-xs-4">
+                        <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>วันที่เริ่มการบ่ม:</label>
+                        <input class="form-control" name="sdate_3"
+                        value="'.$row['sdate_3'].'"'.$row['sdate_3'].'" type="text" disabled>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>วันที่สิ้นสุดการบ่ม:</label>
+                        <input class="form-control" name="edate_3"
+                        value="'.$row['edate_3'].'"'.$row['edate_3'].' type="text" disabled>
+                    </div>
+                        </div>
+                        </div>
+
+                        <div class="panel panel-info">
+                        <div class="panel-body">
+                        <div class="col-xs-4">
+                        <label><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>วันที่เริ่มการบ่ม:</label>
+                        <input class="form-control"  name="sdate_4"
+                        value="'.$row['sdate_4'].'"'.$row['sdate_4'].' type="text" disabled>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>วันที่สิ้นสุดการบ่ม:</label>
+                        <input class="form-control"  name="edate_4"
+                        value="'.$row['edate_4'].'"'.$row['edate_4'].' type="text" disabled>
+                    </div>
+                        </div>
+                        </div>
+                                                
+  
+                         </div>
+
+                         <div class="modal-footer">
+                         </div>
+
                          </form>
-                     </h5>
+                     </div>
                  </div>
-                 
-                 <div class="panel-body" style="background-color: #b2ebf2;">
-     
-                     <form class="form-inline" action="">
-                         <div class="form-group" >
-                             <label style="margin-left:25px">การบ่มช่วงแรก:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control"  name="stap_1" value="'.$row['stap_1'].'"'.$row['stap_1'].'  readonly>  
-                      
-                             <label  style="margin-left:60px">วันที่เริ่มการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control"   name="sdate_1" value="'.$row['sdate_1'].'"'.$row['sdate_1'].'  readonly>
-                     
-                             <label for="edate_1" style="margin-left:60px">วันที่สิ้นสุดการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                        <br><br>
+             </div>
+</div>
 
-                            <label style="margin-left:330px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label for="edate_1"  style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                        <br><br>
-
-                            <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label for="edate_1"  style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                        </div><br><br>
-
-                     </form>
-     
-                     <form class="form-inline" action="">
-                         <div class="form-group">
-                             <label  style="margin-left:29px">การบ่มช่วงที่ 2:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="stap_2" value="'.$row['stap_2'].'"'.$row['stap_2'].'  readonly>
-                        
-                             <label style="margin-left:60px">วันที่เริ่มการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control"name="sdate_2" value="'.$row['sdate_2'].'"'.$row['sdate_2'].'  readonly>
-                        
-                             <label style="margin-left:60px">วันที่สิ้นสุดการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_2" value="'.$row['edate_2'].'"'.$row['edate_2'].'  readonly>
-                         </div><br><br>
-
-                         <div class="form-group" >
-                            <label style="margin-left:330px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label for="edate_1"  style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                        </div><br><br>
-
-                     
-                        <div class="form-group" >
-                            <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label for="edate_1"  style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                        </div><br><br>
-                     </form>
-     
-                     <form class="form-inline" action="">
-
-                         <div class="form-group">
-                             <label  style="margin-left:29px">การบ่มช่วงที่ 3:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control"name="stap_3" value="'.$row['stap_3'].'"'.$row['stap_3'].'  readonly>
-                        
-                             <label  style="margin-left:60px">วันที่เริ่มการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="sdate_3" value="'.$row['sdate_3'].'"'.$row['sdate_3'].' readonly>
-                         
-                             <label  style="margin-left:60px">วันที่สิ้นสุดการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control"  name="edate_3" value="'.$row['edate_3'].'"'.$row['edate_3'].'  readonly>
-                         </div><br><br>
-
-                         <div class="form-group" >
-                            <label style="margin-left:330px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label for="edate_1"  style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                         </div><br><br>
-
-                     
-                         <div class="form-group" >
-                            <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                         </div><br><br>
-
-                     </form>
-     
-                     <form class="form-inline" action="">
-                         <div class="form-group">
-                             <label  style="margin-left:29px">การบ่มช่วงที่ 4:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="stap_4" value="'.$row['stap_4'].'"'.$row['stap_4'].'  readonly>
-                        
-                             <label  style="margin-left:60px">วันที่เริ่มการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="sdate_4" value="'.$row['sdate_4'].'"'.$row['sdate_4'].'  readonly>
-                        
-                             <label  style="margin-left:60px">วันที่สิ้นสุดการบ่ม:</label>
-                             <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_4" value="'.$row['edate_4'].'"'.$row['edate_4'].'  readonly>
-                         </div><br><br>
-                         
-                         <div class="form-group">
-                            <label  style="margin-left:330px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                         </div><br><br>
-
-                     
-                        <div class="form-group" >
-                            <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-
-                            <label  style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                            <input style="background-color: #e5ffff;" type="text" class="form-control" name="edate_1" value="'.$row['edate_1'].'"'.$row['edate_1'].'  readonly> 
-                        </div><br><br><br>
-                         
-                     </form>
-                 </div>
-                 <div class="panel-footer" style="background-color: #81b9bf;">
-                 </div>
-             </div><br>
+                    
 
              <!-- edit Modal -->
              <div class="modal fade" id="edit'.$row['no_pro'].'"'.$row['no_pro'].'" role="dialog">
@@ -511,12 +531,16 @@
                          name="no_pro" type="hidden">
 
                              <div class="form-group row">
-                         
-                     <div class="col-xs-4">
-                         <label>ID กระบวนการบ่ม:</label>
-                         <input class="form-control" id="id_pro" value="'.$row['id_pro'].'"'.$row['id_pro'].'"
-                         name="id_pro" type="text">
-                     </div>
+
+                             <div class="col-xs-4">
+                             <label>โรงบ่ม</label>
+                             <input class="form-control" id="rbom" name="rbom" value="'.$row['rbom'].'"'.$row['rbom'].'"
+                                 type="text">
+                         </div>
+                         </div>
+
+                          <div class="form-group row">
+                   
 
                      <div class="col-xs-4">
                          <label>ชื่อการบ่ม</label>
@@ -524,16 +548,10 @@
                              type="text">
                      </div>
 
-                     <div class="col-xs-4">
-                         <label>โรงบ่ม</label>
-                         <input class="form-control" id="rbom" name="rbom" value="'.$row['rbom'].'"'.$row['rbom'].'"
-                             type="text">
-                     </div><br><br><br><br>
+                    <br><br><br><br>
 
                      <div class="col-xs-4">
-                         <label>การบ่มช่วงแรก</label>
-                         <input class="form-control" name="stap_1" id="stap_1"
-                         value="'.$row['stap_1'].'"'.$row['stap_1'].'" type="text">
+                         <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
                      </div>
 
                      <div class="col-xs-4">
@@ -547,10 +565,11 @@
                          value="'.$row['edate_1'].'"'.$row['edate_1'].' type="text">
                      </div><br><br><br><br>
 
+
+
                      <div class="col-xs-4">
-                         <label>การบ่มช่วงที่ 2:</label>
-                         <input class="form-control" name="stap_2" id="stap_2"
-                         value="'.$row['stap_2'].'"'.$row['stap_2'].'" type="text">
+                         <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
+                        
                      </div>
 
                      <div class="col-xs-4">
@@ -565,10 +584,10 @@
                          value="'.$row['edate_2'].'"'.$row['edate_2'].'" type="text">
                      </div><br><br><br><br>
 
+
+
                      <div class="col-xs-4">
-                         <label>การบ่มช่วงที่ 3:</label>
-                         <input class="form-control" name="stap_3" id="stap_3"
-                         value="'.$row['stap_3'].'"'.$row['stap_3'].'" type="text">
+                         <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
                      </div>
 
                      <div class="col-xs-4">
@@ -584,9 +603,7 @@
                      </div><br><br><br><br>
 
                      <div class="col-xs-4">
-                         <label>การบ่มช่วงที่ 4:</label>
-                         <input class="form-control" name="stap_4" id="stap_4"
-                         value="'.$row['stap_4'].'"'.$row['stap_4'].'" type="text">
+                         <label><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
                      </div>
 
                      <div class="col-xs-4">
@@ -643,6 +660,8 @@
       </div>
     </div>
   </div>
+
+  </tr>
                  ';  
                 ?>
 
@@ -653,19 +672,19 @@
                 $id_pro = $_GET['id_pro'];
                 $name_pro = $_GET['name_pro'];
                 $rbom = $_GET['rbom'];
-                $stap_1 = $_GET['stap_1'];
+                $stap_1 = 'ช่วงทำสี';
                 $sdate_1 = $_GET['sdate_1'];
                 $edate_1 = $_GET['edate_1'];
-                $stap_2 = $_GET['stap_2'];
+                $stap_2 = 'ช่วงตรึงสี';
                 $sdate_2 = $_GET['sdate_2'];
                 $edate_2 = $_GET['edate_2'];
-                $stap_3 = $_GET['stap_3'];
+                $stap_3 = 'ช่วงทำใบแห้ง';
                 $sdate_3 = $_GET['sdate_3'];
                 $edate_3 = $_GET['edate_3'];
-                $stap_4 = $_GET['stap_4'];
+                $stap_4 = 'ช่วงทำก้านแห้ง';
                 $sdate_4 = $_GET['sdate_4'];
                 $edate_4 = $_GET['edate_4'];
-             
+            
                 $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
                 $sql = "INSERT INTO pprocessb (id_pro,name_pro,rbom,stap_1,sdate_1,edate_1,stap_2,sdate_2,edate_2,stap_3,sdate_3,edate_3,stap_4,sdate_4,edate_4,id_farmer)  
                 VALUES ('$id_pro','$name_pro','$rbom','$stap_1','$sdate_1','$edate_1','$stap_2','$sdate_2','$edate_2','$stap_3','$sdate_3','$edate_3','$stap_4','$sdate_4','$edate_4','$farmer') ";
@@ -686,39 +705,43 @@
              //Update Items
              if(isset($_GET['edit'])){
                 $no_pro = $_GET['no_pro'];
-                $id_pro = $_GET['id_pro'];
+               
                 $name_pro = $_GET['name_pro'];
                 $rbom = $_GET['rbom'];
-                $stap_1 = $_GET['stap_1'];
+           
                 $sdate_1 = $_GET['sdate_1'];
                 $edate_1 = $_GET['edate_1'];
-                $stap_2 = $_GET['stap_2'];
+       
                 $sdate_2 = $_GET['sdate_2'];
                 $edate_2 = $_GET['edate_2'];
-                $stap_3 = $_GET['stap_3'];
+         
                 $sdate_3 = $_GET['sdate_3'];
                 $edate_3 = $_GET['edate_3'];
-                $stap_4 = $_GET['stap_4'];
+            
                 $sdate_4 = $_GET['sdate_4'];
                 $edate_4 = $_GET['edate_4'];
             
                 $sql = "UPDATE  pprocessb 
                         SET    no_pro='$no_pro',
-                        id_pro='$id_pro',
+                     
                         name_pro='$name_pro',
                         rbom='$rbom',
-                        stap_1='$stap_1',
+                       
                         sdate_1='$sdate_1',
                         edate_1='$edate_1',
-                        stap_2='$stap_2',
+                        
+                      
                         sdate_2='$sdate_2',
                         edate_2='$edate_2',
-                        stap_3='$stap_3',
+                        
+                    
                         sdate_3='$sdate_3',
                         edate_3='$edate_3',
-                        stap_4='$stap_4',
+                       
+              
                         sdate_4='$sdate_4',
                         edate_4='$edate_4'
+                    
 
                         WHERE no_pro ='$no_pro'";
 
@@ -780,19 +803,7 @@
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
-                                <label>ID กระบวนการบ่ม:</label>
-                                <input class="form-control" id="id_pro" name="id_pro" type="text"
-                                    placeholder="ID กระบวนการบ่ม" required>
-                            </div>
-
-                            <div class="col-xs-4">
-                                <label>ชื่อการบ่ม</label>
-                                <input class="form-control" id="name_pro" name="name_pro" placeholder="ชื่อการบ่ม"
-                                    type="text" required>
-                            </div>
-
-                            <div class="col-xs-4">
+                        <div class="col-xs-4">
                                 <label>เลือกโรงบ่ม</label>
                                 <select class="form-control" name="rbom" id="rbom" required>
                                     <option value="" disabled selected>เลือกโรงบ่ม</option>
@@ -806,187 +817,101 @@
                                     <option value='<?php echo $name_in ?>'><?php echo $name_in?></option>
                                     <?php } ?>
                                 </select>
-                            </div><br><br><br><br>
+                            </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                            <div class="col-xs-4">
+                                <label>ID กระบวนการบ่ม:</label>
+                                <input class="form-control" id="id_pro" name="id_pro" type="text"
+                                    placeholder="ID กระบวนการบ่ม" required>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>ชื่อการบ่ม:</label>
+                                <input class="form-control" id="name_pro" name="name_pro" placeholder="ชื่อการบ่ม"
+                                    type="text" required>
+                            </div>
+
+                            <br><br><br><br>
 
                         </div>
 
                         <div class="form-group row">
 
-                            <div class="col-xs-3">
-                                <label>การบ่มช่วงแรก</label>
-                                <input class="form-control" id="stap_1" name="stap_1" placeholder="" type="text"
-                                    required>
+                            <div class="col-xs-4">
+                                <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่เริ่มการบ่ม</label>
                                 <input class="form-control" id="sdate_1" name="sdate_1"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่เริ่มกระบวนการบ่ม" type="text" required>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่สิ้นสุดการบ่ม</label>
                                 <input class="form-control" id="edate_1" name="edate_1"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>อุณหภูมิต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowTemp" name="lowTemp"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
-                            </div><br><br><br><br>
-
-                            <div class="col-xs-3" style="margin-left:224px">
-                                <label>อุณหภูมิสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highTemp" name="highTemp"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowHumid" name="lowHumid"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highHumid" name="highHumid"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
                             </div><br><br><br><br>
                         </div>
 
                         <div class="form-group row">
 
-                            <div class="col-xs-3">
-                                <label>การบ่มช่วงที่ 2:</label>
-                                <input class="form-control" id="stap_2" name="stap_2" placeholder="" type="text"
-                                    required>
+                            <div class="col-xs-4">
+                                <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่เริ่มการบ่ม:</label>
                                 <input class="form-control" id="sdate_2" name="sdate_2"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่เริ่มกระบวนการบ่ม" type="text" required>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่สิ้นสุดการบ่ม:</label>
                                 <input class="form-control" id="edate_2" name="edate_2"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>อุณหภูมิต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowTemp" name="lowTemp"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
-                            </div><br><br><br><br>
-
-                            <div class="col-xs-3" style="margin-left:224px">
-                                <label>อุณหภูมิสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highTemp" name="highTemp"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowHumid" name="lowHumid"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highHumid" name="highHumid"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
                             </div><br><br><br><br>
                         </div>
 
                         <div class="form-group row">
 
-                            <div class="col-xs-3">
-                                <label>การบ่มช่วงที่ 3:</label>
-                                <input class="form-control" id="stap_3" name="stap_3" placeholder="" type="text"
-                                    required>
+                            <div class="col-xs-4">
+                                <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่เริ่มการบ่ม:</label>
                                 <input class="form-control" id="sdate_3" name="sdate_3"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่เริ่มกระบวนการบ่ม" type="text" required>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่สิ้นสุดการบ่ม:</label>
                                 <input class="form-control" id="edate_3" name="edate_3"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>อุณหภูมิต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowTemp" name="lowTemp"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
-                            </div><br><br><br><br>
-
-                            <div class="col-xs-3" style="margin-left:224px">
-                                <label>อุณหภูมิสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highTemp" name="highTemp"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowHumid" name="lowHumid"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highHumid" name="highHumid"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
                             </div><br><br><br><br>
                         </div>
 
 
                         <div class="form-group row">
 
-                            <div class="col-xs-3">
-                                <label>การบ่มช่วงที่ 4:</label>
-                                <input class="form-control" id="stap_4" name="stap_4" placeholder="" type="text">
+                            <div class="col-xs-4">
+                                <label><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่เริ่มการบ่ม:</label>
                                 <input class="form-control" id="sdate_4" name="sdate_4"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่เริ่มกระบวนการบ่ม" type="text" required>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                 <label>วันที่สิ้นสุดการบ่ม:</label>
                                 <input class="form-control" id="edate_4" name="edate_4"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>อุณหภูมิต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowTemp" name="lowTemp"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
-                            </div><br><br><br><br>
-
-                            <div class="col-xs-3" style="margin-left:224px">
-                                <label>อุณหภูมิสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highTemp" name="highTemp"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นต่ำกว่าที่กำหนด</label>
-                                <input class="form-control" id="lowHumid" name="lowHumid"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label>ความชื้นสูงกว่าที่กำหนด</label>
-                                <input class="form-control" id="highHumid" name="highHumid"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
                             </div>
 
                         </div>
