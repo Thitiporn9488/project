@@ -151,7 +151,6 @@
         <table id="example" class="table table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr class="bg-danger">
-                    <th scope="col" style="text-align: center;">ชื่อ DEVICE</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
                     <th scope="col" style="text-align: center;">KEY</th>
                     <th scope="col" style="text-align: center;">action</th>
@@ -159,7 +158,6 @@
             </thead>
             <tfoot>
                 <tr class="bg-danger">
-                    <th scope="col" style="text-align: center;">ชื่อ DEVICE</th>
                     <th scope="col" style="text-align: center;">ID DEVICE</th>
                     <th scope="col" style="text-align: center;">KEY</th>
                     <th scope="col" style="text-align: center;">action</th>
@@ -181,9 +179,6 @@
 
                     ?>
                 <tr>
-                    <td style="text-align: center;">
-                        <?php echo $name_device ?>
-                    </td>
                     <td style="text-align: center;">
                         <?php echo $id_device ?>
                     </td>
@@ -218,12 +213,6 @@
                                     <div class="modal-body">
                                         <input type="hidden" name="no_devi" value="<?php echo $no_devi ;?>">
 
-                                        <div class="form-group">
-                                            <label>ชื่อ DEVICE:</label>
-                                            <input type="text" name="name_device" class="form-control" id="name_device"
-                                                value="<?php echo $name_device; ?>">
-                                            <span class="message"></span>
-                                        </div>
                                         <div class="form-group">
                                             <label>ID DEVICE:</label>
                                             <input type="text" name="id_device" class="form-control" id="id_device"
@@ -283,33 +272,22 @@
                     }
                          //Add Item        
                     if(isset($_GET['save'])){
-                        $name_device = $_GET['name_device'];
                         $id_device = $_GET['id_device'];
                         $key_de = $_GET['key_de'];
 
-                        $check = "SELECT * FROM devices WHERE name_device = '$name_device'";
-                                // echo $check;
-                                $result= mysqli_query($conn,$check);
-                                $num=mysqli_num_rows($result); 
-                                if($num > 0){
-                                    //ถ้ามี username นี้อยู่ในระบบแล้วให้แจ้งเตือน
-                                    echo "<script>";
-                                    echo "alert(' มีผู้ใช้ ชื่อ DEVICE นี้แล้ว กรุณาสมัครใหม่อีกครั้ง !');";
-                                    echo "window.location='index_de';";
-                                    echo "</script>";
-                                }
-
-                                else{
-                              
-                                $sql = "INSERT INTO devices (name_device,id_device,key_de) VALUES ";
-                                    $sql .= "('" . $name_device ."',
-                                            '" . $id_device ."',
-                                            '" . $key_de ."')";
-                                    mysqli_query($conn, $sql);
-                                    header("Location:index_de");
-                                    exit(0);
-                                }       
-                                mysqli_close($conn);
+                        $sql = "INSERT INTO devices (id_device,key_de) VALUES ('$id_device','$key_de') ";
+                        if ($conn->query($sql) === TRUE) {
+                            if ($conn) {
+                                echo ' <script>
+                                swal("บันทึกข้อมูลเรียบร้อยแล้ว", "success");
+                                    window.location.href="index_de";
+                         </script>';
+                            } else {
+                                echo "Error: " . $sql . "<br>" . $conn->error;
+                            }
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
                     }
 
                      //Update Items
@@ -372,12 +350,6 @@
 
                 <form action="" method="GET">
                     <div class="modal-body">
-
-                    <div class="form-group">
-                            <label>ชื่อ DEVICE:</label>
-                            <input type="text" name="name_device" class="form-control" id="name_device"
-                                placeholder="ชื่อ DEVICE" required>
-                        </div>
 
                         <div class="form-group">
                             <label>ID DEVICE:</label>

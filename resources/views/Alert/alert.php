@@ -167,86 +167,428 @@
               $result = $conn->query($sql) ;
               while($row = $result->fetch_assoc()) {
                  echo '
-
+                 
                  <div class="panel panel-default">
-                 <div class="panel-heading">ตั้งค่าการแจ้งเตือน
-                
-                 </div>
-                 <div class="panel-body" style="background-color: ;">
+                 <div class="panel-heading">ตั้งค่าการแจ้งเตือน 
 
-                   <form class="form-inline" action="">
-                   <div class="form-group" >
-                   <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
-                      <label style="margin-left:167px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                      <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowTemp1" value="'.$row['lowTemp1'].'"'.$row['lowTemp1'].'  readonly> 
-                      <label for="edate_1"  style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                      <input style="background-color: #e5ffff;" type="text" class="form-control" name="highTemp1" value="'.$row['highTemp1'].'"'.$row['highTemp1'].'  readonly> 
-                     <br><br>
-                      <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                      <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowHumid1" value="'.$row['lowHumid1'].'"'.$row['lowHumid1'].'  readonly> 
-                      <label for="edate_1"  style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                      <input style="background-color: #e5ffff;" type="text" class="form-control" name="highHumid1" value="'.$row['highHumid1'].'"'.$row['highHumid1'].'  readonly> 
-                     </div><br><br>
-                    </form>
-
-                    <form class="form-inline" action="">
-                    <div class="form-group" >
-                    <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
-                       <label style="margin-left:167px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" style="background-color: #e5ffff;" type="text" class="form-control" name="lowTemp2" value="'.$row['lowTemp2'].'"'.$row['lowTemp2'].'  readonly> 
-                       <label for="edate_1"  style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" style="background-color: #e5ffff;" type="text" class="form-control" name="highTemp2" value="'.$row['highTemp2'].'"'.$row['highTemp2'].'  readonly> 
-                   </div><br><br>
-                
-                   <div class="form-group" >
-                       <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowHumid2" value="'.$row['lowHumid2'].'"'.$row['lowHumid2'].'  readonly> 
-                       <label for="edate_1"  style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="highHumid2" value="'.$row['highHumid2'].'"'.$row['highHumid2'].'  readonly> 
-                   </div><br><br>
-                    </form>
-                
-                    <form class="form-inline" action="">
-                    <div class="form-group" >
-                    <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
-                       <label style="margin-left:135px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowTemp3" value="'.$row['lowTemp3'].'"'.$row['lowTemp3'].'  readonly> 
-                       <label for="edate_1"  style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="highTemp3" value="'.$row['highTemp3'].'"'.$row['highTemp3'].'  readonly> 
-                    </div><br><br>
-                
-                    <div class="form-group" >
-                       <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowHumid3" value="'.$row['lowHumid3'].'"'.$row['lowHumid3'].'  readonly> 
-                       <label style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="highHumid3" value="'.$row['highHumid3'].'"'.$row['highHumid3'].'  readonly> 
-                    </div><br><br>
-                    </form>
-
-                    <form class="form-inline" action="">
-                    <div class="form-group">
-                    <label ><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
-                       <label  style="margin-left:167px">อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowTemp4" value="'.$row['lowTemp4'].'"'.$row['lowTemp4'].'  readonly> 
-                       <label style="margin-left:18px">อุณหภูมิสูงกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="highTemp4" value="'.$row['highTemp4'].'"'.$row['highTemp4'].'  readonly> 
-                    </div><br><br>
-                   <div class="form-group" >
-                       <label style="margin-left:328px">ความชื้นต่ำกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="lowHumid4" value="'.$row['lowHumid4'].'"'.$row['lowHumid4'].'  readonly> 
-                       <label  style="margin-left:17px">ความชื้นสูงกว่าที่กำหนด:</label>
-                       <input style="background-color: #e5ffff;" type="text" class="form-control" name="highHumid4" value="'.$row['highHumid4'].'"'.$row['highHumid4'].'  readonly> 
-                   </div><br><br><br>
-                    
-                    </form>   
+                 <a href="#edit'.$row['no_alertrb'].'"'.$row['no_alertrb'].'"  style="margin-left:880px" data-toggle="modal">
+                 <button type="button" class="btn btn-info btn-sm" title="แก้ไขข้อมูล"><span
+                         class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+             </a>
+             <a href="#delete'.$row['no_alertrb'].'"'.$row['no_alertrb'].'"  data-toggle="modal">
+                 <button type="button" class="btn btn-danger btn-sm" title="ลบข้อมูล"><span
+                         class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+             </a>
 
                  </div>
 
-                 <div class="panel-footer">Panel footer</div>
+                 <div class="modal-body">
+
+                 <form method="GET">
+
+                 <div class="form-group row">
+
+                 <div class="col-xs-4" style="text-align: center;">
+                 <label>
+                     <font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font>
+                 </label><br><br>
+                 <img src="image/Capture.JPG" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                     align="Center">
+                </div>
+
+                <div class="col-xs-4">
+                    <label><img src="image\444.Jpg" class="img-rounded" alt="อุณหภูมิต่ำกว่าที่กำหนด" width="50" height="60" align="Center" >อุณหภูมิต่ำ:</label>
+                    <span> <font color="#3d5afe"> Current Slider Value: </font></span>
+                    <span><font color="#3d5afe"> '.$row['lowTemp1'].' </font></span>
+                </div>
+
+                <div class="col-xs-4">
+                <label><img src="image\333.Jpg" class="img-rounded" alt="อุณหภูมิสูงกว่าที่กำหนด" width="50" height="60" align="Center">อุณหภูมิสูง:</label>
+                    <span ><font color="#e53935"> Current Slider Value: </font></span>
+                <span><font color="#e53935"> '.$row['highTemp1'].' </font></span>
+
+                </div><br><br><br><br>
+
+                <div class="col-xs-4">
+                    <label><img src="image\987.Jpg" class="img-rounded" alt="ความชื้นต่ำ" width="50" height="60" align="Center">ความชื้นต่ำ:</label>
+                    <span><font color="#3d5afe"> Current Slider Value: </font></span>
+                    <span><font color="#3d5afe"> '.$row['lowHumid1'].' </font></span>
+
+                </div>
+
+                <div class="col-xs-4">
+                    <label><img src="image\7899.Jpg" class="img-rounded" alt="ความชื้นสูง" width="50" height="60" align="Center">ความชื้นสูง:</label
+                    <span ><font color="#e53935"> Current Slider Value: </font></span>
+                    <span><font color="#e53935">'.$row['highHumid1'].'</font></span>
+                </div><br><br><br><br>
+                <hr width="100%" size="30" color="red">
+             </div>
+
+
+             <div class="form-group row">
+
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label>
+                                    <font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font>
+                                </label><br><br>
+                                <img src="image/6669.JPG" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                    align="Center">
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label><img src="image\444.Jpg" class="img-rounded" alt="อุณหภูมิต่ำกว่าที่กำหนด" width="50" height="60" align="Center">อุณหภูมิต่ำ:</label>
+                                <span ><font color="#3d5afe"> Current Slider Value: </font></span>
+                                <span><font color="#3d5afe">'.$row['lowTemp2'].'</font></span>
+
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label><img src="image\333.Jpg" class="img-rounded" alt="อุณหภูมิสูงกว่าที่กำหนด" width="50" height="60" align="Center">อุณหภูมิสูง:</label>
+                                    <span ><font color="#e53935"> Current Slider Value: </font></span>
+                                <span><font color="#e53935"> '.$row['highTemp2'].'</font></span>
+
+                            </div><br><br><br><br>
+
+                            <div class="col-xs-4">
+                                <label><img src="image\987.Jpg" class="img-rounded" alt="ความชื้นต่ำ" width="50" height="60" align="Center">ความชื้นต่ำ:</label>
+                                    <span ><font color="#3d5afe"> Current Slider Value: </font></span>
+                                <span><font color="#3d5afe">'.$row['lowHumid2'].'</font></span>
+
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label><img src="image\7899.Jpg" class="img-rounded" alt="ความชื้นสูง" width="50" height="60" align="Center">ความชื้นสูง:</label
+                                    <span ><font color="#e53935"> Current Slider Value: </font></span>
+                                <span><font color="#e53935"> '.$row['highHumid2'].' </font></span>
+
+                            </div><br><br><br><br>
+                        </div>
+                        <hr width="100%" size="30" color="red">
+
+                        <div class="form-group row">
+
+                        <div class="col-xs-4" style="text-align: center;">
+                            <label>
+                                <font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font>
+                            </label><br><br>
+                            <img src="image\999.Jpg" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                align="Center">
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\444.Jpg" class="img-rounded" alt="อุณหภูมิต่ำกว่าที่กำหนด" width="50" height="60" align="Center">อุณหภูมิต่ำ:</label>
+                                <span ><font color="#3d5afe"> Current Slider Value: </font></span>
+                            <span><font color="#3d5afe"> '.$row['lowTemp3'].'</font></span>
+
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\333.Jpg" class="img-rounded" alt="อุณหภูมิสูงกว่าที่กำหนด" width="40" height="60" align="Center">อุณหภูมิสูง:</label>
+                                <span ><font color="#e53935"> Current Slider Value: </font></span>
+                            <span><font color="#e53935">'.$row['highTemp3'].'</font></span>
+
+                        </div><br><br><br><br>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\987.Jpg" class="img-rounded" alt="ความชื้นต่ำ" width="50" height="60" align="Center">ความชื้นต่ำ:</label>
+                                <span ><font color="#3d5afe"> Current Slider Value: </font></span>
+                            <span><font color="#3d5afe">'.$row['lowHumid3'].'</font></span>
+
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\7899.Jpg" class="img-rounded" alt="ความชื้นสูง" width="50" height="60" align="Center">ความชื้นสูง:</label>
+                                <span ><font color="#e53935"> Current Slider Value: </font><span>
+                            <span><font color="#e53935">'.$row['highHumid3'].'</font></span>
+
+                        </div><br><br><br><br>
+                    </div>
+                    <hr width="100%" size="30" color="red">
+
+
+                    <div class="form-group row">
+
+                        <div class="col-xs-4" style="text-align: center;">
+                            <label>
+                                <font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font>
+                            </label><br><br>
+                            <img src="image\48.Jpg" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                align="Center">
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\444.Jpg" class="img-rounded" alt="อุณหภูมิต่ำกว่าที่กำหนด" width="50" height="60" align="Center">อุณหภูมิต่ำ:</label>
+                                <span ><font color="#3d5afe"> Current Slider Value: </font></span>
+                            <span><font color="#3d5afe">'.$row['lowTemp4'].'</font></span>
+
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\333.Jpg" class="img-rounded" alt="อุณหภูมิสูงกว่าที่กำหนด" width="50" height="60">อุณหภูมิสูง:</label>
+                                <span ><font color="#e53935"> Current Slider Value: </font></span>
+                            <span><font color="#e53935"> '.$row['highTemp4'].'</font></span>
+
+                        </div><br><br><br><br>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\987.Jpg" class="img-rounded" alt="ความชื้นต่ำ" width="50" height="60" align="Center">ความชื้นต่ำ:</label>
+                                <span ><font color="#3d5afe"> Current Slider Value: </font><span>
+                            <span><font color="#3d5afe">'.$row['lowHumid4'].'</font></span>
+
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label><img src="image\7899.Jpg" class="img-rounded" alt="ความชื้นสูง" width="50" height="60" align="Center">ความชื้นสูง:</label>
+                                <span ><font color="#e53935"> Current Slider Value: </font></span>
+                            <span><font color="#e53935"> '.$row['highHumid4'].' </font></span>
+
+                        </div><br><br><br><br>
+
+                    </div>
+
+
+             </form>
+
+                 </div>
+
+                 <div class="panel-footer"></div>
 
                </div>
 
+               <!--edit Item Modal -->
+    <div class="modal fade" id="edit'.$row['no_alertrb'].'"'.$row['no_alertrb'].'" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ตั้งค่าการแจ้งเตือน</h4>
+                </div>
 
+                <form method="GET">
+                <div class="modal-body">
+
+                <input class="form-control" id="no_alertrb" value="'.$row['no_alertrb'].'"'.$row['no_alertrb'].'"
+                         name="no_alertrb" type="hidden">
+
+                
+                        <div class="form-group row">
+
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label><br><br>
+                                <img src="image/Capture.JPG" class="img-rounded" alt="ช่วงทำสี" width="150" height="100" align="Center">
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange1" min="25" max="80" name="lowTemp1" value="'.$row['lowTemp1'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan1"></span>
+                          
+                            
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange2" min="25" max="80" name="highTemp1"  value="'.$row['highTemp1'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                               
+                            </div><br><br><br><br>
+                            
+                            <div class="col-xs-4" >
+                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange3" min="20" max="60" name="lowHumid1" value="'.$row['lowHumid1'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan3"></span>
+
+                            </div>
+                            
+                            <div class="col-xs-4">
+                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange4" min="20" max="60" name="highHumid1" value="'.$row['highHumid1'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan4"></span>
+                            
+                            </div><br><br><br><br>
+                        </div>
+                        <hr width="100%" size="30" color="red">
+
+                        <div class="form-group row">
+
+                            <div class="col-xs-4"  style="text-align: center;">
+                                <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label><br><br>
+                                <img src="image/6669.JPG" class="img-rounded" alt="ช่วงทำสี" width="150" height="100" align="Center">
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange5" min="25" max="80" name="lowTemp2" value="'.$row['lowTemp2'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan5"></span>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange6" min="25" max="80" name="highTemp2" value="'.$row['highTemp2'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan6"></span>
+
+                            </div><br><br><br><br>
+                            
+                            <div class="col-xs-4" >
+                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
+                                
+                                <input type="range" class="custom-range" id="customRange7" min="20" max="60" name="lowHumid2" value="'.$row['lowHumid2'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan7"></span>
+                            </div>
+                            
+                            <div class="col-xs-4">
+                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
+                                
+                                <input type="range" class="custom-range" id="customRange8"min="20" max="60" name="highHumid2" value="'.$row['highHumid2'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan8"></span>
+                            </div><br><br><br><br>
+                        </div>
+                        <hr width="100%" size="30" color="red">
+
+                        <div class="form-group row">
+
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label><br><br>
+                                <img src="image\999.Jpg" class="img-rounded" alt="ช่วงทำสี" width="150" height="100" align="Center">
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange9" min="25" max="80" name="lowTemp3" value="'.$row['lowTemp3'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan9"></span>
+                    
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
+                              
+                                <input type="range" class="custom-range" id="customRange10" min="25" max="80" name="highTemp3" value="'.$row['highTemp3'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan10"></span>
+                            </div><br><br><br><br>
+                            
+                            <div class="col-xs-4">
+                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange18" min="20" max="60"  name="lowHumid3" value="'.$row['lowHumid3'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan18"></span>
+                
+                            </div>
+                            
+                            <div class="col-xs-4">
+                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
+                            
+                                <input type="range" class="custom-range" id="customRange11" min="20" max="60" name="highHumid3" value="'.$row['highHumid3'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan11"></span>
+                            </div><br><br><br><br>
+                        </div>
+                        <hr width="100%" size="30" color="red">
+
+
+                        <div class="form-group row">
+
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label ><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label><br><br>
+                                <img src="image\48.Jpg" class="img-rounded" alt="ช่วงทำสี" width="150" height="100" align="Center">
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange19" min="25" max="80" name="lowTemp4" value="'.$row['lowTemp4'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan19"></span>
+                    
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
+                            
+                                <input type="range" class="custom-range" id="customRange14" min="25" max="80" name="highTemp4" value="'.$row['highTemp4'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan13"></span>
+
+                            </div><br><br><br><br>
+                            
+                            <div class="col-xs-4">
+                                <label>ความชื้นต่ำกว่าที่กำหนด:</label>
+
+                                <input type="range" class="custom-range" id="customRange16" min="20" max="60"  name="lowHumid4" value="'.$row['lowHumid4'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan16"></span>
+                                
+                            </div>
+                            
+                            <div class="col-xs-4">
+                                <label>ความชื้นสูงกว่าที่กำหนด:</label>
+                              
+                                <input type="range" class="custom-range" id="customRange17" min="20" max="60" name="highHumid4" value="'.$row['highHumid4'].'">
+                                <span> Current Slider Value:</span>
+                                <span class="font-weight-bold text-primary ml-2 valueSpan17"></span>
+                            </div><br><br><br><br>
+
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" name="edit" data-target="#edit">
+                                บันทึกข้อมูล </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete Modal -->
+                        <div class="modal fade" id="delete'.$row['no_alertrb'].'"'.$row['no_alertrb'].'" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">ลบข้อมูลกระบวนการบ่ม</h4>
+                              </div>
+                              <form method="GET">
+                              <div class="modal-body">
+                      
+                              <input type="hidden" name="delete_id" value="'.$row['no_alertrb'].'"'.$row['no_alertrb'].'">
+                              <div class="alert alert-danger">คุณต้องการลบ
+                              <a href="#" class="alert-link">ตั้งค่าการแจ้งเตือน</a> หรือไม่? 
+                            </div>
+                      
+                              </div>
+                      
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" name="delete" data-target="#delete">
+                                                      ลบ</button>
+                              </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
                  ';  
                 ?>
 
@@ -282,7 +624,7 @@
                     if ($conn) {
                         echo  '<script>
                         swal("บันทึกข้อมูลเรียบร้อยแล้ว", "success");
-                            window.location.href="pro";
+                            window.location.href="alert";
                  </script>';
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -294,74 +636,66 @@
 
              //Update Items
              if(isset($_GET['edit'])){
+                $no_alertrb = $_GET['no_alertrb'];
                 $lowTemp1 = $_GET['lowTemp1'];
                 $highTemp1= $_GET['highTemp1'];
                 $lowHumid1 = $_GET['lowHumid1'];
                 $highHumid1 = $_GET['highHumid1'];
-               
                 $lowTemp2 = $_GET['lowTemp2'];
                 $highTemp2 = $_GET['highTemp2'];
                 $lowHumid2 = $_GET['lowHumid2'];
                 $highHumid2 = $_GET['highHumid2'];
-               
                 $lowTemp3 = $_GET['lowTemp3'];
                 $highTemp3 = $_GET['highTemp3'];
                 $lowHumid3 = $_GET['lowHumid3'];
                 $highHumid3 = $_GET['highHumid3'];
-               
                 $lowTemp4 = $_GET['lowTemp4'];
                 $highTemp4 = $_GET['highTemp4'];
                 $lowHumid4 = $_GET['lowHumid4'];
                 $highHumid4 = $_GET['highHumid4'];
             
-                $sql = "UPDATE  pprocessb 
-                        SET   
+                $sql = "UPDATE  alertrb 
+                        SET    no_alertrb ='$no_alertrb ',
                         lowTemp1='$lowTemp1',
                         highTemp1='$highTemp1',
                         lowHumid1='$lowHumid1',
                         highHumid1='$highHumid1', 
-                        
-                        lowTemp2='$lowTemp1',
-                        highTemp2='$highTemp1',
-                        lowHumid2='$lowHumid1',
+                        lowTemp2='$lowTemp2',
+                        highTemp2='$highTemp2',
+                        lowHumid2='$lowHumid2',
                         highHumid2='$highHumid2', 
-                        
                         lowTemp3='$lowTemp3',
                         highTemp3='$highTemp3',
                         lowHumid3='$lowHumid3',
                         highHumid3='$highHumid3', 
-                       
                         lowTemp4='$lowTemp4',
                         highTemp4='$highTemp4',
                         lowHumid4='$lowHumid4',
                         highHumid4='$highHumid4'
-
-                        WHERE  ='$'";
-
-                       
+                        WHERE  no_alertrb ='$no_alertrb '";  
                 if ($conn->query($sql) === TRUE) {
                     echo '<script>
                     swal("แก้ไขข้อมูลเรียบร้อยแล้ว", "success");
-                        window.location.href="pro";
+                        window.location.href="alert";
              </script>';
                 } 
                 else {
                     echo "Error updating record: " . $conn->error;
                 }
             }
-              
+           
              // Delete
              if(isset($_GET['delete'])){
                 // sql to delete a record
                 $delete_id = $_GET['delete_id'];
-                $sql = "DELETE FROM pprocessb WHERE no_pro  ='$delete_id' ";
+                $sql = "DELETE FROM alertrb WHERE no_alertrb  ='$delete_id' ";
                 if ($conn->query($sql) === TRUE) {
-                    $sql = "DELETE FROM pprocessb WHERE no_pro ='$delete_id' ";
+                    $sql = "DELETE FROM alertrb WHERE no_alertrb ='$delete_id' ";
                     if ($conn->query($sql) === TRUE) {
-                        $sql = "DELETE FROM pprocessb WHERE no_pro='$delete_id' ";
+                        $sql = "DELETE FROM alertrb WHERE no_alertrb='$delete_id' ";
                         echo  '<script>
                         swal("ลบข้อมูลเรียบร้อยแล้ว","success");
-                            window.location.href="pro";
+                            window.location.href="alert";
                  </script>';
                    
                     } else {
@@ -384,7 +718,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">กระบวนการบ่ม</h4>
+                    <h4 class="modal-title">ตั้งค่าการแจ้งเตือน</h4>
                 </div>
 
                 <div class="modal-body">
@@ -393,126 +727,224 @@
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
-                                <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label>
+                                    <font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font>
+                                </label><br><br>
+                                <img src="image/Capture.JPG" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                    align="Center">
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowTemp1" name="lowTemp1"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
+                                
+                                <input type="range" class="form-control-range" id="lowTemp1" name="lowTemp1"
+                                    onInput="$('#rangeval').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval">50
+                                    <!-- Default value --></span>
+
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highTemp1" name="highTemp1"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highTemp1" name="highTemp1" 
+                                    onInput="$('#rangeval1').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval1">50
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
-                            
-                            <div class="col-xs-4" style="margin-left:299px">
+
+                            <div class="col-xs-4">
                                 <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowHumid1" name="lowHumid1"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="lowHumid1" name="lowHumid1"
+                                    onInput="$('#rangeval2').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval2">40
+                                    <!-- Default value --></span>
+
                             </div>
-                            
+
                             <div class="col-xs-4">
                                 <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highHumid1" name="highHumid1"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highHumid1" name="highHumid1"
+                                    onInput="$('#rangeval3').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval3">40
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
                         </div>
+                        <hr width="100%" size="30" color="red">
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
-                                <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label>
+                                    <font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font>
+                                </label><br><br>
+                                <img src="image/6669.JPG" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                    align="Center">
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowTemp2" name="lowTemp2"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
+                                <input type="range" class="form-control-range" id="lowTemp2" name="lowTemp2"
+                                    onInput="$('#rangeval4').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval4">50
+                                    <!-- Default value --></span>
+
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highTemp2" name="highTemp2"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highTemp2" name="highTemp2"
+                                    onInput="$('#rangeval5').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval5">50
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
-                            
-                            <div class="col-xs-4" style="margin-left:299px">
+
+                            <div class="col-xs-4">
                                 <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowHumid2" name="lowHumid2"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="lowHumid2" name="lowHumid2"
+                                    onInput="$('#rangeval6').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval6">40
+                                    <!-- Default value --></span>
+
                             </div>
-                            
+
                             <div class="col-xs-4">
                                 <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highHumid2" name="highHumid2"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highHumid2" name="highHumid2"
+                                    onInput="$('#rangeval7').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval7">40
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
                         </div>
+                        <hr width="100%" size="30" color="red">
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
-                                <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label>
+                                    <font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font>
+                                </label><br><br>
+                                <img src="image\999.Jpg" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                    align="Center">
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowTemp3" name="lowTemp3"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="lowTemp3" name="lowTemp3"
+                                    onInput="$('#rangeval8').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval8">50
+                                    <!-- Default value --></span>
+
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highTemp3" name="highTemp3"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highTemp3" name="highTemp3"
+                                    onInput="$('#rangeval9').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval9">50
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
-                            
-                            <div class="col-xs-4" style="margin-left:299px">
+
+                            <div class="col-xs-4">
                                 <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowHumid3" name="lowHumid3"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="lowHumid3" name="lowHumid3"
+                                    onInput="$('#rangeval10').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval10">40
+                                    <!-- Default value --></span>
+
                             </div>
-                            
+
                             <div class="col-xs-4">
                                 <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highHumid3" name="highHumid3"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highHumid3" name="highHumid3"
+                                    onInput="$('#rangeval11').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval11">40
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
                         </div>
+                        <hr width="100%" size="30" color="red">
 
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
-                                <label ><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
+                            <div class="col-xs-4" style="text-align: center;">
+                                <label>
+                                    <font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font>
+                                </label><br><br>
+                                <img src="image\48.Jpg" class="img-rounded" alt="ช่วงทำสี" width="150" height="100"
+                                    align="Center">
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowTemp4" name="lowTemp4"
-                                    placeholder="อุณหภูมิต่ำกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="lowTemp4" name="lowTemp4"
+                                    onInput="$('#rangeval12').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval12">50
+                                    <!-- Default value --></span>
+
                             </div>
 
                             <div class="col-xs-4">
                                 <label>อุณหภูมิสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highTemp4" name="highTemp4"
-                                    placeholder="อุณหภูมิสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highTemp4" name="highTemp4"
+                                    onInput="$('#rangeval13').html($(this).val())" min="25" max="80" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval13">50
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
-                            
-                            <div class="col-xs-4" style="margin-left:299px">
+
+                            <div class="col-xs-4">
                                 <label>ความชื้นต่ำกว่าที่กำหนด:</label>
-                                <input class="form-control" id="lowHumid4" name="lowHumid4"
-                                    placeholder="ความชื้นต่ำกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="lowHumid4" name="lowHumid4"
+                                    onInput="$('#rangeval14').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval14">40
+                                    <!-- Default value --></span>
+
                             </div>
-                            
+
                             <div class="col-xs-4">
                                 <label>ความชื้นสูงกว่าที่กำหนด:</label>
-                                <input class="form-control" id="highHumid4" name="highHumid4"
-                                    placeholder="ความชื้นสูงกว่าที่กำหนด" type="text" required>
+
+                                <input type="range" class="form-control-range" id="highHumid4" name="highHumid4"
+                                    onInput="$('#rangeval15').html($(this).val())" min="20" max="60" step="1">
+                                <span>Current Slider Value:</span>
+                                <span id="rangeval15">40
+                                    <!-- Default value --></span>
+
                             </div><br><br><br><br>
 
                         </div>
@@ -531,4 +963,207 @@
     </div>
 
 </body>
+
+<script>
+    
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan1');
+const $value = $('#customRange1');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan2');
+const $value = $('#customRange2');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan3');
+const $value = $('#customRange3');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan4');
+const $value = $('#customRange4');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan5');
+const $value = $('#customRange5');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan6');
+const $value = $('#customRange6');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan7');
+const $value = $('#customRange7');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan8');
+const $value = $('#customRange8');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan9');
+const $value = $('#customRange9');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan10');
+const $value = $('#customRange10');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan11');
+const $value = $('#customRange11');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan12');
+const $value = $('#customRange2');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan13');
+const $value = $('#customRange14');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan15');
+const $value = $('#customRange15');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan16');
+const $value = $('#customRange16');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan17');
+const $value = $('#customRange17');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan18');
+const $value = $('#customRange18');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+$(document).ready(function() {
+
+const $valueSpan = $('.valueSpan19');
+const $value = $('#customRange19');
+$valueSpan.html($value.val());
+$value.on('input change', () => {
+
+  $valueSpan.html($value.val());
+});
+});
+
+
+</script>
 </html>

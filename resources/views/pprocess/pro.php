@@ -82,6 +82,8 @@
         $(function () {
             var startDateTextBox = $('#sdate_1');
             var endDateTextBox = $('#edate_1');
+            var startDateTextBox1 = $('#sdate_2');
+            var endDateTextBox1 = $('#edate_2');
 
             startDateTextBox.datepicker({
                 dateFormat: 'yy-mm-dd',
@@ -114,44 +116,41 @@
                 }
             });
 
-        });
-
-        $(function () {
-            var startDateTextBox = $('#sdate_2');
-            var endDateTextBox = $('#edate_2');
-
-            startDateTextBox.datepicker({
+            startDateTextBox1.datepicker({
                 dateFormat: 'yy-mm-dd',
                 onClose: function (dateText, inst) {
                     if (endDateTextBox.val() != '') {
-                        var testStartDate = startDateTextBox.datepicker('getDate');
+                        var testStartDate = startDateTextBox1.datepicker('getDate');
                         var testEndDate = endDateTextBox.datepicker('getDate');
                         if (testStartDate > testEndDate)
                             endDateTextBox.datepicker('setDate', testStartDate);
                     }
                 },
                 onSelect: function (selectedDateTime) {
-                    endDateTextBox.datepicker('option', 'minDate', startDateTextBox.datepicker(
+                    endDateTextBox.datepicker('option', 'minDate', startDateTextBox1.datepicker(
                         'getDate'));
                 }
             });
-            endDateTextBox.datepicker({
+
+            endDateTextBox1.datepicker({
                 dateFormat: 'yy-mm-dd',
                 onClose: function (dateText, inst) {
                     if (startDateTextBox.val() != '') {
                         var testStartDate = startDateTextBox.datepicker('getDate');
-                        var testEndDate = endDateTextBox.datepicker('getDate');
+                        var testEndDate = endDateTextBox1.datepicker('getDate');
                         if (testStartDate > testEndDate)
-                            startDateTextBox.datepicker('setDate', testEndDate);
+                        startDateTextBox1.datepicker('setDate', testEndDate);
                     }
                 },
                 onSelect: function (selectedDateTime) {
-                    startDateTextBox.datepicker('option', 'maxDate', endDateTextBox.datepicker(
+                    startDateTextBox1.datepicker('option', 'maxDate', endDateTextBox1.datepicker(
                         'getDate'));
                 }
             });
 
         });
+
+        
 
 
         $(function () {
@@ -353,7 +352,7 @@
                  echo '
 
                  <tr>
-                 <td style="width:700px;text-align: center;">
+                 <td style="width:550px;text-align: center;">
                      '.$row['name_pro'].'
                  </td>
 
@@ -381,35 +380,35 @@
 
                          <div class="modal-header">
                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                             <h4 class="modal-title">ดูข้อมูลกระบานการบ่ม</h4>
+                             <h4 class="modal-title">ดูข้อมูลกระบวนการบ่ม</h4>
                          </div>
 
                          <form method="GET">
 
                          <div class="modal-body">
 
-                         <div class="panel panel-info">
+                         <div class="panel panel-info" style="border-width:4px;border-color: blue;">
                          <div class="panel-body">
 
-                         <div class="form-group row">
+                         <div class="form-group row" style="text-align:center;">
                          <label class="control-label col-sm-2">โรงบ่ม :</label>
                          <div class="col-xs-4">
                          <input  class="form-control" id="rbom" name="rbom" value="'.$row['rbom'].'"'.$row['rbom'].'"
-                             type="text" disabled>
+                             type="text" style="background-color: #FEC58C;" disabled>
                      </div>
                      </div>
 
                          </div>
                        </div>
 
-                       <div class="panel panel-info">
+                       <div class="panel panel-info" style="border-width:4px;border-color: blue;">
                        <div class="panel-body">
 
-                       <div class="form-group row">
+                       <div class="form-group row" style="text-align:center;">
                        <label class="control-label col-sm-2">ชื่อการบ่ม :</label>
                        <div class="col-xs-4">
                        <input  class="form-control" id="rbom" name="rbom" value="'.$row['name_pro'].'"'.$row['name_pro'].'"
-                           type="text" disabled>
+                           type="text" style="background-color: #FEC58C;" disabled>
                    </div>
                    </div>
 
@@ -417,85 +416,88 @@
                      </div>
 
 
-                         <div class="panel panel-info">
-                         <div class="panel-body">
+                         <div class="panel panel-info" style="border-width:4px;border-color: blue;">
+                         <div class="panel-body" >
                            <div class="form-group row">
 
-                           <div class="col-xs-4">
+                           <div class="col-xs-4" style="text-align: center;">
                            <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
+                           <img src="image/Capture.JPG" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                        </div>
   
                        <div class="col-xs-4">
                            <label>วันที่เริ่มการบ่ม:</label>
-                           <input class="form-control" name="sdate_1" name="sdate_1" value="'.$row['sdate_1'].'"'.$row['sdate_1'].' disabled>
+                           <input class="form-control" name="sdate_1" name="sdate_1" value="'.$row['sdate_1'].'"'.$row['sdate_1'].' style="background-color: #FEC58C;" disabled>
                        </div>
   
                        <div class="col-xs-4">
                            <label>วันที่สิ้นสุดการบ่ม:</label>
-                           <input class="form-control" name="edate_1"
+                           <input class="form-control" name="edate_1" style="background-color: #FEC58C;"
                            value="'.$row['edate_1'].'"'.$row['edate_1'].' type="text" disabled> 
                        </div>
                            </div>
                          </div>
                        </div>
 
-                       <div class="panel panel-info">
+                       <div class="panel panel-info" style="border-width:4px;border-color: blue;">
                         <div class="panel-body">
-                        <div class="col-xs-4">
+                        <div class="col-xs-4" style="text-align: center;">
                         <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
-                       
+                        <img src="image/6669.JPG" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                     </div>
 
                     <div class="col-xs-4">
                         <label>วันที่เริ่มการบ่ม:</label>
                         <input class="form-control" name="sdate_2"
-                        value="'.$row['sdate_2'].'"'.$row['sdate_2'].'" type="text" disabled>
+                        value="'.$row['sdate_2'].'"'.$row['sdate_2'].'" style="background-color: #FEC58C;" type="text" disabled>
                     </div>
 
                     <div class="col-xs-4">
                         <label>วันที่สิ้นสุดการบ่ม:</label>
                         <input class="form-control"  name="edate_2"
-                        value="'.$row['edate_2'].'"'.$row['edate_2'].'" type="text" disabled>
+                        value="'.$row['edate_2'].'"'.$row['edate_2'].'" style="background-color: #FEC58C;" type="text" disabled>
                     </div>
                         </div>
                         </div>
 
-                        <div class="panel panel-info">
+                        <div class="panel panel-info" style="border-width:4px;border-color: blue;">
                         <div class="panel-body">
-                        <div class="col-xs-4">
+                        <div class="col-xs-4" style="text-align: center;">
                         <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
+                        <img src="image\999.Jpg" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                     </div>
 
                     <div class="col-xs-4">
                         <label>วันที่เริ่มการบ่ม:</label>
                         <input class="form-control" name="sdate_3"
-                        value="'.$row['sdate_3'].'"'.$row['sdate_3'].'" type="text" disabled>
+                        value="'.$row['sdate_3'].'"'.$row['sdate_3'].'" type="text" style="background-color: #FEC58C;" disabled>
                     </div>
 
                     <div class="col-xs-4">
                         <label>วันที่สิ้นสุดการบ่ม:</label>
                         <input class="form-control" name="edate_3"
-                        value="'.$row['edate_3'].'"'.$row['edate_3'].' type="text" disabled>
+                        value="'.$row['edate_3'].'"'.$row['edate_3'].' type="text" style="background-color: #FEC58C;" disabled>
                     </div>
                         </div>
                         </div>
 
-                        <div class="panel panel-info">
+                        <div class="panel panel-info" style="border-width:4px;border-color: blue;">
                         <div class="panel-body">
-                        <div class="col-xs-4">
+                        <div class="col-xs-4" style="text-align: center;">
                         <label><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
+                        <img src="image\48.Jpg" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                     </div>
 
                     <div class="col-xs-4">
                         <label>วันที่เริ่มการบ่ม:</label>
                         <input class="form-control"  name="sdate_4"
-                        value="'.$row['sdate_4'].'"'.$row['sdate_4'].' type="text" disabled>
+                        value="'.$row['sdate_4'].'"'.$row['sdate_4'].' type="text" style="background-color: #FEC58C;" disabled>
                     </div>
 
                     <div class="col-xs-4">
                         <label>วันที่สิ้นสุดการบ่ม:</label>
                         <input class="form-control"  name="edate_4"
-                        value="'.$row['edate_4'].'"'.$row['edate_4'].' type="text" disabled>
+                        value="'.$row['edate_4'].'"'.$row['edate_4'].' type="text" style="background-color: #FEC58C;" disabled>
                     </div>
                         </div>
                         </div>
@@ -530,28 +532,19 @@
                          <input class="form-control" id="no_pro" value="'.$row['no_pro'].'"'.$row['no_pro'].'"
                          name="no_pro" type="hidden">
 
-                             <div class="form-group row">
-
-                             <div class="col-xs-4">
-                             <label>โรงบ่ม</label>
-                             <input class="form-control" id="rbom" name="rbom" value="'.$row['rbom'].'"'.$row['rbom'].'"
-                                 type="text">
-                         </div>
-                         </div>
-
-                          <div class="form-group row">
-                   
-
+                            
+                          <div class="form-group row" style="text-align: center;">
+                          <label class="control-label col-sm-2">ชื่อการบ่ม:</label>
                      <div class="col-xs-4">
-                         <label>ชื่อการบ่ม</label>
                          <input class="form-control" id="name_pro" name="name_pro" value="'.$row['name_pro'].'"'.$row['name_pro'].'"
                              type="text">
                      </div>
 
                     <br><br><br><br>
 
-                     <div class="col-xs-4">
+                     <div class="col-xs-4" style="text-align: center;">
                          <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
+                         <img src="image/Capture.JPG" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                      </div>
 
                      <div class="col-xs-4">
@@ -564,12 +557,11 @@
                          <input class="form-control" name="edate_1"
                          value="'.$row['edate_1'].'"'.$row['edate_1'].' type="text">
                      </div><br><br><br><br>
+                     <hr width="100%" size="30" color="red">
 
-
-
-                     <div class="col-xs-4">
+                     <div class="col-xs-4" style="text-align: center;">
                          <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
-                        
+                         <img src="image/6669.JPG" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                      </div>
 
                      <div class="col-xs-4">
@@ -583,11 +575,11 @@
                          <input class="form-control"  name="edate_2"
                          value="'.$row['edate_2'].'"'.$row['edate_2'].'" type="text">
                      </div><br><br><br><br>
+                     <hr width="100%" size="30" color="red">
 
-
-
-                     <div class="col-xs-4">
+                     <div class="col-xs-4" style="text-align: center;">
                          <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
+                         <img src="image\999.Jpg" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                      </div>
 
                      <div class="col-xs-4">
@@ -601,9 +593,12 @@
                          <input class="form-control" name="edate_3"
                          value="'.$row['edate_3'].'"'.$row['edate_3'].' type="text">
                      </div><br><br><br><br>
+                     <hr width="100%" size="30" color="red">
+                     
 
-                     <div class="col-xs-4">
+                     <div class="col-xs-4" style="text-align: center;">
                          <label><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
+                         <img src="image\48.Jpg" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                      </div>
 
                      <div class="col-xs-4">
@@ -669,7 +664,7 @@
         <?php 
             } 
             if(isset($_GET['save'])){
-                $id_pro = $_GET['id_pro'];
+              
                 $name_pro = $_GET['name_pro'];
                 $rbom = $_GET['rbom'];
                 $stap_1 = 'ช่วงทำสี';
@@ -684,10 +679,10 @@
                 $stap_4 = 'ช่วงทำก้านแห้ง';
                 $sdate_4 = $_GET['sdate_4'];
                 $edate_4 = $_GET['edate_4'];
-            
+
                 $farmer = (isset($_SESSION['id_farmer'])) ? $_SESSION['id_farmer'] : '';
-                $sql = "INSERT INTO pprocessb (id_pro,name_pro,rbom,stap_1,sdate_1,edate_1,stap_2,sdate_2,edate_2,stap_3,sdate_3,edate_3,stap_4,sdate_4,edate_4,id_farmer)  
-                VALUES ('$id_pro','$name_pro','$rbom','$stap_1','$sdate_1','$edate_1','$stap_2','$sdate_2','$edate_2','$stap_3','$sdate_3','$edate_3','$stap_4','$sdate_4','$edate_4','$farmer') ";
+                $sql = "INSERT INTO pprocessb (name_pro,rbom,stap_1,sdate_1,edate_1,stap_2,sdate_2,edate_2,stap_3,sdate_3,edate_3,stap_4,sdate_4,edate_4,id_farmer)  
+                VALUES ('$name_pro','$rbom','$stap_1','$sdate_1','$edate_1','$stap_2','$sdate_2','$edate_2','$stap_3','$sdate_3','$edate_3','$stap_4','$sdate_4','$edate_4','$farmer') ";
                 if ($conn->query($sql) === TRUE) {
                     if ($conn) {
                         echo  '<script>
@@ -701,51 +696,33 @@
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
              }
+            
 
              //Update Items
              if(isset($_GET['edit'])){
                 $no_pro = $_GET['no_pro'];
-               
                 $name_pro = $_GET['name_pro'];
-                $rbom = $_GET['rbom'];
-           
                 $sdate_1 = $_GET['sdate_1'];
                 $edate_1 = $_GET['edate_1'];
-       
                 $sdate_2 = $_GET['sdate_2'];
                 $edate_2 = $_GET['edate_2'];
-         
                 $sdate_3 = $_GET['sdate_3'];
                 $edate_3 = $_GET['edate_3'];
-            
                 $sdate_4 = $_GET['sdate_4'];
                 $edate_4 = $_GET['edate_4'];
             
                 $sql = "UPDATE  pprocessb 
-                        SET    no_pro='$no_pro',
-                     
+                        SET   no_pro='$no_pro',
                         name_pro='$name_pro',
-                        rbom='$rbom',
-                       
                         sdate_1='$sdate_1',
                         edate_1='$edate_1',
-                        
-                      
                         sdate_2='$sdate_2',
                         edate_2='$edate_2',
-                        
-                    
                         sdate_3='$sdate_3',
                         edate_3='$edate_3',
-                       
-              
                         sdate_4='$sdate_4',
                         edate_4='$edate_4'
-                    
-
-                        WHERE no_pro ='$no_pro'";
-
-                       
+                        WHERE no_pro ='$no_pro'";  
                 if ($conn->query($sql) === TRUE) {
                     echo '<script>
                     swal("แก้ไขข้อมูลเรียบร้อยแล้ว", "success");
@@ -801,10 +778,9 @@
 
                     <form method="GET">
 
-                        <div class="form-group row">
-
+                        <div class="form-group row" style="text-align:center;">
+                     <label class="control-label col-sm-2">เลือกโรงบ่ม:</label>
                         <div class="col-xs-4">
-                                <label>เลือกโรงบ่ม</label>
                                 <select class="form-control" name="rbom" id="rbom" required>
                                     <option value="" disabled selected>เลือกโรงบ่ม</option>
                                     <?php
@@ -820,28 +796,22 @@
                             </div>
                             </div>
 
-                            <div class="form-group row">
-
+                            <div class="form-group row" style="text-align:center;">
+                            <label class="control-label col-sm-2">ชื่อการบ่ม:</label>
                             <div class="col-xs-4">
-                                <label>ID กระบวนการบ่ม:</label>
-                                <input class="form-control" id="id_pro" name="id_pro" type="text"
-                                    placeholder="ID กระบวนการบ่ม" required>
-                            </div>
-
-                            <div class="col-xs-4">
-                                <label>ชื่อการบ่ม:</label>
                                 <input class="form-control" id="name_pro" name="name_pro" placeholder="ชื่อการบ่ม"
                                     type="text" required>
                             </div>
 
-                            <br><br><br><br>
+                            <br><br><br>
 
                         </div>
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" style="text-align:center;">
                                 <label><font color="red"> การบ่มช่วงแรก : ช่วงทำสี </font></label>
+                                <img src="image/Capture.JPG" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                             </div>
 
                             <div class="col-xs-4">
@@ -854,13 +824,15 @@
                                 <label>วันที่สิ้นสุดการบ่ม</label>
                                 <input class="form-control" id="edate_1" name="edate_1"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div><br><br><br><br>
+                            </div><br><br><br>
                         </div>
+                        <hr width="100%" size="30" color="red">
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" style="text-align:center;">
                                 <label><font color="red"> การบ่มช่วงที่ 2 : ช่วงตรึงสี </font></label>
+                                <img src="image/6669.JPG" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                             </div>
 
                             <div class="col-xs-4">
@@ -873,13 +845,15 @@
                                 <label>วันที่สิ้นสุดการบ่ม:</label>
                                 <input class="form-control" id="edate_2" name="edate_2"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div><br><br><br><br>
+                            </div><br><br><br>
                         </div>
+                        <hr width="100%" size="30" color="red">
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" style="text-align:center;">
                                 <label><font color="red"> การบ่มช่วงที่ 3 : ช่วงทำใบแห้ง </font></label>
+                                <img src="image\999.Jpg" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                             </div>
 
                             <div class="col-xs-4">
@@ -892,14 +866,16 @@
                                 <label>วันที่สิ้นสุดการบ่ม:</label>
                                 <input class="form-control" id="edate_3" name="edate_3"
                                     placeholder="คลิ๊กเพื่อเลือกวันที่สิ้นสุดกระบวนการการบ่ม" type="text" required>
-                            </div><br><br><br><br>
+                            </div><br><br><br>
                         </div>
+                        <hr width="100%" size="30" color="red">
 
 
                         <div class="form-group row">
 
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" style="text-align:center;">
                                 <label><font color="red"> การบ่มช่วงที่ 4 : ช่วงทำก้านแห้ง </font></label>
+                                <img src="image\48.Jpg" class="img-rounded" alt="ช่วงทำสี" width="130" height="50" align="Center">
                             </div>
 
                             <div class="col-xs-4">

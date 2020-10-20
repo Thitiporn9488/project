@@ -161,7 +161,7 @@
             <tfoot>
                 <tr class="bg-danger">
                     <th scope="col" style="text-align: center;"></th>
-                    <th scope="col" style="text-align: center;">action</th>
+                    <th scope="col" style="text-align: center;"></th>
                 </tr>
             </tfoot>
 
@@ -176,7 +176,7 @@
                         echo ' 
                         <tr>
                        
-                        <td style="width:700px;text-align: center;">
+                        <td style="width:550px;text-align: center;">
                             '.$row['name_in'].'
                         </td>
                     
@@ -202,6 +202,8 @@
                         </td>
 
                         <!-- View Modal -->
+
+                        
                         <div class="modal fade" id="view'.$row['no_in'].'"'.$row['no_in'].'" role="dialog">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -215,23 +217,65 @@
            
                                     <div class="modal-body">
 
-                                    
 
-
-                                    <div class="panel panel-info">
+                                    <div class="panel panel-info" style="border-width:4px;border-color: blue;">
                                     <div class="panel-body">
            
-                                    <div class="form-group row">
-                                    <label class="control-label col-sm-3">ลูกจ้างดูแลโรงบ่ม:</label>
+                                    <div class="form-group row" style="text-align:center;">
+                                    <label class="control-label col-sm-3">ID โรงบ่ม:</label>
                                     <div class="col-xs-4">
-                                    <input  class="form-control" id="emp" name="emp" value="'.$row['emp'].'"'.$row['emp'].'"
-                                        type="text" disabled>
+                                    <input  class="form-control" id="id_in" name="id_in" value="'.$row['id_in'].'"'.$row['id_in'].'"
+                                        type="text" style="background-color: #FEC58C;" disabled>
                                 </div>
                                 </div>
            
                                     </div>
-                                  </div>                    
+                                  </div>       
+
+
+                                    <div class="panel panel-info" style="border-width:4px;border-color: blue;">
+                                    <div class="panel-body">
            
+                                    <div class="form-group row" style="text-align:center;">
+                                    <label class="control-label col-sm-3">ชื่อโรงบ่ม:</label>
+                                    <div class="col-xs-4">
+                                    <input  class="form-control" id="name_in" name="name_in" value="'.$row['name_in'].'"'.$row['name_in'].'"
+                                        type="text" style="background-color: #FEC58C;" disabled>
+                                </div>
+                                </div>
+           
+                                    </div>
+                                  </div>   
+                                  
+                                  
+                                  <div class="panel panel-info" style="border-width:4px;border-color: blue;">
+                                  <div class="panel-body">
+         
+                                  <div class="form-group row" style="text-align:center;">
+                                  <label class="control-label col-sm-3">ID DEVICE:</label>
+                                  <div class="col-xs-4">
+                                  <input  class="form-control" id="id_device" name="id_device" value="'.$row['id_device'].'"'.$row['id_device'].'"
+                                      type="text" style="background-color: #FEC58C;" placeholder="ไม่มีข้อมูล" disabled>
+                              </div>
+                              </div>
+         
+                                  </div>
+                                </div>  
+                                  
+                                
+                                  <div class="panel panel-info" style="border-width:4px;border-color: blue;">
+                                  <div class="panel-body">
+         
+                                  <div class="form-group row" style="text-align:center;">
+                                  <label class="control-label col-sm-3">ลูกจ้างดูแลโรงบ่ม:</label>
+                                  <div class="col-xs-4">
+                                  <input  class="form-control" id="emp" name="emp" value="'.$row['emp'].'"'.$row['emp'].'"
+                                      type="text" style="background-color: #FEC58C;" disabled>
+                              </div>
+                              </div>
+         
+                                  </div>
+                                </div>   
                                 
                                                         
                                     </div>
@@ -244,10 +288,6 @@
                             </div>
                         </div>
            </div>
-           
-    
-                       
-    
     
                         <!-- add device Modal -->
                         <div class="modal fade" id="add_de'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
@@ -266,22 +306,17 @@
                                             <input type="input" name="name_in" class="form-control"
                                                 value="'.$row['name_in'].'"'.$row['name_in'].' " id="name_in" readonly><br>
 
-                                                <div class="form-group row">
-
-                                            <div class="col-xs-4" style="margin-left:70px">
-                                                <label>ID DEVICE::</label>
-                                                <input type="text" name="id_device" class="form-control" id="id_device"
-                                                    placeholder="ID DEVICE" required>
+                                                <div class="form-group">
+                                                <label>ID DEVICE:</label>
+                                                <input type="text" name="id_device" class="form-control" id="id_device" placeholder="ID DEVICE"
+                                                    required>
                                             </div>
-                                           
-                                            <div class="col-xs-4" style="margin-left:70px">
+                                            <div class="form-group">
                                                 <label>KEY:</label>
-                                                <input type="text" name="key" class="form-control" id="key"
-                                                    placeholder="KEY" required>
-                                            </div>
-                                           
-    
-                                        </div><br>
+                                                <input type="text" name="key" class="form-control" id="key" placeholder="KEY"
+                                                    required>
+                                            </div><br>
+
                                         <span id="hok"></span>
                                         <span id="hok1"></span>
 
@@ -300,46 +335,43 @@
     
                         <!-- edit Modal -->
                         <div class="modal fade" id="edit'.$row['no_in'].'"'.$row['no_in'].'" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลโรงบ่ม</h4>
+                                        <h4 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลโรงบ่ม</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+                    
                                     <form action="" method="GET">
                                         <div class="modal-body">
-                                            <input type="hidden" name="no_in" class="form-control"
-                                                value="'.$row['no_in'].'"'.$row['no_in'].'" id="no_in" readonly><br>
 
-                                                <div class="form-group row">
-    
-                                            <div class="col-xs-10" style="margin-left:65px">
+                                        <input class="form-control" id="no_in" value="'.$row['no_in'].'"'.$row['no_in'].'"
+                         name="no_in" type="hidden">
+
+                                            <div class="form-group">
                                                 <label>ID โรงบ่ม:</label>
-                                                <input type="text" name="id_in" class="form-control" id="id_in"
-                                                    value="'.$row['id_in'].'"'.$row['id_in'].'" placeholder="ID โรงบ่ม" >
-                                            </div><br><br><br><br>
-                                            <div class="col-xs-10" style="margin-left:65px">
-                                                <label>ชื่อโรงบ่ม:</label>
-                                                <input type="text" name="name_in" class="form-control" id="name_in"
-                                                    value="'.$row['name_in'].'"'.$row['name_in'].'" placeholder="ชื่อโรงบ่ม" >
-                                            </div><br><br><br><br>
-                                            <div class="col-xs-10" style="margin-left:65px">
-                                                <label>ลูกจ้างดูแลโรงบ่ม:</label>
-                                                <input type="text" name="emp" class="form-control" id="emp"
-                                                    value="'.$row['emp'].'"'.$row['emp'].'" placeholder="ลูกจ้างดูแลโรงบ่ม" >
-                                            </div><br><br><br><br>
-
+                                                <input type="text" name="id_in" class="form-control" 
+                                                value="'.$row['id_in'].'">
                                             </div>
-    
+                                            <div class="form-group">
+                                                <label>ชื่อโรงบ่ม:</label>
+                                                <input type="text" name="name_in" class="form-control"  
+                                                value="'.$row['name_in'].'">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ลูกจ้างดูแลโรงบ่ม:</label>
+                                                <input type="text" name="emp" class="form-control" 
+                                                value="'.$row['emp'].'">
+                                            </div>
+                    
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" name="edit"
-                                                data-target="#edit">update data</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" name="edit" data-target="#edit">
+                                                บันทึกข้อมูล </button>
                                         </div>
                                     </form>
                                 </div>
@@ -411,28 +443,27 @@
                         }
                     }
 
-                    //Update Items
-                    if(isset($_GET['edit'])){
-                        $no_in = $_GET['no_in'];
-                        $id_in = $_GET['id_in'];
-                        $name_in = $_GET['name_in'];
-                        $emp = $_GET['emp'];
-
-                        $sql = "UPDATE  incubs 
-                                SET  id_in='$id_in',
-                                     name_in='$name_in',
-                                     emp='$emp'
-                        
-                                WHERE no_in='$no_in'";
-                        if ($conn->query($sql) === TRUE) {
-                            echo '<script>
-                            swal("แก้ไขข้อมูลเรียบร้อยแล้ว","success");
-                                window.location.href="index_in";
-                     </script>';
-                        } else {
-                            echo "Error updating record: " . $conn->error;
-                        }
+                   //Update Items
+                   if(isset($_GET['edit'])){
+                    $no_in = $_GET['no_in'];
+                    $id_in = $_GET['id_in'];
+                    $name_in = $_GET['name_in'];
+                    $emp = $_GET['emp'];
+                    $sql = "UPDATE  incubs 
+                            SET  id_in='$id_in',
+                                 name_in='$name_in',
+                                 emp='$emp'
+                    
+                            WHERE no_in='$no_in'";
+                    if ($conn->query($sql) === TRUE) {
+                        echo '<script>
+                        swal("แก้ไขข้อมูลเรียบร้อยแล้ว","success");
+                            window.location.href="index_in";
+                 </script>';
+                    } else {
+                        echo "Error updating record: " . $conn->error;
                     }
+                }
 
                     // Delete
                     if(isset($_GET['delete'])){
